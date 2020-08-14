@@ -41,29 +41,29 @@
 ```json
 {
     //用户名
-    loginName: {
-        type: String,
-        required: true
+    "loginName": {
+        "type": String,
+        "required": true
     },
     //手机号
-    mobile:{
-        type:String,
+    "mobile":{
+        "type":String,
     },
     //密码
-	passwod:{          
-    	type:String,
-        required: true
+	"passwod":{          
+    	"type":String,
+        "required": true
     },
     //用户类型
-    userType:{
-        type:Number,
-        enum:[0,1,2]  //0-超级管理员 1-后台管理  2-用户
-        default:2
+    "userType":{
+        "type":Number,
+        "enum":[0,1,2]  //0-超级管理员 1-后台管理  2-用户
+        "default":2
     },
     //创建时间
-    createDate:{
-        type:Date,
-        default:Date.now
+    "createDate":{
+        "type":Date,
+        "default":Date.now
     }
 }
 ```
@@ -73,40 +73,40 @@
 ```json
 {
     //商品名称
-    name:{
-        type:String,
-        required:true
+    "name":{
+        "type":String,
+        "required":true
     },
     //商品描述
-    description:{
-        type:String,
-        required:true
+    "description":{
+        "type":String,
+        "required":true
     },
     //商品图片
-    imgUrl:{
-        type:String,
-        required:true
+    "imgUrl":{
+        "type":String,
+        "required":true
     },
     //价格
-    price:{
-        type:Number,
-        required:true
+    "price":{
+        "type":Number,
+        "required":true
     },
     //商品上下架状态
-    status:{
-        type:Number,
-        enum:[0,1]  //0-下架  1-上架
-        default:0
+    "status":{
+        "type":Number,
+        "enum":[0,1]  //0-下架  1-上架
+        "default":0
     },
     //创建时间
-    createDate:{
-        type:Date,
-        default:Date.now
+    "createDate":{
+        "type":Date,
+        "default":Date.now
     },
     //修改时间
-    modifyDate:{
-        type:Date,
-        default:Date.now
+    "modifyDate":{
+        "type":Date,
+        "default":Date.now
     }
     
 }
@@ -117,19 +117,19 @@
 ```json
 {
     //订单编号
-    orderNum:{
-        type:String,
-        required:true
+    "orderNum":{
+        "type":String,
+        "required":true
     },
     //商品id
-    productId:{
-        type:String,
-        required:true
+    "productId":{
+        "type":String,
+        "required":true
     },
     //创建时间
-    createDate:{
-        type:Date,
-        default:Date.now
+    "createDate":{
+        "type":Date,
+        "default":Date.now
     },
     
 }
@@ -140,24 +140,24 @@
 ```json
 {
     //订单id    -> 对应的是  order表里的id
-    orderId:{
-        type:String,
-        required:true
+    "orderId":{
+        "type":String,
+        "required":true
     },
     //物流状态
-    status:{
-        type:Number,
-        enum[0,1]  //0-未发货   1-已发货
-        required:true
+    "status":{
+        "type":Number,
+        "enum"[0,1]  //0-未发货   1-已发货
+        "required":true
     },
 	//物流单号
-	logistics:{
-        type:String
+	"logistics":{
+        "type":String
     },
     //创建时间
-    createDate:{
-        type:Date,
-        default:Date.now
+    "createDate":{
+        "type":Date,
+        "default":Date.now
     },
 }
 ```
