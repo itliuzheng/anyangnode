@@ -72,6 +72,21 @@
 
 ```json
 {
+    //商品名称
+    name:{
+        type:String,
+        required:true
+    },
+    //商品描述
+    description:{
+        type:String,
+        required:true
+    },
+    //商品图片
+    imgUrl:{
+        type:String,
+        required:true
+    },
     //价格
     price:{
         type:Number,
@@ -110,7 +125,7 @@
     productId:{
         type:String,
         required:true
-    }
+    },
     //创建时间
     createDate:{
         type:Date,
