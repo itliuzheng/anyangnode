@@ -14,12 +14,19 @@ module.exports.create = function(req,res,next) {
     })
 }
 
-// module.exports.update = function(req,res,next) {
-//     db.products.update( req.body, function(err, user) {
-//       if (err) return next(err);
-//       res.json(user);
-//     });
-// }
+module.exports.update = function(req,res,next) {
+    db.products.update( req.body, function(err, product) {
+      if (err) return next(err);
+      res.json(product);
+    });
+}
+
+module.exports.delete = function(req,res,next) {
+    db.products.delete( req.query, function(err, product) {
+      if (err) return next(err);
+      res.json(product);
+    });
+}
 
 // module.exports.find = function(req, res, next) {
 //     db.products.find(req.param('id'), function(err, user) {

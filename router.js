@@ -14,8 +14,11 @@ router.post('/user/login',routes.users.login);
 router.get('/sysuser/resources',routes.sysuser.resources)
 
 //产品管理
-router.post('/product/list',routes.product.list)
-router.post('/product/create',routes.product.create)
+router.post('/product/list',routes.product.list);
+router.post('/product/create',routes.product.create);
+router.post('/product/update',routes.product.update);
+router.post('/product/delete',routes.product.delete);
+
 
 
 module.exports = router;
