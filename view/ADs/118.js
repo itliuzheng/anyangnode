@@ -1,0 +1,1 @@
+﻿document.write("<a href='/PC/dongzuo/GTA/' target='_blank' title='case ad'><img src='/images/up_images/bg4.jpg'  width='1920' height='300' ></a>")

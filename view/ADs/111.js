@@ -1,0 +1,1 @@
+﻿document.write("<a href='https://pr.kuaifaka.com/item/Zvkqs2' target='_blank' title='test4'><img src='/images/up_images/2.jpg'  width='0' height='0' ></a>")

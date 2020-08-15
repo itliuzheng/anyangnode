@@ -1,0 +1,8 @@
+﻿.fixed{_position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||120)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
+.layer_bottom_img{width: 100px;height:100px;position: fixed;bottom:-100px;right:10px;z-index: 99999;}
+
+.layer_bottom_img .dh_alink_m{display: inline-block;width: 100px;height:100px;}
+.layer_bottom_img .dh_alink_m img{width: 100%;height:100px;}
+.layer_bottom_img .dh_closed_wd_bottom{position: absolute;left:100px;top:0;display: inline-block;width: 30px;height:30px;z-index: 999999;}
+
+

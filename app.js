@@ -46,7 +46,7 @@ app.use(expressJwt({
     algorithms:['HS256'],  // algorithms should be set  6.0.0以后必须配置算法 否则报错
     secret:vertoken.singkey  //秘钥
 }).unless({
-    path:['/user/login'] //除了这个地址，其他的URL都需要验证
+    path:['/','/user/login'] //除了这个地址，其他的URL都需要验证
 }))
 
 

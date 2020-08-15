@@ -21,4 +21,9 @@ router.post('/product/delete',routes.product.delete);
 
 
 
+//用户界面
+router.get('/',function(req,res,next) {
+    res.send('/view/index.html')
+})
+
 module.exports = router;
