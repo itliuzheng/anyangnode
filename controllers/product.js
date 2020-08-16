@@ -7,8 +7,12 @@ function Collection(){
 
 Collection.prototype.findAll = function(obj,cb){
     let data = {};
-    if(obj.name){ data.name = obj.name }
-    if(obj.status || obj.status == 0){ data.status = obj.status }
+    if(obj.name != null || obj.name.trim() !== ''){
+        data.name = obj.name
+    }
+    if(obj.status != null || obj.status.trim() != ''){
+        data.status = obj.status
+    }
     let page = obj.page || 1;
     let pageSize = obj.pageSize || 10;
 

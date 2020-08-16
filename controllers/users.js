@@ -41,48 +41,5 @@ Collection.prototype.login = async function(body = {},cb) {
 }
 // await new User(obj).save()
 
-Collection.prototype.find = function(body = {},cb) {
-    let id = parseInt(body.id,10);
-    var obj = this.store[id];
-    if(obj){
-        cb(null,obj)
-    }else{
-        cb(new error.NotFound('Item not found'))
-    }
-}
-
-Collection.prototype.findAll = function(obj,cb){
-    var items = [];
-    let object = this.store;
-    for (const id in object) {
-        if (object.hasOwnProperty(id)) {
-            const element = object[id];
-            items.push(element);
-        }
-    }
-    cb(null,items)
-}
-
-Collection.prototype.create = function(obj,cb) {
-    this.lastId++;
-    obj.id = this.lastId;
-    this.store[this.lastId] = obj;
-    cb(null,obj)
-}
-
-Collection.prototype.update = function(obj = {},cb) {
-    let id = obj.id || null;
-    this.find(id,function(err,item) {
-        if(err) return cb(err);
-
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                item[key] = obj[key];
-            }
-        }
-        
-        cb(null,item);
-    })
-}
 
 module.exports.users = new Collection('users');

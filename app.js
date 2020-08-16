@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -6,6 +7,8 @@ var expressJwt = require('express-jwt');
 var vertoken = require('./common/token');
 
 var router = require('./router')
+
+app.use('/',express.static(path.join(__dirname,'/view')));
 
 // 给express post请求体中 加入 body 对象
 app.use(bodyParser.urlencoded({extended:false}))
@@ -42,11 +45,12 @@ app.use(function(req,res,next) {
 })
 
 //验证Token是否过期并规定哪些路由不用验证
-app.use(expressJwt({
+// /api下所有路径都需要验证
+app.use('/api',expressJwt({
     algorithms:['HS256'],  // algorithms should be set  6.0.0以后必须配置算法 否则报错
     secret:vertoken.singkey  //秘钥
 }).unless({
-    path:['/','/user/login'] //除了这个地址，其他的URL都需要验证
+    path:['/api/user/login'] //除了这个地址，其他的URL都需要验证
 }))
 
 
