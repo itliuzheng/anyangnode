@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/common.css" type="text/css" />
 <title><%=gdb("select web_name from web_settings ")%> - 中英企业网站管理系统</title>
 </head>
-<!-- <frameset rows="50,*" frameborder="no" border="0" framespacing="0">
+ <frameset rows="50,*" frameborder="no" border="0" framespacing="0">
   <frameset cols="*" frameborder="no" border="0" framespacing="0">
   <frame src="topframe.asp" name="topFrame" frameborder="no" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
   </frameset>
@@ -25,7 +25,7 @@
      </frameset>
   </frameset>
 	</frameset>
-</frameset> -->
+</frameset>
 <noframes><body>
 </body>
 </noframes>

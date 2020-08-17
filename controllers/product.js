@@ -16,6 +16,7 @@ Collection.prototype.findAll = function(obj,cb){
     let page = obj.page || 1;
     let pageSize = obj.pageSize || 10;
 
+    //分页
     let queryResult = Product.find(data)
         .limit(pageSize)
         .skip((page - 1) * pageSize)

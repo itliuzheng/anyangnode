@@ -6,12 +6,12 @@
 
 	1. 登录注册页
  	2. 商品列表页
-   	3. 支付页
-   	4. 我的页面
+      	3. 支付页
+         	4. 我的页面
        	1. 商品物流信息页
        	2. 退款页面
        	3. 客服（连接qq）
-   	5. 后台页面
+         	5. 后台页面
        	1. 订单管理
             	1. 查看订单
             	2. 分配订单
@@ -68,7 +68,7 @@
 }
 ```
 
-### 商品表（product）
+### 游戏产品表（product）
 
 ```json
 {
@@ -158,9 +158,65 @@
     "createDate":{
         "type":Date,
         "default":Date.now
-    },
+    }
 }
 ```
 
-
+### 网站信息表（webinfo）
+```json
+{
+    //网站名称
+    "name": {
+        "type": String,
+        "required": true
+    },
+    //网站网址
+    "websiteUrl":{
+        "type":String,
+        "required": true
+    },
+    //logo
+	"logo":{
+    	"type":String,
+        "required": true
+    },
+    //首页标题(Title)
+	"title":{
+    	"type":String,
+        "required": true
+    },
+    //网站关键字(keywords)
+	"keywords":{
+    	"type":String,
+        "required": true
+    },
+    //网站描述(Description)
+	"description":{
+    	"type":String,
+        "required": true
+    },
+    //内页联系方式
+	"insideContact":{
+    	"type":String,
+    },
+    //网站底部HTML代码
+	"footer":{
+    	"type":String,
+    },
+    //联系电话
+	"mobile":{
+    	"type":String,
+    },
+    //创建时间`
+    "createDate":{
+        "type":Date,
+        "default":Date.now
+    },
+    //修改时间`
+    "modifyDate":{
+        "type":Date,
+        "default":Date.now
+    }
+}
+```
 

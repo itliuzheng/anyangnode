@@ -30,21 +30,21 @@ app.set('views',path.join(__dirname,'./views'));
 
 
 // 给express post请求体中 加入 body 对象
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 //解决跨域问题
 app.use(cors({
     origin:['http://localhost:8080'],
     methods:['GET','POST']
-}))
+}));
 //跨域问题解决方面
 app.all('*',function(req,res,next) {
     res.header('Access-Control-Allow-Origin','http://localhost:8080');
     res.header('Access-Control-Allow-Headers','Content-Type,Authorization');
     res.header('Access-Control-Allow-Methods','PUT,POST,GET,DELETE,OPTIONS');
     next();
-})
+});
 
 //解析token 获取用户信息
 app.use(function(req,res,next) {
@@ -70,11 +70,11 @@ app.use('/api',expressJwt({
     secret:vertoken.singkey  //秘钥
 }).unless({
     path:['/api/user/login'] //除了这个地址，其他的URL都需要验证
-}))
+}));
 
 
 //把路由挂载到app中
-app.use(router)
+app.use(router);
 
 //当token失效返回提示信息
 app.use(function(err, req, res, next) {
