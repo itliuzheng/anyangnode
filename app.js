@@ -4,11 +4,30 @@ var app = express();
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var expressJwt = require('express-jwt');
+var expressArtTemplate = require('express-art-template');
 var vertoken = require('./common/token');
 
 var router = require('./router')
 
-app.use('/',express.static(path.join(__dirname,'/view')));
+app.use('/static/',express.static(path.join(__dirname,'static')));
+
+//因为一些框架都在使用{{}}这种模板语法，所以更改解析规则这种需求也时常出现
+//更改art-template 解析规则{{ }}为<? ?>
+// let rule = expressArtTemplate.template.defaults.rules[1]
+// expressArtTemplate.template.defaults.rules[1].test = new RegExp(rule.test.source
+//     .replace('{{', '{\\\?')
+//     .replace('}}', '\\\?}'));
+
+app.engine('html',expressArtTemplate);
+
+//是否开启调试模式
+app.set('view options', {
+    debug: process.env.NODE_ENV !== 'production'
+});
+
+// 设置模板存放目录    第一个参数 'views' 不能修改
+app.set('views',path.join(__dirname,'./views'));
+
 
 // 给express post请求体中 加入 body 对象
 app.use(bodyParser.urlencoded({extended:false}))

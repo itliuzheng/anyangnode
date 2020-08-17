@@ -1,4 +1,5 @@
 var express = require('express');
+var fs = require('fs');
 var routes = require('./routes');
 
 
@@ -23,7 +24,19 @@ router.post('/api/product/delete',routes.product.delete);
 
 //用户界面
 router.get('/',function(req,res,next) {
-    res.end('/view/index.html')
+    res.render('index.html',{
+          user: {
+            name: '刘正',
+            tags: ['art', 'template', 'nodejs']
+        }
+    })
+})
+
+
+//后台界面
+router.get('/admin',function(req,res,next) {
+    // res.end('/Wzadmin/index.html')
+    res.end('/index.html')
 })
 
 module.exports = router;

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/favicon.ico"/>
+    <title>{{ block 'title'}}FFF单机游戏下载站 - 首页{{/block}}</title>
+    <link href="/static/css/main.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/MyCMSLoad/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
+    <meta name="keywords" content="FFF单机游戏下载站，PC单机游戏，电脑单机游戏，免steam登录，热门大作，最新单机游戏下载，破解，汉化"/>
+    <meta name="description" content="FFF游戏网(www.FFFyouxi.com)专注单机游戏下载,游戏下载安装免steam登录,安装解压即玩,追忆儿时情意."/>
+     {{ block 'head'}} {{/block}}
+</head>
+<body>
+     {{ include '../_partials/header.html' }}
+
+    {{ block 'content'}} {{/block}}
+
+    {{ include '../_partials/footer.html'}}
+
+     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+     <script type="text/javascript" src="/static/js/gd.js"></script>
+     <script type="text/javascript" src="/static/js/Functions.js"></script>
+     <script type="text/javascript" src="/static/js/ScrollPic.js"></script>
+     <script src="/static/js/MyTop.js"></script>
+     {{ block 'script'}} {{/block}}
+</body>
+</html>
