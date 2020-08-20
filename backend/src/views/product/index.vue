@@ -68,7 +68,7 @@
 </template>
 
 <script>
-  import { getProduct, getProductDelete, getProductUpdate } from '@/api/api'
+  // import { getProduct, getProductDelete, getProductUpdate } from '@/api/api'
   import DialogProduct from "@/components/views/DialogProduct"
   export default {
     name: "creditProgress",
@@ -142,9 +142,6 @@
         let obj = {}
         this.dialogInitProduct = obj
         this.dialogFormVisibleProduct = true
-      },
-      openShow(row) {
-        this.$router.push({name:'financing-agreement'})
       },
       getProductStatusFn (productId,status) {
         let obj = {}

@@ -76,8 +76,9 @@ app.use('/api',expressJwt({
 //把路由挂载到app中
 app.use(router);
 
-//当token失效返回提示信息
+// 错误统一处理
 app.use(function(err, req, res, next) {
+    //当token失效返回提示信息
     if (err.status == 401) {
         return res.status(401).json({
             code:-1,
@@ -85,6 +86,12 @@ app.use(function(err, req, res, next) {
             msg:'token失效'
         });
     }
+    return res.json({
+        code:-1,
+        data:null,
+        msg:err
+    })
 });
+
 
 module.exports = app;

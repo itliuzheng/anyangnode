@@ -10,116 +10,166 @@
         </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="网站网址" prop="name">
-          <el-input v-model="formData.name" placeholder=""></el-input>
+        <el-form-item label="网站网址" prop="websiteUrl">
+          <el-input v-model="formData.websiteUrl" placeholder=""></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="12">
-        <p style="line-height: 40px;">请以http:// 或 https://开头，后面不要带 / ，如：http://www.baidu.com</p>
+        <p class="desc">请以http:// 或 https://开头，<span class="red">后面不要带 / </span>，如：http://www.baidu.com</p>
       </el-col>
-      <el-col :span="24">
-        <el-form-item label="网站标志(logo)" prop="url_front">
+      <el-col :span="24" class="text-left">
+        <el-form-item label="网站标志(logo)" prop="logoUrl">
           <el-upload
             action=""
-            name="url_front"
+            name="logoUrl"
             :show-file-list="true"
+            :limit="1"
+            :file-list="fileList"
+            list-type="picture"
             :http-request="uploadHttp"
-            >
+          >
             <el-button size="small" type="primary">点击上传</el-button>
           </el-upload>
         </el-form-item>
       </el-col>
       <el-col :span="24">
-        <el-form-item label="首页标题(Title)" prop="name">
-          <el-input v-model="formData.name" placeholder=""></el-input>
+        <el-form-item label="首页标题(Title)" prop="title">
+          <el-input v-model="formData.title" placeholder=""></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="24">
-        <el-form-item label="网站关键字(keywords)" prop="name">
-          <el-input v-model="formData.name" placeholder=""></el-input>
+        <el-form-item label="网站关键字(keywords)" prop="keywords">
+          <el-input v-model="formData.keywords" placeholder=""></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="24">
-        <el-form-item label="网站描述(Description)" prop="name">
-          <el-input type="textarea" v-model="formData.name" placeholder=""></el-input>
+        <el-form-item label="网站描述(Description)" prop="description">
+          <el-input type="textarea" v-model="formData.description" placeholder=""></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="24">
-        <el-form-item label="内页联系方式" prop="name">
-          <el-input v-model="formData.name" placeholder=""></el-input>
+        <el-form-item label="内页联系方式">
+          <el-input v-model="formData.insideContact" placeholder=""></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="24">
-        <el-form-item label="网站底部HTML代码" prop="name">
-          <el-input type="textarea" v-model="formData.name" placeholder=""></el-input>
+        <el-form-item label="联系电话">
+          <el-input v-model="formData.mobile" placeholder=""></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="24">
-        <el-form-item label="联系电话" prop="name">
-          <el-input v-model="formData.name" placeholder=""></el-input>
+        <el-form-item label="上次修改时间">
+          <p class="text-left">{{formData.modifyDate}}</p>
         </el-form-item>
       </el-col>
     </el-row>
-    <el-button>提交</el-button>
+    <el-button @click="postForm">提交</el-button>
   </el-form>
 </template>
 
 <script>
-  import { postUpload } from '@/api/api'
+  import {postUpload,postAdd,getInfo} from '@/api/api'
+
   export default {
     name: "agentInformation",
-    data(){
+    data() {
       let name = '代理人';
       return {
-        name:name,
-        formData:{
-          type:'',
-          name:'',
-          creditCode:'',
-          url_front:'',
-          url_end:'',
-          info:'',
+        name: name,
+        formData: {
+          "name": '',
+          "websiteUrl": '',
+          "logoUrl": '',
+          "title": '',
+          "keywords": '',
+          "description": '',
+          "insideContact": '',
+          "mobile": '',
+          "modifyDate": '',
         },
-        formRules:{
-          type:[
-            {required:true, message:`${name}归属地不能为空`,trigger:'change'}
+        fileList:[
+
+        ],
+        formRules: {
+          type: [
+            {required: true, message: `${name}归属地不能为空`, trigger: 'change'}
           ],
-          name:[
-            {required:true, message:`${name}名称不能为空`,trigger:'blur'}
+          name: [
+            {required: true, message: `${name}名称不能为空`, trigger: 'blur'}
           ],
-          creditCode:[
-            {required:true, message:`${name}身份证号不能为空`,trigger:'blur'}
+          creditCode: [
+            {required: true, message: `${name}身份证号不能为空`, trigger: 'blur'}
           ],
-          url_front:[
-            {required:true, message:'身份证不能为空',trigger:'change'}
+          url_front: [
+            {required: true, message: '身份证不能为空', trigger: 'change'}
           ],
-          url_end:[
-            {required:true, message:'身份证不能为空',trigger:'change'}
+          url_end: [
+            {required: true, message: '身份证不能为空', trigger: 'change'}
           ],
         },
       }
     },
-    methods:{
-      uploadHttp(data){
+    created(){
+      this.getInit();
+    },
+    methods: {
+      uploadHttp(data) {
         let formData = new FormData();
+        console.log(data);
         formData.append('img', data.file);
 
+        console.log(formData.get('img'));
+
         postUpload(formData)
-          .then(res=>{
+          .then(res => {
             this.$message({
               type: 'success',
               message: '上传成功'
             });
+            this.formData.logoUrl = res.data;
           })
 
       },
+      getInit(){
+        getInfo()
+          .then(res=>{
+            if(res.data){
+              this.formData = res.data;
+              this.$set(this.fileList,'0',{
+                name:'logo.png',
+                url:res.data.logoUrl
+              })
+            }
+          })
+      },
+      postForm(){
+        postAdd(this.formData)
+          .then(res=>{
+            this.$message({
+              type: 'success',
+              message: '修改成功'
+            });
+          },err=>{
+            this.$message({
+              type: 'error',
+              message: err
+            });
+          })
+      }
+
     }
   }
 </script>
 
 <style scoped lang="scss">
-  .form-data{
+  @import '@/styles/variables.scss';
+  .form-data {
     width: 1000px;
     margin: 0 auto;
+  }
+  .desc{
+    line-height: 40px;
+    font-size: 12px;
+    color: $gray;
   }
 </style>

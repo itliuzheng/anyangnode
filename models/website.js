@@ -5,6 +5,11 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     //网站名称
+    "_id": {
+        "type": Number,
+        "required": true
+    },
+    //网站名称
     "name": {
         "type": String,
         "required": true
@@ -14,8 +19,13 @@ var userSchema = new Schema({
         "type":String,
         "required": true
     },
-    //logo
-	"logo":{
+    //logo文件名
+	// "logoName":{
+    // 	"type":String,
+    //     "required": true
+    // },
+    //logo地址
+	"logoUrl":{
     	"type":String,
         "required": true
     },

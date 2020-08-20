@@ -109,6 +109,9 @@
       }
     },
     methods: {
+      reset(){
+        this.$refs.formData.resetFields()
+      },
       socialCreditCodeChange(_value){
         let arr = this.formItem.find( val =>{
           return val.name == 'companyName'

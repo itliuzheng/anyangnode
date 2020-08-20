@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import {getProductCustomer, getProductAdd, getProductUpdate} from '@/api/api';
+  // import {getProductCustomer, getProductAdd, getProductUpdate} from '@/api/api';
   export default {
     name: "dialogProduct",
     props:{

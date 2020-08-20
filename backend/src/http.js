@@ -26,7 +26,7 @@ const http = axios.create({
     
     let token = store.getters.token;
     headers.Authorization = token && ( 'Bearer ' + token);
-    if (headers['Content-type'] === 'multipart/form-data') {
+    if (headers['Content-Type'] === 'multipart/form-data') {
       return data;
     } else {
       return JSON.stringify(data);

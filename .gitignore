@@ -1,0 +1,11 @@
+.DS_Store
+# 本地数据存储
+/data/
+# npm 包文件
+/node_modules
+
+/dist
+
+*.zip
+
+npm-debug.log*

@@ -6,7 +6,7 @@
             <h2>
                 <p>
                     <script language="javaScript">
-                        var name = '欢迎来到FFF单机游戏下载站',
+                        var name = '欢迎来到{{home.name}}',
                             now = new Date(),
                             hour = now.getHours();
                         if (hour < 6) {
@@ -46,7 +46,7 @@
     <div class="top">
 
         <div class="TopLogo">
-            <div class="logo"><a href="/"><img src="/static/images/up_images/logo.png" alt="FFF单机游戏下载站"></a></div>
+            <div class="logo"><a href="/"><img src="{{home.logoUrl}}" alt="{{home.name}}"></a></div>
 
 
             <div class='SearchTop'>
