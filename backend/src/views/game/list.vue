@@ -18,7 +18,7 @@
     <el-table :data="tableData.records" border>
       <el-table-column type="index" label="序号" align="center" width="50px"></el-table-column>
       <el-table-column prop="name" label="游戏名称" align="center"></el-table-column>
-      <el-table-column prop="type" label="所属分类" align="center"></el-table-column>
+      <el-table-column prop="type" label="所属分类" align="center" ></el-table-column>
       <el-table-column prop="catena" label="所属系列" align="center"></el-table-column>
       <el-table-column prop="tagStr" label="标签" align="center"></el-table-column>
       <el-table-column prop="sizeStr" label="游戏大小" align="center"></el-table-column>

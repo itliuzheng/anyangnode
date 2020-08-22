@@ -30,6 +30,7 @@ class Collection{
                         id:value._id,
                         name:value.name,
                         type:value.type,
+                        catena:value.catena,
                         tagStr:value.tagStr,
                         sizeStr:value.sizeStr,
                         versionStr:value.versionStr,
