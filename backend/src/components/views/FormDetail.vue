@@ -20,19 +20,6 @@
                 <el-option :label="optionItem.label" :value="optionItem.value" :key="optionItem.value" v-for="optionItem in item.optionItem"></el-option>
               </el-select>
             </el-form-item>
-            <template v-else-if="item.type == 'SelectCompanyName'">
-              <el-form-item :label="`${item.label}:`" :prop="item.name">
-                <el-select :disabled="item.disabled"
-                           v-model="formData[item.name]"
-                           @change="socialCreditCodeChange"
-                           :placeholder="item.placeholder">
-                  <el-option :label="optionItem.label" :value="optionItem.label" :key="optionItem.value" v-for="optionItem in item.optionItem"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item :label="`统一社会信用代码:`" >
-                <p class="text-left">{{formData.socialCreditCode}}</p>
-              </el-form-item>
-            </template>
             <el-form-item :label="`${item.label}:`" :prop="item.name"  v-else-if="item.type == 'address'"  >
               <el-select v-model="formData[item.name]"
                          :placeholder="item.placeholder"
@@ -55,7 +42,6 @@
             <el-form-item :label="`${item.label}:`" :prop="item.name">
               <p class="form-desc text-left" v-if="item.type == 'address' && item.name == 'province'">{{_formatProvince}}</p>
               <p class="form-desc text-left" v-else-if="item.type == 'address' && item.name == 'city'">{{_formatCity}}</p>
-              <p class="form-desc text-left" v-else-if="item.name == 'companyScale'">{{_formatCompanyScale}}</p>
               <p class="form-desc text-left" v-else>{{formData[item.name]}}</p>
             </el-form-item>
           </template>

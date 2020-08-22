@@ -4,4 +4,5 @@ module.exports = {
     product:require('./product'),
     website:require('./website'),
     gameType:require('./gameType'),
+    gameDetail:require('./gameDetail'),
 }

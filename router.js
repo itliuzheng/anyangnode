@@ -26,6 +26,12 @@ router.post('/api/game_type/create',routes.gameType.create);
 router.post('/api/game_type/update',routes.gameType.update);
 router.post('/api/game_type/delete',routes.gameType.delete);
 
+//游戏详情
+router.post('/api/game_detail/page',routes.gameDetail.list);
+router.post('/api/game_detail/create',routes.gameDetail.create);
+router.post('/api/game_detail/update',routes.gameDetail.update);
+router.post('/api/game_detail/delete',routes.gameDetail.deleteById);
+
 //产品管理
 router.post('/api/product/list',routes.product.list);
 router.post('/api/product/create',routes.product.create);

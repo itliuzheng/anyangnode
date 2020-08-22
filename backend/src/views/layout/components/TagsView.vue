@@ -131,6 +131,8 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+  @import '@/styles/variables.scss';
+
   div{
     text-align: left;
   }
@@ -160,9 +162,9 @@ export default {
         margin-right: 15px;
       }
       &.active {
-        background-color: #42b983;
+        background-color: $blue;
         color: #fff;
-        border-color: #42b983;
+        border-color: $blue;
         &::before {
           content: '';
           background: #fff;

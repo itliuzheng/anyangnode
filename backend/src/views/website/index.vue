@@ -71,11 +71,9 @@
   import {postUpload,postAdd,getInfo} from '@/api/api'
 
   export default {
-    name: "agentInformation",
+    name: "website",
     data() {
-      let name = '代理人';
       return {
-        name: name,
         formData: {
           "name": '',
           "websiteUrl": '',
@@ -91,20 +89,23 @@
 
         ],
         formRules: {
-          type: [
-            {required: true, message: `${name}归属地不能为空`, trigger: 'change'}
-          ],
           name: [
-            {required: true, message: `${name}名称不能为空`, trigger: 'blur'}
+            {required: true, message: `网站名称不能为空`, trigger: 'blur'}
           ],
-          creditCode: [
-            {required: true, message: `${name}身份证号不能为空`, trigger: 'blur'}
+          websiteUrl: [
+            {required: true, message: `网站网址不能为空`, trigger: 'blur'}
           ],
-          url_front: [
-            {required: true, message: '身份证不能为空', trigger: 'change'}
+          title: [
+            {required: true, message: `首页标题不能为空`, trigger: 'blur'}
           ],
-          url_end: [
-            {required: true, message: '身份证不能为空', trigger: 'change'}
+          keywords: [
+            {required: true, message: `网站关键字不能为空`, trigger: 'blur'}
+          ],
+          description: [
+            {required: true, message: `网站描述不能为空`, trigger: 'blur'}
+          ],
+          logoUrl: [
+            {required: true, message: `logo不能为空`, trigger: 'change'}
           ],
         },
       }

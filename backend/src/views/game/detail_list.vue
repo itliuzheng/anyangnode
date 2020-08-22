@@ -17,14 +17,14 @@
 
     <el-table :data="tableData.records" border>
       <el-table-column type="index" label="序号" align="center" width="50px"></el-table-column>
-      <el-table-column prop="name" label="类型名称" align="center"></el-table-column>
-      <el-table-column prop="englishName" label="英文名称" align="center"></el-table-column>
-      <el-table-column prop="sort" label="显示排序" align="center"></el-table-column>
+      <el-table-column prop="name" label="游戏名称" align="center"></el-table-column>
+      <el-table-column prop="englishName" label="图片" align="center"></el-table-column>
+      <el-table-column prop="sort" label="标签" align="center"></el-table-column>
+      <el-table-column prop="sort" label="游戏大小" align="center"></el-table-column>
+      <el-table-column prop="sort" label="版本介绍" align="center"></el-table-column>
+      <el-table-column prop="sort" label="下载信息" align="center"></el-table-column>
       <el-table-column label="操作" align="center" fixed="right">
         <template slot-scope="scope">
-          <el-button class="" type="text" size="small"
-                     @click="detail(scope.row)">详情
-          </el-button>
           <el-button class="" type="text" size="small"
                      @click="modify(scope.row)">修改
           </el-button>
@@ -52,15 +52,18 @@
 </template>
 
 <script>
-  import { postPage,postAdd,postUpdate,postDelete } from '@/api/game'
+  import { postPage,postAdd,postUpdate,postDelete } from '@/api/gameDetail'
   import FormDetail from '@/components/views/FormDetail'
   export default {
     name: "gameIndex",
     components: {
       FormDetail
     },
+    beforeRouteEnter (to,from,next){
+      to.meta.title = to.query.name;
+      next()
+    },
     data() {
-
       let init = [
         {name: 'name',label: '类型名称', col: 24, type: 'input',  },
         {name: 'englishName',label: '英文名称', col: 24, type: 'input',  },
@@ -126,9 +129,6 @@
           .then(res=>{
             this.tableData = res.data
           })
-      },
-      detail(row){
-        this.$router.push({name:'gameDetailList',params:{name:row.englishName},query:{name:row.name}})
       },
       modify(row){
 

@@ -1,19 +1,21 @@
+$sider-height:70px;
+
 #app {
   // 主体区域
   .main-container {
     min-height: 100%;
     transition: margin-left .28s;
-    margin-left: 180px;
+    margin-left: 250px;
     position: relative;
   }
   // 侧边栏
   .sidebar-container {
     transition: width 0.28s;
-    width: 180px !important;
-    height: 100%;
+    width: 250px !important;
+    height: calc(100% - 70px);
     position: fixed;
-    font-size: 0px;
-    top: 0;
+    font-size: 0;
+    top: $sider-height;
     bottom: 0;
     left: 0;
     z-index: 1001;
@@ -88,7 +90,7 @@
   }
   .sidebar-container .nest-menu .el-submenu>.el-submenu__title,
   .sidebar-container .el-submenu .el-menu-item {
-    min-width: 180px !important;
+    min-width: 250px !important;
     background-color: $subMenuBg !important;
     &:hover{
       background-color: $menuHover !important;
@@ -107,8 +109,25 @@
       }
     }
   }
+  .el-menu-item, .el-submenu .el-submenu__title{
+    &:hover {
+      background-color: $menuHover !important;
+    }
+  }
+  .el-menu-item.is-active{
+    background: $menuHover !important;
+    :before{
+      content:'';
+      position: absolute;
+      width: 4px;
+      height: 100px;
+      background: #1986f6;
+      left: 0;
+    }
+  }
+
   .el-menu--collapse .el-menu .el-submenu {
-    min-width: 180px !important;
+    min-width: 250px !important;
   }
 
   //适配移动端

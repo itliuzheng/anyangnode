@@ -88,6 +88,10 @@
 .el-table thead{
   background: #fbfbfb;
 }
+.el-table th, .el-table tr{
+  background: none;
+}
+
 .el-date-table{
   th{
     text-align: center;
@@ -98,6 +102,15 @@
       text-align: center;
     }
   }
+}
+
+/*
+  el-input  disabled 通用样式
+*/
+.el-input.is-disabled .el-input__inner{
+  background-color: #F2F2F2;
+  border-color: #ddd;
+  color: #666;
 }
 
 

@@ -18,7 +18,7 @@ export const constantRouterMap = [
         path: 'Home',
         component: resolve => require(['@/views/home/index'], resolve),
         name: 'Home',
-        meta: {title: '首页', noCache: true, icon: 'dashboard'},
+        meta: {title: '首页', noCache: true},
       }
     ]
   },
@@ -66,7 +66,6 @@ export const constantRouterMap = [
       title: '网站管理',
       noCache: true,
       roles: '/website',
-      icon: 'dashboard'
     },
     alwaysShow: true, // will always show the root menu
     children: [
@@ -88,19 +87,37 @@ export const constantRouterMap = [
     meta: {
       title: '游戏管理',
       noCache: true,
-      icon: 'game'
     },
     alwaysShow: true, // will always show the root menu
     children: [
       {
-        path: 'list',
+        path: 'type',
         component: resolve => require(['@/views/game/index.vue'], resolve),
-        name: 'gameList',
+        name: 'gameType',
         meta: {
           title: '游戏分类',
           noCache: true,
+        }
+      },
+      {
+        path: 'list',
+        component: resolve => require(['@/views/game/list.vue'], resolve),
+        name: 'gameList',
+        meta: {
+          title: '游戏列表',
+          noCache: true,
+        }
+      },
+      {
+        path: ':name',
+        component: resolve => require(['@/views/game/detail_list.vue'], resolve),
+        name: 'gameDetailList',
+        hidden:true,
+        meta: {
+          title: '详情',
+          noCache: true,
         },
-      }
+      },
     ]
   },
   {
@@ -111,7 +128,6 @@ export const constantRouterMap = [
       title: '产品管理',
       noCache: true,
       roles: '/product',
-      icon: 'dashboard'
     },
     alwaysShow: true, // will always show the root menu
     children: [
@@ -121,8 +137,7 @@ export const constantRouterMap = [
         name: 'productIndex',
         meta: {
           title: '产品维护',
-          noCache: true,
-          roles: '/product/index'
+          noCache: true
         },
       }
     ]
@@ -137,7 +152,7 @@ export const constantRouterMap = [
     alwaysShow: true, // will always show the root menu
     meta: {
       title: '权限管理',
-      roles: '/authority_management/set', icon: 'lock'
+      roles: '/authority_management/set'
     },
     children: [
       {

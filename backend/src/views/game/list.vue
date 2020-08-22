@@ -3,7 +3,7 @@
     <el-form v-model="topModel" ref="customerTopModel" :inline="true" label-position="left">
       <el-row>
         <el-col :span="8">
-          <el-form-item label="名称:">
+          <el-form-item label="游戏名称:">
             <el-input v-model="topModel.name"></el-input>
           </el-form-item>
         </el-col>
@@ -17,14 +17,16 @@
 
     <el-table :data="tableData.records" border>
       <el-table-column type="index" label="序号" align="center" width="50px"></el-table-column>
-      <el-table-column prop="name" label="类型名称" align="center"></el-table-column>
-      <el-table-column prop="englishName" label="英文名称" align="center"></el-table-column>
-      <el-table-column prop="sort" label="显示排序" align="center"></el-table-column>
+      <el-table-column prop="name" label="游戏名称" align="center"></el-table-column>
+      <el-table-column prop="type" label="所属分类" align="center"></el-table-column>
+      <el-table-column prop="catena" label="所属系列" align="center"></el-table-column>
+      <el-table-column prop="tagStr" label="标签" align="center"></el-table-column>
+      <el-table-column prop="sizeStr" label="游戏大小" align="center"></el-table-column>
+      <el-table-column prop="versionStr" label="版本介绍" align="center"></el-table-column>
+      <el-table-column prop="downloadStr" label="下载信息" align="center"></el-table-column>
+      <el-table-column prop="createDate" label="创建时间" align="center"></el-table-column>
       <el-table-column label="操作" align="center" fixed="right">
         <template slot-scope="scope">
-          <el-button class="" type="text" size="small"
-                     @click="detail(scope.row)">详情
-          </el-button>
           <el-button class="" type="text" size="small"
                      @click="modify(scope.row)">修改
           </el-button>
@@ -52,7 +54,8 @@
 </template>
 
 <script>
-  import { postPage,postAdd,postUpdate,postDelete } from '@/api/game'
+  import { postPage,postAdd,postUpdate,postDelete } from '@/api/gameDetail'
+  import { postPage as getGameTypePage } from '@/api/game'
   import FormDetail from '@/components/views/FormDetail'
   export default {
     name: "gameIndex",
@@ -60,11 +63,15 @@
       FormDetail
     },
     data() {
-
       let init = [
-        {name: 'name',label: '类型名称', col: 24, type: 'input',  },
-        {name: 'englishName',label: '英文名称', col: 24, type: 'input',  },
-        {name: 'sort',label: '显示排序', col: 24, type: 'input',  },
+        {name: 'name',label: '类型名称',required:true, col: 24, type: 'input',  },
+        {name: 'type',label: '所属分类',required:true, col: 24,
+          type: 'select',optionItem: [],  },
+        {name: 'catena',label: '所属系列', col: 24, type: 'input',  },
+        {name: 'tagStr',label: '标签', col: 24, type: 'input',  },
+        {name: 'sizeStr',label: '游戏大小', col: 24, type: 'input',  },
+        {name: 'versionStr',label: '版本介绍', col: 24, type: 'input',  },
+        {name: 'downloadStr',label: '下载信息', col: 24, type: 'input',  },
       ];
       let buttonList = [
         {
@@ -88,7 +95,7 @@
           name: null,
           status: null,
           pageNum: 1,
-          pageSize: 15
+          pageSize: 30
         },
         tableData: {},
         dialogInitDetail:[],
@@ -101,6 +108,7 @@
       }
     },
     created(){
+      this.getGameType();
       this.getData();
     },
     methods: {
@@ -127,12 +135,26 @@
             this.tableData = res.data
           })
       },
-      detail(row){
-        this.$router.push({name:'gameDetailList',params:{name:row.englishName},query:{name:row.name}})
+      getGameType() {
+        getGameTypePage({
+          pageSize:30,
+          pageNum:1
+        })
+          .then(res=>{
+            this.$store.dispatch('insertType',res.data.records)
+          //  this.$store.getters.game_type
+
+            let items = this.$store.getters.game_type.map(item=>{
+              return {
+                label:item.name,
+                value:item.id
+              }
+            });
+
+            this.$set(this.formInit.list[1],'optionItem',items)
+          })
       },
       modify(row){
-
-
         this.$refs.formDetail && this.$refs.formDetail.reset();
         let init = [
           {name: 'name',label: '类型名称',

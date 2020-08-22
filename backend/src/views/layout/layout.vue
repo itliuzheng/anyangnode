@@ -1,8 +1,13 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <!--<div class="drawer-bg" @click="handleClickOutside"/>-->
-    <div class="drawer-bg"/>
-    <sidebar class="sidebar-container"/>
+
+    <div class="sidebar-shadow"  style="z-index: 999;">
+      <div class="topic">
+        <span>{{isCollapse?"":"系统"}}</span>
+      </div>
+      <sidebar class="sidebar-container"/>
+    </div>
     <div class="main-container">
       <navbar></navbar>
       <tags-view/>
@@ -37,35 +42,15 @@
           withoutAnimation: this.sidebar.withoutAnimation,
           mobile: this.device === 'mobile'
         }
+      },
+      isCollapse() {
+        return !this.sidebar.opened
       }
     },
     beforeMount(){
 
     },
     methods:{
-      getList(page = 1){
-        var _this = this;
-        new Promise((resolve,reject) => {
-            ajax({
-              url:`/product/product/page`,
-              method:'post',
-              data:{
-                pageSize:10,
-                pageNum:page,
-              }
-            }).then(function (res) {
-              let data = res.data;
-              if(data.code == 1){
-                if(data.data){
-
-                }
-              }
-
-            }).catch(error => {
-              reject(error)
-            })
-        })
-      },
       handleClickOutside(){
       }
     }
@@ -104,6 +89,41 @@
     background: #b3c0d1;
   }
 
+
+  .sidebar-shadow{
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    box-shadow:0px 0px 8px 0px rgba(0, 0, 0, 0.16);
+  }
+  .topic{
+    position: fixed;
+    width: 250px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 70px;
+    background: #fff;
+    color: #333;
+    font-size: 0;
+    text-align: center;
+    line-height: 70px;
+    font-weight: 400;
+    border-bottom: 1px solid #DDDDDD;
+    img{
+      display: inline-block;
+      vertical-align: middle;
+      width: 32px;
+      height: 32px;
+      margin-right: 8px;
+    }
+    span{
+      font-size: 20px;
+      vertical-align: top;
+    }
+  }
 </style>
 
 
