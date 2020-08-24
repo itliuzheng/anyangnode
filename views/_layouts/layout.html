@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="/static/favicon.ico"/>
-    <title>{{ block 'title'}}{{home.title}}{{/block}}</title>
+    <title>{{ block 'title' }}{{/block}}</title>
     <link href="/static/css/main.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/MyCMSLoad/style.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
-    <meta name="keywords" content="{{home.keywords}}"/>
-    <meta name="description" content="{{home.description}}"/>
+    <meta name="keywords" content="{{ block 'keywords' }} {{/block}}"/>
+    <meta name="description" content="{{ block 'description' }} {{/block}}"/>
      {{ block 'head'}} {{/block}}
 </head>
 <body>

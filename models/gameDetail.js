@@ -8,6 +8,10 @@ var objSchema = new Schema({
         "type":String,
         "required":true
     },
+    //游戏描述
+    "desc":{
+        "type":String,
+    },
     //所属分类
     "type":{
         "type":String,

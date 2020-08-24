@@ -19,14 +19,14 @@
   </div>
 </template>
 <script>
-  import Hamburger from '@/components/Hamburger'
+  // import Hamburger from '@/components/Hamburger'
   import Breadcrumb from '@/components/Breadcrumb'
   import router from '@/router'
   // import store from 'store'
 
   export default {
     components:{
-      Hamburger,
+      // Hamburger,
       Breadcrumb
     },
     data(){

@@ -42,7 +42,7 @@ http.interceptors.request.use(config => {
 
   loadingInstance = Loading.service({
     fullscreen: true,
-    lock: true,
+    background: 'rgba(0, 0, 0, 0.7)',
     text: '正在请求数据...'
   });
 
@@ -56,7 +56,9 @@ http.interceptors.request.use(config => {
 
   return config;
 }, error => {
-  loadingInstance.close();
+  setTimeout(()=>{
+    loadingInstance.close();
+  },0)
   Message.error({
     message: '请求失败'
   });
@@ -65,7 +67,9 @@ http.interceptors.request.use(config => {
 
 // 响应拦截器
 http.interceptors.response.use(res => {
-  loadingInstance.close();
+  setTimeout(()=>{
+    loadingInstance.close();
+  },0)
   // console.log(res);
   if(res.data.code == 3){
     MessageBox.alert(res.data.msg, '提示', {
@@ -82,19 +86,22 @@ http.interceptors.response.use(res => {
       }
     });
   }
-  if(res.data.code != 1){
-    MessageBox.alert(res.data.msg, '提示', {
-      confirmButtonText: `请通知管理员！`,
-      showClose: false,
-      type: 'error',
-      callback: action => {
-        // router.back()
-      }
-    });
-  }
+  // if(res.data.code != 1){
+  //   MessageBox.alert(res.data.msg, '提示', {
+  //     confirmButtonText: `请通知管理员！`,
+  //     showClose: false,
+  //     type: 'error',
+  //     callback: action => {
+  //       // router.back()
+  //     }
+  //   });
+  // }
   return res.data;
+
 }, error => {
-  loadingInstance.close();
+  setTimeout(()=>{
+    loadingInstance.close();
+  },0)
   if (error && error.response) {
     // console.log(error.response);
 
@@ -106,16 +113,15 @@ http.interceptors.response.use(res => {
         //   showClose: false,
         //   type: 'error',
         //   callback: action => {
-        //     router.replace({
-        //       path: '/login',
-        //       query: {
-        //         redirect: router.currentRoute.fullPath
-        //       }
-        //     });
         //   }
         // });
-        
-        router.push('/login');
+
+        router.replace({
+          path: '/login',
+          query: {
+            redirect: router.currentRoute.fullPath
+          }
+        });
         break;
 
       // 403 服务器拒绝访问

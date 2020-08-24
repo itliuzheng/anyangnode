@@ -1,4 +1,9 @@
-﻿{{ extend './_layouts/layout.html'}}
+﻿{{ extend '../_layouts/layout.html'}}
+
+{{ block 'title'}}{{home.title}}{{ /title}}
+{{ block 'keywords'}}{{home.keywords}}{{ /block}}
+{{ block 'description'}}{{home.description}}{{ /block}}
+
 {{ block 'content'}}
 
 <!--focus start-->

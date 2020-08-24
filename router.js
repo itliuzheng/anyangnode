@@ -40,9 +40,11 @@ router.post('/api/product/delete',routes.product.delete);
 
 
 
-//用户界面
+//用户界面  start
 router.get('/',viewModels.home.home);
+router.get('/Support',viewModels.pc.index);
 
+//用户界面  end
 
 //后台界面
 router.get('/admin',function(req,res,next) {

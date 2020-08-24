@@ -1,8 +1,18 @@
 var error = require('../common/error');
 var utils = require('../common/utils');
+var DbGameType = require('../models/gameType');
 var Db = require('../models/gameDetail');
 
 class Collection{
+
+    findGameType(){
+        return new Promise((resolve ,reject)=> {
+            DbGameType.find((err,items)=>{
+                if(err) return reject(err);
+                resolve(items)
+            })
+        })
+    }
 
     findAll(obj,cb){
         let data = {};
@@ -11,6 +21,9 @@ class Collection{
                 $regex:obj.name,
                 $options:'i'
             }
+        }
+        if(utils.isEmpty(obj.typeId)){
+            data.type = obj.typeId
         }
         let page = obj.page || 1;
         let pageSize = obj.pageSize || 10;
@@ -25,33 +38,44 @@ class Collection{
             if(err){
                 return cb(null,err)
             }else{
-                let item = items.map(value=>{
-                    return {
-                        id:value._id,
-                        name:value.name,
-                        type:value.type,
-                        catena:value.catena,
-                        tagStr:value.tagStr,
-                        sizeStr:value.sizeStr,
-                        versionStr:value.versionStr,
-                        downloadStr:value.downloadStr,
-                        createDate:value.createDate.toLocaleString(),
-                    }
-                });
-                Db.find(function(err,total) {
-                    let result = {
-                        current:page,
-                        pageNum:page,
-                        pageSize:pageSize,
-                        records:item,
-                        total:total.length
-                    };
-                    return cb(null,{
-                        code:1,
-                        data:result,
-                        msg:'成功'
+
+                this.findGameType()
+                    .then(gameType =>{
+                        let item = items.map(value=>{
+                            let type = gameType.find(val=>{
+                                    return value.type == val._id
+                                });
+                            return {
+                                id:value._id,
+                                name:value.name,
+                                desc:value.desc,
+                                type:type._id,
+                                typeName:type.name,
+                                catena:value.catena,
+                                tagStr:value.tagStr,
+                                sizeStr:value.sizeStr,
+                                versionStr:value.versionStr,
+                                downloadStr:value.downloadStr,
+                                createDate:value.createDate.toLocaleString(),
+                            }
+                        });
+
+                        Db.find(function(err,total) {
+                            if(err) return cb(null,err);
+                            let result = {
+                                current:page,
+                                pageNum:page,
+                                pageSize:pageSize,
+                                records:item,
+                                total:total.length
+                            };
+                            return cb(null,{
+                                code:1,
+                                data:result,
+                                msg:'成功'
+                            })
+                        })
                     })
-                })
             }
         })
     }
@@ -79,10 +103,7 @@ class Collection{
 
     update(obj,cb) {
         let id = obj.id || null;
-        let updateInfo = {};
-
-        if(utils.isEmpty(obj.name)) updateInfo.name = obj.name;
-        if(utils.isEmpty(obj.type)) updateInfo.englishName = obj.englishName;
+        let updateInfo = Object.assign({},obj);
 
         Db.updateOne({_id:id},updateInfo,(err,docs)=>{
             if(err) return cb(err);

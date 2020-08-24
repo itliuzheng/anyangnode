@@ -37,6 +37,19 @@
                 <el-option :label="optionItem.label" :value="optionItem.value" :key="optionItem.value" v-for="optionItem in item.optionItem"></el-option>
               </el-select>
             </el-form-item>
+            <el-form-item :label="`${item.label}:`" :prop="item.name"  v-else-if="item.type == 'textarea'"  >
+                <el-input :disabled="item.disabled"
+                          type="textarea"
+                        v-model="formData[item.name]"
+                        :placeholder="item.placeholder"></el-input>
+            </el-form-item>
+            <el-form-item :label="`${item.label}:`" :prop="item.name"  v-else-if="item.type == 'editor'"  >
+
+              <quill-editor v-model="formData[item.name]"
+                            :config="editorOption"
+                            :disabled="item.disabled">
+              </quill-editor>
+            </el-form-item>
           </template>
           <template v-else>
             <el-form-item :label="`${item.label}:`" :prop="item.name">
@@ -56,6 +69,11 @@
 </template>
 
 <script>
+	import 'quill/dist/quill.core.css'
+	import 'quill/dist/quill.snow.css'
+	import 'quill/dist/quill.bubble.css'
+
+	import { quillEditor } from 'vue-quill-editor'
   import { CUSTOMERPOST } from '@/api/api'
   import CITY from '@/utils/city'
   import OPTIONS from '@/utils/industry'
@@ -71,6 +89,9 @@
         }
       }
     },
+		components: {
+			quillEditor
+		},
     name: "customerDetail",
     data() {
       let formData = this.init.list.map(function (value) {
@@ -91,7 +112,46 @@
       return {
         formRules:formRules,
         formItem: formData,
-        formData: initForm(formData)
+        formData: initForm(formData),
+				editorOption:{
+				  theme: 'bubble',
+				  placeholder: "every contentï¼support html",
+				  modules: {
+					toolbar: [
+					  ['bold', 'italic', 'underline', 'strike'],
+					  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+					  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+					  [{ 'color': [] }, { 'background': [] }],
+					  [{ 'font': [] }],
+					  [{ 'align': [] }],
+					  ['link', 'image'],
+					  ['clean']
+					]
+				  }
+				},
+      }
+    },
+    watch:{
+      init:{
+        handler(old,newValue){
+          let formData = newValue.list.map(function (value) {
+            let obj = {};
+            obj = Object.assign(obj,value);
+            obj.col = Number(obj.col);
+            let reg = /\([^\)]*\)/g;
+
+            if(value.type === 'input'){
+              obj.placeholder =  '请输入' + value.label.replace(reg,'');
+            }else{
+              obj.placeholder =  '请选择' + value.label.replace(reg,'');
+            }
+            return value
+          });
+          this.formRules = initRules(formData);
+          this.formItem = formData;
+          this.formData = initForm(formData);
+        },
+        deep:true
       }
     },
     methods: {
@@ -157,9 +217,19 @@
   }
 </script>
 
+
 <style scoped lang="scss">
 
   .form-desc{
     color: #666;
+  }
+</style>
+<style lang="scss">
+  .ql-container{
+    min-height: 100px;
+  }
+  .ql-snow .ql-picker-label{
+    line-height: 1;
+    vertical-align: top;
   }
 </style>
