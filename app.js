@@ -22,7 +22,12 @@ app.engine('html',expressArtTemplate);
 
 //是否开启调试模式
 app.set('view options', {
-    debug: process.env.NODE_ENV !== 'production'
+    // debug: process.env.NODE_ENV !== 'production'
+    debug: true,
+    bail: false,
+    onerror: function (err) {
+        console.log(err);
+    },
 });
 
 // 设置模板存放目录    第一个参数 'views' 不能修改

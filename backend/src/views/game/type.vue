@@ -16,15 +16,22 @@
     </el-form>
 
     <el-table :data="tableData.records" border>
+    <el-table-column type="expand">
+      <template slot-scope="props">
+        <el-form label-position="left" inline class="demo-table-expand">
+          <el-form-item label="系列游戏">
+            <p v-for="item in props.row.catena">{{ item.name }}</p>
+            <p v-if="!props.row.catena.length">暂无系列游戏</p>
+          </el-form-item>
+        </el-form>
+      </template>
+    </el-table-column>
       <el-table-column type="index" label="序号" align="center" width="50px"></el-table-column>
       <el-table-column prop="name" label="类型名称" align="center"></el-table-column>
       <el-table-column prop="englishName" label="英文名称" align="center"></el-table-column>
       <el-table-column prop="sort" label="显示排序" align="center"></el-table-column>
       <el-table-column label="操作" align="center" fixed="right">
         <template slot-scope="scope">
-          <el-button class="" type="text" size="small"
-                     @click="detail(scope.row)">详情
-          </el-button>
           <el-button class="" type="text" size="small"
                      @click="modify(scope.row)">修改
           </el-button>
@@ -126,9 +133,6 @@
           .then(res=>{
             this.tableData = res.data
           })
-      },
-      detail(row){
-        this.$router.push({name:'gameDetailList',params:{name:row.englishName},query:{name:row.name}})
       },
       modify(row){
 

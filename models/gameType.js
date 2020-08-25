@@ -13,6 +13,10 @@ var objSchema = new Schema({
         "type":String,
         "required":true
     },
+    //下属系列
+    "catena":{
+        "type":Array
+    },
     //显示排序
     "sort":{
         "type":Number,

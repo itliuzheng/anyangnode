@@ -98,7 +98,7 @@ export const constantRouterMap = [
     children: [
       {
         path: 'type',
-        component: resolve => require(['@/views/game/index.vue'], resolve),
+        component: resolve => require(['@/views/game/type.vue'], resolve),
         name: 'gameType',
         meta: {
           title: '游戏分类',
@@ -124,28 +124,6 @@ export const constantRouterMap = [
           noCache: true,
         },
       },
-    ]
-  },
-  {
-    path: '/product',
-    name: 'product',
-    component: Layout,
-    meta: {
-      title: '产品管理',
-      noCache: true,
-      roles: '/product',
-    },
-    alwaysShow: true, // will always show the root menu
-    children: [
-      {
-        path: '',
-        component: resolve => require(['@/views/product/index.vue'], resolve),
-        name: 'productIndex',
-        meta: {
-          title: '产品维护',
-          noCache: true
-        },
-      }
     ]
   },
 

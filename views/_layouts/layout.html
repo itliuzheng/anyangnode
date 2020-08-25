@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="/static/favicon.ico"/>
     <title>{{ block 'title' }}{{/block}}</title>
+    <meta name="keywords" content="{{ block 'keywords' }} {{/block}}"/>
+    <meta name="description" content="{{ block 'description' }} {{/block}}"/>
+     {{ block 'head'}}
     <link href="/static/css/main.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/MyCMSLoad/style.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
-    <meta name="keywords" content="{{ block 'keywords' }} {{/block}}"/>
-    <meta name="description" content="{{ block 'description' }} {{/block}}"/>
-     {{ block 'head'}} {{/block}}
+    {{/block}}
+
 </head>
 <body>
-     {{ include '../_partials/header.html' }}
+    {{ include '../_partials/header.html' }}
 
     {{ block 'content'}} {{/block}}
-
     {{ include '../_partials/footer.html'}}
 
      <script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -23,6 +24,30 @@
      <script type="text/javascript" src="/static/js/Functions.js"></script>
      <script type="text/javascript" src="/static/js/ScrollPic.js"></script>
      <script src="/static/js/MyTop.js"></script>
+
+    <script type="text/javascript">
+        jQuery(".fullSlide").hover(function () {
+                jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+            },
+            function () {
+                jQuery(this).find(".prev,.next").fadeOut()
+            });
+        jQuery(".fullSlide").slide({
+            titCell: ".hd ul",
+            mainCell: ".bd ul",
+            effect: "fold",
+            autoPlay: true,
+            autoPage: true,
+            trigger: "click",
+            startFun: function (i) {
+                var curLi = jQuery(".fullSlide .bd li").eq(i);
+                if (!!curLi.attr("_src")) {
+                    curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+                }
+            }
+        });
+    </script>
      {{ block 'script'}} {{/block}}
+
 </body>
 </html>

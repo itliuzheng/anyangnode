@@ -71,21 +71,21 @@ http.interceptors.response.use(res => {
     loadingInstance.close();
   },0)
   // console.log(res);
-  if(res.data.code == 3){
-    MessageBox.alert(res.data.msg, '提示', {
-      confirmButtonText: '重新登陆',
-      showClose: false,
-      type: 'error',
-      callback: action => {
-        router.replace({
-          path: '/login',
-          query: {
-            redirect: router.currentRoute.fullPath
-          }
-        });
-      }
-    });
-  }
+  // if(res.data.code == 3){
+  //   MessageBox.alert(res.data.msg, '提示', {
+  //     confirmButtonText: '重新登陆',
+  //     showClose: false,
+  //     type: 'error',
+  //     callback: action => {
+  //       router.replace({
+  //         path: '/login',
+  //         query: {
+  //           redirect: router.currentRoute.fullPath
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
   // if(res.data.code != 1){
   //   MessageBox.alert(res.data.msg, '提示', {
   //     confirmButtonText: `请通知管理员！`,

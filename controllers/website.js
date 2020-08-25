@@ -167,4 +167,4 @@ class Collection {
 
 }
 
-module.exports.website = new Collection('webiste');
+module.exports = new Collection('webiste');

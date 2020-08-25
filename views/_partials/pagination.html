@@ -1,0 +1,22 @@
+
+<div class='t_page ColorLink'>
+    总数：{{total}}条&nbsp;&nbsp;
+    当前页数：<span class='FontRed'>{{current}}</span>/{{pages}}
+    <a href="{{url}}">首页</a>
+    {{ if current == 1}}
+    &nbsp;&nbsp;上一页&nbsp;&nbsp;
+    {{ else if current != 1}}
+    <a href="{{url}}?page={{current - 1}}">上一页</a>
+    {{/if}}
+
+    {{ each pageArr}}
+    <a href="{{url}}?page={{$value}}">{{$value}}</a>
+    {{ /each}}
+
+    {{ if current == pages}}
+    &nbsp;&nbsp;下一页&nbsp;&nbsp;
+    {{ else if current != pages}}
+    <a href="/Support?page={{current + 1}}">下一页</a>
+    {{/if}}
+    <a href="{{url}}?page={{pages}}">尾页</a>
+</div>

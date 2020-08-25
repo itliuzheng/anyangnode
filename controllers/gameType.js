@@ -32,6 +32,7 @@ Collection.prototype.findAll = function(obj,cb){
                     id:value._id,
                     name:value.name,
                     englishName:value.englishName,
+                    catena:value.catena,
                     sort:value.sort,
                     createDate:value.createDate.toLocaleString(),
                 }

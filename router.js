@@ -43,6 +43,12 @@ router.post('/api/product/delete',routes.product.delete);
 //用户界面  start
 router.get('/',viewModels.home.home);
 router.get('/Support',viewModels.pc.index);
+//大类分类
+router.get('/PC/:name',viewModels.pc.query);
+//系列分类
+router.get('/PC/:name/:series',viewModels.pc.query);
+//首字母分类
+router.get('/PC/initials',viewModels.pc.query);
 
 //用户界面  end
 
