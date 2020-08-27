@@ -1,0 +1,134 @@
+<template>
+  <div class="app-container">
+    <el-form v-model="topModel" ref="customerTopModel" :inline="true" label-position="left">
+      <el-row>
+        <el-col :span="8">
+          <el-form-item label="名称:">
+            <el-input size="small"  v-model="topModel.name"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8" class="text-right">
+          <el-form-item label="">
+            <el-button size="small" class="el-button" type="primary" @click="inquire">查询</el-button>
+            <el-button size="small" class="el-button" type="" @click="clear">清空</el-button>
+            <el-button size="small" class="el-button" type="danger"  @click="addCreate">新增</el-button>
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
+
+    <el-table :data="tableData.records" border>
+      <el-table-column type="index" label="序号" align="center" width="50px"></el-table-column>
+      <el-table-column prop="title" label="标题" align="center"></el-table-column>
+      <el-table-column prop="isTop" label="状态" align="center" >
+        <template slot-scope="scope">
+          <p>{{scope.row.isTop?"已置顶":"未置顶"}}</p>
+        </template>
+      </el-table-column>
+      <el-table-column prop="createDate" label="创建时间" align="center" width="150px"></el-table-column>
+      <el-table-column label="操作" align="center" fixed="right">
+        <template slot-scope="scope">
+          <el-button class="" type="text" size="small"
+                     @click="modify(scope.row)">修改
+          </el-button>
+          <el-button class="" type="text" size="small"
+                     @click="deleteBtn(scope.row)">删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="page-box" v-if="tableData.total != 0">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page="tableData.current"
+        :page-size="tableData.pageSize"
+        layout="total, prev,pager, next, jumper"
+        :total="tableData.total">
+      </el-pagination>
+    </div>
+
+
+
+  </div>
+</template>
+
+<script>
+  import { postPage,postDelete } from '../../api/notice'
+
+  export default {
+    name: "gameIndex",
+    data() {
+
+      return {
+        topModel: {
+          name: null,
+          typeId: null,
+          pageNum: 1,
+          pageSize: 30
+        },
+        tableData: {
+          records:[]
+        },
+        dialogInitDetail:[],
+        axiosId:null,
+        formData:{},
+        gameTypeList:[],
+      }
+    },
+    created(){
+      this.getData();
+    },
+    methods: {
+      handleCurrentChange(val) {
+        this.topModel.pageNum = val;
+        this.getData();
+      },
+      addCreate() {
+        this.$router.push({name:'addNotice'})
+      },
+      inquire() {
+        this.getData();
+      },
+      clear() {
+        this.topModel = {
+          name: null,
+          typeId: null,
+        }
+        this.getData();
+      },
+      getData() {
+        postPage(this.topModel)
+          .then(res=>{
+            this.tableData = res.data
+          })
+      },
+      modify(row){
+        this.$router.push({name:'addNotice',query:{id:row.id}})
+
+      },
+      deleteBtn(row){
+        this.$confirm('确定要删除吗?', '消息提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'success'})
+          .then(() => {
+            postDelete(row.id).then(res =>{
+              this.$message({
+                type:'success',
+                message:res.msg
+              });
+              this.getData();
+            });
+          })
+          .catch(() => {
+
+          });
+      },
+    }
+
+  }
+</script>
+
+<style scoped>
+
+</style>

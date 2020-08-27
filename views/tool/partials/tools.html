@@ -1,0 +1,45 @@
+<div class="prenext">
+    <div class="IntroTitle">更多工具补丁</div>
+    <div class="blk_29">
+
+        <div class="LeftBotton" id="LeftArr_{{@scrollpicId}}"></div>
+        <div class="Cont" id="ISL_Cont_{{@scrollpicId}}">
+            <!-- 图片列表 begin -->
+            {{ each records}}
+            <div class='box'>
+                <a class='imgBorder' href="/tool/{{@$value.id}}"
+                   target='_blank' title="{{$value.title}}" >
+                    <img src="{{$value.imgUrl}}" alt="{{$value.title}}">
+                </a>
+                <p>
+                    <a class='imgBorder'
+                       href="/tool/{{@$value.id}}" target='_blank'
+                       title="{{$value.title}}">{{$value.title}}</a>
+                </p>
+            </div>
+            {{ /each }}
+            <!-- 图片列表 end -->
+        </div>
+        <div class="RightBotton" id="RightArr_{{@scrollpicId}}"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/static/js/ScrollPic.js"></script>
+<script language=javascript type=text/javascript>
+    var scrollPic_02 = new ScrollPic();
+
+    scrollPic_02.scrollContId = "ISL_Cont_{{@scrollpicId}}"; //内容容器ID
+    scrollPic_02.arrLeftId = "LeftArr_{{@scrollpicId}}";//左箭头ID
+    scrollPic_02.arrRightId = "RightArr_{{@scrollpicId}}"; //右箭头ID
+
+    scrollPic_02.frameWidth = 750;//显示框宽度
+    scrollPic_02.pageWidth = 240; //翻页宽度
+
+    scrollPic_02.speed = 1; //移动速度(单位毫秒，越小越快)
+    scrollPic_02.space = 1; //每次移动像素(单位px，越大越快)
+    scrollPic_02.autoPlay = true; //自动播放
+    scrollPic_02.autoPlayTime = 2; //自动播放间隔时间(秒)
+
+    scrollPic_02.initialize(); //初始化
+</script>

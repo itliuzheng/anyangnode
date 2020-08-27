@@ -537,3 +537,17 @@ a.libox2:hover{ border:none; background:url(/static/images/img2-1.jpg) 20px cent
 .clear { 
 	height:1%; 
 	overflow:hidden; }
+
+
+.search_welcome{
+	line-height:25px;
+	text-align:center;
+	}
+.search_welcome p{
+	text-align:center;}
+
+.download-text a{
+	text-decoration: underline;
+}
+
+.ql-align-center{text-align: center}

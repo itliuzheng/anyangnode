@@ -1,0 +1,125 @@
+{{ extend '../_layouts/layout.html' }}
+
+{{ block 'head'}}
+
+<link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
+{{ /block}}
+
+{{ block 'content'}}
+
+<div id="body">
+    <div class="HeightTab clearfix"></div>
+    <!--inner start -->
+    <div class="inner clearfix">
+        <!--left start-->
+        <div class="left">
+            <div class="Sbox">
+                <div class="topic2">教程资讯</div>
+                <div class="ClassNav">
+                    <div class="NavTree">
+                        <ul id='suckertree1'>
+                            <li><a href="/course/">游戏教程</a></li>
+                            <li><a href="/course_new/">游戏资讯</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+            <div class="Sbox">
+                <div class="topic">FFF单机游戏下载站</div>
+                <a href="/">
+                    <div class="txt ColorLink">
+                    </div>
+                </a>
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+        </div>
+        <!--left end-->
+        <!--right start-->
+        <div class="right">
+            <div class="Position">
+                <span>你的位置：
+                    <a href="/">首页</a> >
+                    <a href="/course/">教程资讯</a>
+                    <font class='FontRed'>({{(pagination.total)}})</font>
+                </span>
+            </div>
+            <div class="HeightTab clearfix"></div>
+            <!--main start-->
+            <div class="main">
+
+                {{ if pagination.total !== 0}}
+
+                <div class="right-main news-02">
+                    <!--startprint-->
+                    <ul>
+                        {{ each list }}
+                        <li class="clear">
+                            <div class='time'><strong>{{ $value.tagTop }}</strong>{{ $value.tagDown }}</div>
+                            <div class='time-txt'><h3>
+                                <a href="/course/{{@$value.id}}" target='_blank'>
+                                    {{ $value.title}}
+                                </a>
+                            </h3>
+                                <p>{{ $value.description}}...</p></div>
+                        </li>
+                        {{ /each }}
+                    </ul>
+                    <!--endprint-->
+                </div>
+
+                <div class="clearfix"></div>
+
+                {{ include '../_partials/pagination.html' pagination}}
+
+                {{ else}}
+                <div class='search_welcome'>很抱歉,没有找到与
+                    <span class='FontRed'>游戏教程</span> 相关的信息！
+                    <p>提示：只搜索游戏名称部分内容，进行模糊搜索可获取更理想结果，如“使命”“正当防卫”“古墓丽影”。</p>
+                </div>
+                {{/if}}
+
+
+            </div>
+
+
+        </div>
+        <!--right end-->
+
+    </div>
+    <!--main end-->
+    <div class="HeightTab clearfix"></div>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script type="text/javascript" src="/static/js/ServiceCenter.js"></script>
+<script type="text/javascript" src="/static/images/iepng/iepngfix_tilebg.js"></script>
+
+<script type="text/javascript">
+    jQuery(".fullSlide").hover(function () {
+            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+        function () {
+            jQuery(this).find(".prev,.next").fadeOut()
+        });
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click",
+        startFun: function (i) {
+            var curLi = jQuery(".fullSlide .bd li").eq(i);
+            if (!!curLi.attr("_src")) {
+                curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+            }
+        }
+    });
+</script>
+{{/block}}

@@ -114,15 +114,92 @@ export const constantRouterMap = [
           noCache: true,
         }
       },
+    ]
+  },
+  {
+    path: '/tools',
+    component: Layout,
+    meta: {
+      title: '游戏工具',
+      noCache: true,
+    },
+    alwaysShow: true, // will always show the root menu
+    children: [
       {
-        path: ':name',
-        component: resolve => require(['@/views/game/detail_list.vue'], resolve),
-        name: 'gameDetailList',
-        hidden:true,
+        path: 'list',
+        component: resolve => require(['@/views/tools/list.vue'], resolve),
+        name: 'gameList',
         meta: {
-          title: '详情',
+          title: '工具列表',
           noCache: true,
-        },
+        }
+      },
+    ]
+  },
+  {
+    path: '/tutorial',
+    component: Layout,
+    meta: {
+      title: '教程资讯',
+      noCache: true,
+    },
+    alwaysShow: true, // will always show the root menu
+    children: [
+      {
+        path: 'list',
+        component: resolve => require(['@/views/tutorial/list.vue'], resolve),
+        name: 'gameTutorial',
+        meta: {
+          title: '游戏教程',
+          noCache: true,
+        }
+      },
+      {
+        path: 'add',
+        component: resolve => require(['@/views/tutorial/addTutorial.vue'], resolve),
+        name: 'addGameTutorial',
+        meta: {
+          title: '添加游戏教程',
+          noCache: true,
+        }
+      },
+      {
+        path: 'news',
+        component: resolve => require(['@/views/tutorial/new.vue'], resolve),
+        name: 'gameNew',
+        meta: {
+          title: '游戏资讯',
+          noCache: true,
+        }
+      },
+    ]
+  },
+  {
+    path: '/notice',
+    component: Layout,
+    meta: {
+      title: '网站公告',
+      noCache: true,
+    },
+    alwaysShow: true, // will always show the root menu
+    children: [
+      {
+        path: 'list',
+        component: resolve => require(['@/views/notice/list.vue'], resolve),
+        name: 'notice',
+        meta: {
+          title: '公告列表',
+          noCache: true,
+        }
+      },
+      {
+        path: 'add',
+        component: resolve => require(['@/views/notice/add.vue'], resolve),
+        name: 'addNotice',
+        meta: {
+          title: '添加网站公告',
+          noCache: true,
+        }
       },
     ]
   },

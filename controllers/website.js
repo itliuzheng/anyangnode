@@ -31,7 +31,6 @@ class Collection {
             //上传域
             let file = files.img;
             let extName = '';
-            console.log(file.type);
             switch (file.type) {
                 case 'image/pjpeg':
                     extName = 'jpg';
@@ -59,7 +58,6 @@ class Collection {
                 var dir = vacationPhotoDir + '/'+Date.now();
                 var _path = path.join(dir,Date.now()+'.'+extName);
                 fs.mkdirSync(dir);
-                console.log(file.path);
                 //file.path是formidable创建的临时文件
                 fs.renameSync(file.path,_path);
 
@@ -69,7 +67,7 @@ class Collection {
 
                 cb(null,{
                     code:1,
-                    data:_path,
+                    data:path.relative(__dirname,_path),
                     msg:'成功'
                 })
             }

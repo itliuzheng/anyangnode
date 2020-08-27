@@ -8,6 +8,10 @@ var objSchema = new Schema({
         "type":String,
         "required":true
     },
+    //名称简拼
+    "nameCode":{
+        "type":String
+    },
     //游戏描述
     "desc":{
         "type":String,
@@ -19,6 +23,10 @@ var objSchema = new Schema({
     },
     //系列分类
     "catena":{
+        "type":String
+    },
+    //系列分类code
+    "catenaCode":{
         "type":String
     },
     //标签

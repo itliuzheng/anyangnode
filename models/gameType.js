@@ -15,7 +15,7 @@ var objSchema = new Schema({
     },
     //下属系列
     "catena":{
-        "type":Array
+        "type":Array     //{ name:'',code:'' }
     },
     //显示排序
     "sort":{

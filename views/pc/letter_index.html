@@ -1,0 +1,223 @@
+{{ extend '../_layouts/layout.html' }}
+
+{{ block 'head'}}
+
+<link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
+{{ /block}}
+
+{{ block 'content'}}
+
+<div id="body">
+    <div class="HeightTab clearfix"></div>
+    <!--inner start -->
+    <div class="inner clearfix">
+        <!--left start-->
+        <div class="left">
+            <div class="Sbox">
+                <div class="topic2">PC单机游戏</div>
+                <div class="ClassNav">
+                    <div class="NavTree">
+                        <ul id='suckertree1'>
+                            {{ each rightNav}}
+                            <li><a href="/PC/{{ $value.englishName }}/">{{ $value.name }}</a>
+                                <ul>
+                                    {{ each $value.catena data}}
+                                    <li><a href='/PC/{{ $value.englishName }}/{{ data.code }}'>{{data.name}}系列</a></li>
+                                    {{ /each }}
+                                </ul>
+                            </li>
+                            {{ /each }}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+            <div class="Sbox">
+                <div class="topic2">游戏分类</div>
+                <div class="ClassNav">
+                    <div class="NavTree">
+                        <ul>
+                            {{ each letterArr }}
+                            <li><a href='/PC_initials/{{$value}}'>{{$value}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+        </div>
+        <!--left end-->
+        <!--right start-->
+        <div class="right">
+            <div class="Position">
+                <span>你的位置：
+                    <a href="/">首页</a> >
+                    <a href="/Support/">PC单机游戏</a> >
+                    <a href="/PC_initials/{{currentName}}">{{currentName}}</a>
+                    <font class='FontRed'>({{(pagination.total)}})</font>
+                </span>
+            </div>
+            <div class="HeightTab clearfix"></div>
+            <!--main start-->
+            <div class="main">
+                {{ if pagination.total !== 0}}
+
+                <div class="right-main news-02">
+                    <!--startprint-->
+                    <ul>
+                        {{ each gameList }}
+                        <li class="clear">
+                            <div class='time'><strong>{{ $value.tagTop }}</strong>{{ $value.tagDown }}</div>
+                            <div class='time-txt'><h3>
+                                <a href='/html/14280310.html' target='_blank'>
+                                    {{ $value.name}}
+                                </a>
+                            </h3>
+                                <p>{{ $value.desc}}...</p></div>
+                        </li>
+                        {{ /each }}
+                    </ul>
+                    <!--endprint-->
+                </div>
+
+                <div class="clearfix"></div>
+
+                {{ include '../_partials/pagination.html' pagination}}
+
+                <div class="prenext">
+                    <div class="IntroTitle">游戏相关教程</div>
+                    <DIV class="blk_29">
+                        <div class="LeftBotton"></div>
+                        <DIV class="Cont" id="ISL_Cont_1">
+                            <!-- 图片列表 begin -->
+                            <DIV class='box'>
+                                <A class='imgBorder' href='/Course/104161413.html' target='_blank' title=''>
+                                    <IMG src='/static/images/image/20200070.jpg'>
+                                </A>
+                                <p>
+                                    <A class='imgBorder' href='/Course/104161413.html' target='_blank' title=''>游戏安装启动常见问题及解决办法</A>
+                                </p>
+                            </DIV>
+                            <DIV class='box'>
+                                <A class='imgBorder' href='/Course/104161322.html' target='_blank' title=''>
+                                    <IMG src='/static/images/image/20200071.jpg'>
+                                </A>
+                                <p>
+                                    <A class='imgBorder' href='/Course/104161322.html' target='_blank'
+                                       title=''>游戏安装教程</A>
+                                </p>
+                            </DIV>
+                            <DIV class='box'>
+                                <A class='imgBorder' href='/Course/104161511.html' target='_blank' title=''>
+                                    <IMG src='/static/images/image/20200078.jpg'>
+                                </A>
+                                <p>
+                                    <A class='imgBorder' href='/Course/104161511.html' target='_blank' title=''>文件完整性md5校验教程</A>
+                                </p>
+                            </DIV>
+
+
+                            <!-- 图片列表 end -->
+                        </DIV>
+
+                        <DIV class="RightBotton" id="RightArr"></DIV>
+                    </DIV>
+
+                    <!--<div class='clicktimes'>-->
+                    <!--<script language="javascript" src="/inc/article_view.asp?id=1055"></script>-->
+                    <!--</div>-->
+                    <div class="prenext">
+                        <div class="IntroTitle">游戏常用工具</div>
+                        <DIV class="blk_29">
+                            <div class="LeftBotton"></div>
+                            <DIV class="Cont">
+                                <!-- 图片列表 begin -->
+                                <DIV class='box'>
+                                    <A class='imgBorder' href='/case/8520695954.html' target='_blank' title='游戏必备工具合集'>
+                                        <IMG alt='游戏必备工具合集' src='/static/images/up_images/202041510537.jpg'
+                                             alt='游戏必备工具合集'>
+                                    </A>
+                                    <p>
+                                        <A class='imgBorder' href='/case/8520695954.html' target='_blank'
+                                           title='游戏必备工具合集'>游戏必备工具合集</A>
+                                    </p>
+                                </DIV>
+                                <DIV class='box'>
+                                    <A class='imgBorder' href='/case/2158474918.html' target='_blank'
+                                       title='md5文件完整性校验工具'>
+                                        <IMG alt='md5文件完整性校验工具' src='/static/images/up_images/20200016.jpg'
+                                             alt='md5文件完整性校验工具'>
+                                    </A>
+                                    <p>
+                                        <A class='imgBorder' href='/case/2158474918.html' target='_blank'
+                                           title='md5文件完整性校验工具'>md5文件完整性校验</A>
+                                    </p>
+                                </DIV>
+                                <DIV class='box'>
+                                    <A class='imgBorder' href='/case/3659281128.html' target='_blank' title='游戏运行库'>
+                                        <IMG alt='游戏运行库' src='/static/images/up_images/20200015.jpg' alt='游戏运行库'>
+                                    </A>
+                                    <p>
+                                        <A class='imgBorder' href='/case/3659281128.html' target='_blank' title='游戏运行库'>游戏运行库</A>
+                                    </p>
+                                </DIV>
+
+                                <!-- 图片列表 end --></DIV>
+
+                            <DIV class="RightBotton"></DIV>
+                        </DIV>
+
+
+                    </div>
+
+
+                </div>
+                {{ else}}
+                <div class='search_welcome'>很抱歉,没有找到与
+                    <span class='FontRed'>{{currentName}}</span> 相关的信息！
+                    <p>提示：只搜索游戏名称部分内容，进行模糊搜索可获取更理想结果，如“使命”“正当防卫”“古墓丽影”。</p>
+                </div>
+                {{/if}}
+            </div>
+
+
+        </div>
+        <!--right end-->
+
+    </div>
+    <!--main end-->
+    <div class="HeightTab clearfix"></div>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script type="text/javascript" src="/static/js/ServiceCenter.js"></script>
+<script type="text/javascript" src="/static/images/iepng/iepngfix_tilebg.js"></script>
+
+<script type="text/javascript">
+    jQuery(".fullSlide").hover(function () {
+            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+        function () {
+            jQuery(this).find(".prev,.next").fadeOut()
+        });
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click",
+        startFun: function (i) {
+            var curLi = jQuery(".fullSlide .bd li").eq(i);
+            if (!!curLi.attr("_src")) {
+                curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+            }
+        }
+    });
+</script>
+{{/block}}

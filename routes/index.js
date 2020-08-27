@@ -5,4 +5,8 @@ module.exports = {
     website:require('./website'),
     gameType:require('./gameType'),
     gameDetail:require('./gameDetail'),
+    gameTool:require('./gameTool'),
+    gameTutorial:require('./gameTutorial'),
+    gameNew:require('./gameNew'),
+    notice:require('./notice'),
 }

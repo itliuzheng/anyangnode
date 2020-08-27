@@ -10,6 +10,7 @@ var vertoken = require('./common/token');
 var router = require('./router')
 
 app.use('/static/',express.static(path.join(__dirname,'static')));
+app.use('/data',express.static(path.join(__dirname,'data')));
 
 //因为一些框架都在使用{{}}这种模板语法，所以更改解析规则这种需求也时常出现
 //更改art-template 解析规则{{ }}为<? ?>

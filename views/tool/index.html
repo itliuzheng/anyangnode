@@ -1,0 +1,101 @@
+{{ extend '../_layouts/layout.html' }}
+
+{{ block 'head'}}
+
+<link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
+{{ /block}}
+
+{{ block 'content'}}
+
+<div id="body">
+    <div class="HeightTab clearfix"></div>
+    <!--inner start -->
+    <div class="inner clearfix">
+        <!--left start-->
+        <div class="left">
+            <div class="Sbox">
+                <div class="topic2">高速下载通道</div>
+
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+            <div class="Sbox">
+                <div class="topic">FFF单机游戏下载站</div>
+                <a href="/">
+                    <div class="txt ColorLink">
+                    </div>
+                </a>
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+        </div>
+        <!--left end-->
+        <!--right start-->
+        <div class="right">
+            <div class="Position">
+                <span>你的位置：
+                    <a href="/">首页</a> >
+                    <a href="/case/">游戏工具</a>
+                </span>
+            </div>
+            <div class="HeightTab clearfix"></div>
+            <!--main start-->
+            <div class="main">
+
+                <!--image start-->
+                <div class='ImageList'>
+                    {{ each list}}
+                    <div class='ImageBlockBG'>
+                        <div class='ImageBlock'>
+                            <a href="/tool/{{@$value.id}}" title="{{$value.title}}" target='_blank'>
+                                <img src="{{$value.imgUrl}}" alt="{{$value.title}}"/>
+                            </a>
+                            <p>
+                                <a href="/case/{{@$value.id}}" title="{{$value.title}}" target='_blank'>{{$value.title}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    {{ /each }}
+                    <div class="clearfix"></div>
+                    {{ include '../_partials/pagination.html' pagination}}
+                </div>
+                <!--image end -->
+            </div>
+            <!--main end-->
+        </div>
+        <!--right end-->
+
+    </div>
+    <!--inner end-->
+    <div class="HeightTab clearfix"></div>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script type="text/javascript" src="/static/js/ServiceCenter.js"></script>
+<script type="text/javascript" src="/static/images/iepng/iepngfix_tilebg.js"></script>
+
+<script type="text/javascript">
+    jQuery(".fullSlide").hover(function () {
+            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+        function () {
+            jQuery(this).find(".prev,.next").fadeOut()
+        });
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click",
+        startFun: function (i) {
+            var curLi = jQuery(".fullSlide .bd li").eq(i);
+            if (!!curLi.attr("_src")) {
+                curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+            }
+        }
+    });
+</script>
+{{/block}}

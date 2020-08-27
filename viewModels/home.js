@@ -11,3 +11,11 @@ module.exports.home = function(req, res, next) {
     });
 };
 
+module.exports.dashang = function(req, res, next) {
+    res.render('dashang/index.html');
+};
+
+module.exports.vip = function(req, res, next) {
+    res.render('vip/index.html');
+};
+

@@ -1,0 +1,134 @@
+{{ extend '../../_layouts/layout.html' }}
+
+{{ block 'head'}}
+
+<link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
+{{ /block}}
+
+{{ block 'content'}}
+
+<div id="body">
+    <div class="HeightTab clearfix"></div>
+    <!--inner start -->
+    <div class="inner clearfix">
+        <!--left start-->
+        <div class="left">
+            <div class="Sbox">
+                <div class="topic2">PC单机游戏</div>
+                <div class="ClassNav">
+                    <div class="NavTree">
+                        <ul id='suckertree1'>
+                            {{ each rightNav}}
+                            <li><a href="/PC/{{ $value.englishName }}/">{{ $value.name }}</a>
+                                <ul>
+                                    {{ each $value.catena data}}
+                                    <li><a href='/PC/{{ $value.englishName }}/{{ data.code }}'>{{data.name}}系列</a></li>
+                                    {{ /each }}
+                                </ul>
+                            </li>
+                            {{ /each }}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+            <div class="Sbox">
+                <div class="topic">FFF单机游戏下载站</div>
+                <a href="/">
+                    <div class="txt ColorLink">
+                    </div>
+                </a>
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+        </div>
+        <!--left end-->
+        <!--right start-->
+        <div class="right">
+            <div class="Position">
+                <span>你的位置：
+                    <a href="/">首页</a> >
+                    <a href="/Support/">PC单机游戏</a> >
+                    {{gameDetail.name}}
+                </span>
+            </div>
+            <div class="HeightTab clearfix"></div>
+            <!--main start-->
+            <div class="main">
+                <div class="content"><br/>
+                    <div class="title"><h3>{{gameDetail.name}}</h3></div>
+                    <br/>
+                    <div class="maincontent clearfix">
+                        {{ if gameDetail.sizeStr}}
+                        <div class="IntroTitle">游戏大小</div>
+                        <p>{{gameDetail.sizeStr}}</p>
+                        <div class="clearfix"></div>
+                        {{/if}}
+                        {{ if gameDetail.versionStr}}
+                        <div class="IntroTitle">版本介绍</div>
+                        <p>{{gameDetail.versionStr}}</p>
+                        <div class="clearfix"></div>
+                        {{/if}}
+
+                        {{ if gameDetail.downloadStr}}
+                        <div class="IntroTitle">下载信息</div>
+                        <div class="download-text">{{@gameDetail.downloadStr}}</div>
+                        <div class="clearfix"></div>
+                        {{/if}}
+
+                        {{ if gameDetail.tagStr}}
+                        <div class="IntroTitle">标签</div>
+                        <p>{{gameDetail.tagStr}}</p>
+                        <div class="clearfix"></div>
+                        {{/if}}
+
+                    </div>
+
+                    {{ include '../../_partials/dashang.html'}}
+
+
+                    {{ include '../partials/tutorials.html'}}
+                    {{ include '../partials/tools.html'}}
+
+                </div>
+            </div>
+            <!--main end-->
+        </div>
+        <!--right end-->
+
+    </div>
+    <!--inner end-->
+    <div class="HeightTab clearfix"></div>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script type="text/javascript" src="/static/js/ServiceCenter.js"></script>
+<script type="text/javascript" src="/static/images/iepng/iepngfix_tilebg.js"></script>
+
+<script type="text/javascript">
+    jQuery(".fullSlide").hover(function () {
+            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+        function () {
+            jQuery(this).find(".prev,.next").fadeOut()
+        });
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click",
+        startFun: function (i) {
+            var curLi = jQuery(".fullSlide .bd li").eq(i);
+            if (!!curLi.attr("_src")) {
+                curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+            }
+        }
+    });
+</script>
+{{/block}}

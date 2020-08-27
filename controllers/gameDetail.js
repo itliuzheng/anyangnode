@@ -7,6 +7,15 @@ var pyfl = require('pyfl').default;
 
 class Collection{
 
+    gameDetailfindById(obj={}){
+        return new Promise((resolve ,reject)=> {
+            Db.findOne(obj,(err,detail)=>{
+                if(err) return reject(err);
+                resolve(detail)
+            })
+        })
+    }
+
     findGameType(obj={}){
         return new Promise((resolve ,reject)=> {
             DbGameType.find(obj,(err,items)=>{
@@ -28,7 +37,6 @@ class Collection{
     gameTypeSave(obj = {},catena){
         return new Promise((resolve ,reject)=> {
             let id = obj._id;
-
             DbGameType.updateOne({_id:id},{
                 $addToSet:{
                     catena:catena
@@ -51,6 +59,14 @@ class Collection{
         if(utils.isEmpty(obj.typeId)){
             data.type = obj.typeId
         }
+        if(utils.isEmpty(obj.catenaCode)){
+            data.catenaCode = obj.catenaCode
+        }
+
+        if(utils.isEmpty(obj.nameCode)){
+            data.nameCode = obj.nameCode
+        }
+
         let page = obj.page || 1;
         let pageSize = obj.pageSize || 10;
 
@@ -74,6 +90,7 @@ class Collection{
                             return {
                                 id:value._id,
                                 name:value.name,
+                                nameCode:value.nameCode,
                                 desc:value.desc,
                                 type:type._id,
                                 typeName:type.name,
@@ -86,24 +103,42 @@ class Collection{
                             }
                         });
 
-                        Db.find(function(err,total) {
-                            if(err) return cb(null,err);
-                            let result = {
-                                current:page,
-                                pageNum:page,
-                                pageSize:pageSize,
-                                records:item,
-                                total:total.length
-                            };
-                            return cb(null,{
-                                code:1,
-                                data:result,
-                                msg:'成功'
-                            })
+                        let result = {
+                            current:page,
+                            pageNum:page,
+                            pageSize:pageSize,
+                            records:item,
+                            total:items.length
+                        };
+                        return cb(null,{
+                            code:1,
+                            data:result,
+                            msg:'成功'
                         })
                     })
             }
         })
+    }
+
+    async findById(obj,cb){
+        try {
+            if(!utils.isEmpty(obj.id)){
+                return cb('id不能为空');
+            }
+
+            let detail = await this.gameDetailfindById({
+                _id:obj.id
+            });
+
+            return cb(null,{
+                code:1,
+                data:detail,
+                msg:'成功'
+            })
+
+        }catch (e) {
+            return cb(null, e)
+        }
     }
 
     async create(obj,cb) {
@@ -115,7 +150,7 @@ class Collection{
                 return cb('所属分类不能为空');
             }
 
-            console.log(obj);
+            obj.nameCode = pyfl(obj.name);
 
             if(utils.isEmpty(obj.catena)){
                let gameTypeInfo = await this.findGameTypeOne({_id:obj.type});
@@ -124,13 +159,11 @@ class Collection{
                    code:pyfl(obj.catena)
                }
                await this.gameTypeSave(gameTypeInfo,catenaObj);
-               // let catena = gameTypeInfo.catena || [];
-               // if(!catena.includes(obj.catena)){
-               //    await this.gameTypeSave(gameTypeInfo,obj.catena);
-               // }
+               obj.catenaCode = pyfl(obj.catena);
             }
 
-            // let data = await new Db(obj).save();
+
+            await new Db(obj).save();
 
             return cb(null,{
                 code:1,
@@ -148,6 +181,7 @@ class Collection{
             let id = obj.id || null;
             let updateInfo = Object.assign({},obj);
 
+
             if(utils.isEmpty(obj.catena)){
                let gameTypeInfo = await this.findGameTypeOne({name:obj.typeName});
                let catenaObj = {
@@ -155,10 +189,7 @@ class Collection{
                    code:pyfl(obj.catena)
                }
                await this.gameTypeSave(gameTypeInfo,catenaObj);
-               // let catena = gameTypeInfo.catena || [];
-               // if(!catena.includes(obj.catena)){
-               //    await this.gameTypeSave(gameTypeInfo,obj.catena);
-               // }
+               updateInfo.catenaCode = pyfl(obj.catena);
             }
 
             Db.updateOne({_id:id},updateInfo,(err,docs)=>{

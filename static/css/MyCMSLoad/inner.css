@@ -167,13 +167,13 @@
 	padding:10px;
 	width:280px;
 	padding-top:150px;
-	background:url("/images/contact_bg.png") no-repeat 0px 0px;
+	background:url("/static/images/contact_bg.png") no-repeat 0px 0px;
 	}
 	
 #body .inner .right  .Position{
 	font-size:12px;
 	line-height:33px;
-	background:#F5F5F5 url("/images/s-homeico.png") no-repeat 10px center;
+	background:#F5F5F5 url("/static/images/s-homeico.png") no-repeat 10px center;
 	color:#999;}
 #body .inner .right  .Position a{
 	color:#999;}
@@ -199,12 +199,23 @@
 	text-align:center;}
 #body .inner .right .main .content .maincontent{
 	font-size:14px;}
+#body .inner .right .main .content .maincontent ul li{
+	font-size:14px;
+	line-height:25px;
+	border-left:3px solid #C40000;
+	margin:10px 0px;
+	padding-left:10px;
+	color:#C40000;
+	font-weight:bold;
+	background-color:#e5e5e5;
+}
 #body .inner .right .main .content .maincontent p{
+	text-indent: 2em;
 	padding:5px 0px;
 	line-height:200%;
 	}
 #body .inner .right .main .content .download{
-	background:url("/images/MyCMSLoad/downicon.gif") no-repeat 15px 7px;
+	background:url("/static/images/MyCMSLoad/downicon.gif") no-repeat 15px 7px;
 	padding-left:55px;
 	border:1px solid #F5F5F5;
 	line-height:40px;
@@ -217,7 +228,7 @@
 	margin-top:10px;}
 #body .inner .right .main .content .prenext ul li{
 	line-height:30px;
-	background:url("/images/MyCMSLoad/jiantou.gif") no-repeat 0px 1px;
+	background:url("/static/images/MyCMSLoad/jiantou.gif") no-repeat 0px 1px;
 	padding-left:15px;}				
 				
 #body .inner .right .main .ArticleList{
@@ -368,7 +379,7 @@
 	padding:10px 20px;
 	border-bottom:1px dashed #CCCCCC;
 	font-size:14px;
-	background:url("/images/MyCMSLoad/ico4.jpg") no-repeat left 18px;}
+	background:url("/static/images/MyCMSLoad/ico4.jpg") no-repeat left 18px;}
 
 
 #body .inner .right .main .SiteMap ul li ul li{
@@ -409,7 +420,7 @@
 	padding:0px 20px 5px 20px;}	
  .FeedBack .Fright .Fcontent{
 	width:600px;
-	background:url("/images/MyCMSLoad/PostBG.jpg") no-repeat left top;
+	background:url("/static/images/MyCMSLoad/PostBG.jpg") no-repeat left top;
 	padding:10px 0px;
 	}
  .FeedBack .Fright .Fcontent p{
@@ -420,7 +431,7 @@
 	line-height:20px;
 	color:#FFFFFF;
 	height:25px;
-	background:url("/images/MyCMSLoad/picon.gif") no-repeat 2px 0px;
+	background:url("/static/images/MyCMSLoad/picon.gif") no-repeat 2px 0px;
 	padding-left:20px;
 	font-weight:bold;}
  .FeedBack .Fright .Fcontent .Freply p{
@@ -532,8 +543,8 @@
 	text-decoration:none;}
 #body .prenext .blk_29 {	 PADDING:0px 0px; OVERFLOW: hidden;  ZOOM: 1; POSITION: relative;}
 	
-#body .prenext .blk_29 .LeftBotton {	BACKGROUND: url(/images/Arrow_l.jpg) no-repeat -1px 0px; LEFT: 0px; FLOAT: left; WIDTH: 35px; CURSOR: pointer; POSITION: absolute; TOP: 50px; HEIGHT: 114px}
-#body .prenext .blk_29 .RightBotton {	RIGHT: 5px; BACKGROUND: url(/images/Arrow_r.jpg) no-repeat -0px 0px; FLOAT: right;right:0px; WIDTH: 35px; CURSOR: pointer; POSITION: absolute; TOP: 50px; HEIGHT: 114px}
+#body .prenext .blk_29 .LeftBotton {	BACKGROUND: url(/static/images/Arrow_l.jpg) no-repeat -1px 0px; LEFT: 0px; FLOAT: left; WIDTH: 35px; CURSOR: pointer; POSITION: absolute; TOP: 50px; HEIGHT: 114px}
+#body .prenext .blk_29 .RightBotton {	RIGHT: 5px; BACKGROUND: url(/static/images/Arrow_r.jpg) no-repeat -0px 0px; FLOAT: right;right:0px; WIDTH: 35px; CURSOR: pointer; POSITION: absolute; TOP: 50px; HEIGHT: 114px}
 #body .prenext .blk_29 .Cont {	MARGIN: 0px auto; OVERFLOW: hidden;  PADDING:15px 0 0 0px;float:left;height:170px;width:720px;POSITION: relative;left:30px;}
 #body .prenext .blk_29 .box {	FLOAT: left; WIDTH: 240px; TEXT-ALIGN: center;}
 #body .prenext .blk_29 .box IMG {	BORDER: #ccc 1px solid; PADDING: 3px; DISPLAY: block; BACKGROUND: #fff; PADDING-BOTTOM: 3px; MARGIN: 0px auto; width:160px;height:120px;}
@@ -575,7 +586,7 @@
 	z-index: 9;
 }
 #popupTitleBar {
-	background:url("/images/box_bg1.jpg") repeat-x left top;
+	background:url("/static/images/box_bg1.jpg") repeat-x left top;
 	color: #C40000;
 	font-weight: bold;
 	height: 1.3em;
@@ -597,7 +608,7 @@
 	height: 15px;
 	width: 15px;
 	text-indent: -9000px;
-	background: url('/images/close.gif') no-repeat;
+	background: url('/static/images/close.gif') no-repeat;
 }
 
 .VideoBox{
@@ -607,7 +618,7 @@
     padding: 0px 0;
 }
  .right .news-02 ul li {
-    background: url("/images/tit-bg.jpg") no-repeat scroll left bottom transparent;
+    background: url("/static/images/tit-bg.jpg") no-repeat scroll left bottom transparent;
     padding: 20px 0;
     width: 780px;
 }
@@ -737,7 +748,7 @@ p{
 .SearchBar {
 	width:220px;
 	height:25px;
-	background:url("/images/MyCMSLoad/search_bg.gif") no-repeat left top;
+	background:url("/static/images/MyCMSLoad/search_bg.gif") no-repeat left top;
 }
 
 .Sbox .SearchBar{
@@ -879,7 +890,7 @@ p{
  width: 50px;
  height:50px;
  line-height: 1.2;
- background:url("/images/MyCMSLoad/back_top.png") left top;;
+ background:url("/static/images/MyCMSLoad/back_top.png") left top;;
  color: #fff;
  font-size: 12px;
  text-align: center;
@@ -928,7 +939,7 @@ p{
 	z-index: 9;
 }
 #popupTitleBar {
-	background:url("/images/MyCMSLoad/box_bg1.jpg") repeat-x left top;
+	background:url("/static/images/MyCMSLoad/box_bg1.jpg") repeat-x left top;
 	color: #C40000;
 	font-weight: bold;
 	height: 1.3em;
@@ -950,7 +961,7 @@ p{
 	height: 15px;
 	width: 15px;
 	text-indent: -9000px;
-	background: url('/images/MyCMSLoad/close.gif') no-repeat;
+	background: url('/static/images/MyCMSLoad/close.gif') no-repeat;
 }
 
 .VideoBox{
@@ -997,11 +1008,11 @@ z-index:2000;}
 	line-height:36px;
 	padding-left:30px;
 	border-top:1px solid #E5E5E5;
-	background:#F3F3F3 url("/images/icon_3.jpg") no-repeat 12px center;
+	background:#F3F3F3 url("/static/images/icon_3.jpg") no-repeat 12px center;
 	 }	
 
  .ClassNav .NavTree ul li li{
-	background:url("/images/MyCMSLoad/box_icon1.png") no-repeat 12px 12px;
+	background:url("/static/images/MyCMSLoad/box_icon1.png") no-repeat 12px 12px;
 	padding-left:0;
 	text-align:center;
 	z-index:2000;
