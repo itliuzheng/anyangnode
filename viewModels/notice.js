@@ -80,6 +80,7 @@ module.exports.index = async function (req, res, next) {
     let pagination = calcPageination(init, '/FFF');
 
     let render = {
+        currentClass:'notice',
         home: home,
         list: list,
         pagination: pagination,
@@ -100,24 +101,42 @@ module.exports.detail = async function (req, res, next) {
         let detail = {};
         let allData = null;
         detail = await getFindById(option);
-        allData = await autoFindAll({
-            _id: {
-                $ne: detailId
-            }
-        });
+        allData = await autoFindAll();
 
         allData.records = allData.records.map(item => {
             return {
                 id: item.id,
                 title: item.title,
-                imgUrl: item.imgUrl,
+                createDate: item.createDate,
             }
         });
         allData.scrollpicId = detailId;
 
+        let index = allData.records.findIndex(item=>{
+            return item.id.toString() === detailId.toString()
+        });
+        let otherNotice = {
+            prev:{
+                title:null,
+                createDate:null,
+                id:null
+            },
+            next:{
+                title:null,
+                createDate:null,
+                id:null
+            }
+        };
+        if(index > 0 ){
+            otherNotice.prev = allData.records[index - 1];
+        }
+        if(index < allData.total - 1){
+            otherNotice.next = allData.records[index + 1];
+        }
+
         res.render(tampltePath, {
             detail: detail,
-            otherList: allData,
+            otherNotice: otherNotice,
         });
 
     } catch (e) {

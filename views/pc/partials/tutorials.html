@@ -1,43 +1,26 @@
+<div class="prenext">
+    <div class="IntroTitle">游戏相关教程</div>
+    <div class="blk_29">
 
-                    <div class="prenext">
-                        <div class="IntroTitle">游戏相关教程</div>
-                        <DIV class="blk_29">
-                            <DIV class="LeftBotton" id="LeftArr"></DIV>
-                            <DIV class="Cont" id="ISL_Cont_1">
-                                <!-- 图片列表 begin -->
-                                <DIV class='box'>
-                                    <A class='imgBorder' href='/Course/104161413.html' target='_blank' title=''>
-                                        <IMG src='/images/image/20200070.jpg'>
-                                    </A>
-                                    <p>
-                                        <A class='imgBorder' href='/Course/104161413.html' target='_blank' title=''>游戏安装启动常见问题及解决办法</A>
-                                    </p>
-                                </DIV>
-                                <DIV class='box'>
-                                    <A class='imgBorder' href='/Course/104161322.html' target='_blank' title=''>
-                                        <IMG src='/images/image/20200071.jpg'>
-                                    </A>
-                                    <p>
-                                        <A class='imgBorder' href='/Course/104161322.html' target='_blank' title=''>游戏安装教程</A>
-                                    </p>
-                                </DIV>
-                                <DIV class='box'>
-                                    <A class='imgBorder' href='/Course/104161511.html' target='_blank' title=''>
-                                        <IMG src='/images/image/20200078.jpg'>
-                                    </A>
-                                    <p>
-                                        <A class='imgBorder' href='/Course/104161511.html' target='_blank' title=''>文件完整性md5校验教程</A>
-                                    </p>
-                                </DIV>
+        <div class="LeftBotton" id="Tutorials_LeftArr_{{@scrollpicId}}"></div>
+        <div class="Cont" id="Tutorials_ISL_Cont_{{@scrollpicId}}">
+            <!-- 图片列表 begin -->
+            {{ each records}}
+            <div class='box'>
+                <a class='imgBorder' href="/course/{{@$value.id}}"
+                   target='_blank' title="{{$value.title}}" >
+                    <img src="{{$value.imgUrl}}" alt="{{$value.title}}">
+                </a>
+                <p>
+                    <a class='imgBorder'
+                       href="/course/{{@$value.id}}" target='_blank'
+                       title="{{$value.title}}">{{$value.title}}</a>
+                </p>
+            </div>
+            {{ /each }}
+            <!-- 图片列表 end -->
+        </div>
+        <div class="RightBotton" id="Tutorials_RightArr_{{@scrollpicId}}"></div>
+    </div>
+</div>
 
-
-                                <!-- 图片列表 end -->
-                            </DIV>
-
-                            <DIV class="RightBotton" id="RightArr"></DIV>
-                        </DIV>
-
-                        <div class='clicktimes'>
-                            <script language="javascript" src="/inc/article_view.asp?id=1055"></script>
-                        </div>
-                    </div>

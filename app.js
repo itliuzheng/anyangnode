@@ -6,6 +6,8 @@ var cors = require('cors');
 var expressJwt = require('express-jwt');
 var expressArtTemplate = require('express-art-template');
 var vertoken = require('./common/token');
+var website = require(`./controllers/website`);
+var { gameType } = require(`./controllers/gameType`);
 
 var router = require('./router')
 
@@ -78,6 +80,20 @@ app.use('/api',expressJwt({
     path:['/api/user/login'] //除了这个地址，其他的URL都需要验证
 }));
 
+
+//公共布局
+app.use( async function (req, res, next) {
+    if(!res.locals.partials){
+        res.locals.partials = {};
+
+        let websiteInfo = await website.promiseFindAll(req.body);
+        let pcList = await gameType.promiseFindAll();
+
+        res.locals.partials.websiteInfo = websiteInfo;
+        res.locals.partials.pcList = pcList;
+    }
+    next()
+})
 
 //把路由挂载到app中
 app.use(router);

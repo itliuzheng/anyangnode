@@ -68,6 +68,7 @@ module.exports.index = async function(req, res, next) {
     let pagination = calcPageination(init,'/course');
 
     let render = {
+        currentClass:'tutorial',
         home:home,
         list:list,
         pagination:pagination,

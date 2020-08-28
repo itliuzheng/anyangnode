@@ -1,9 +1,5 @@
 ﻿{{ extend './_layouts/layout.html'}}
 
-{{ block 'title'}}{{home.title}}{{ /block}}
-{{ block 'keywords'}}{{home.keywords}}{{ /block}}
-{{ block 'description'}}{{home.description}}{{ /block}}
-
 {{ block 'content'}}
 
 <!--body start-->
@@ -14,19 +10,9 @@
                 <p>游戏类型</p>ategory
             </h2>
             <ul class="index_kinds_box">
-                <li><a href='/PC/dongzuo'>动作游戏ACT</A></li>
-                <li><a href='/PC/sheji'>射击游戏STG</A></li>
-                <li><a href='/PC/kongbu'>恐怖冒险AVG</A></li>
-                <li><a href='/PC/juese'>角色扮演RPG</A></li>
-                <li><a href='/PC/celue'>策略战棋SLG</A></li>
-                <li><a href='/PC/moni'>模拟经营SIM</A></li>
-                <li><a href='/PC/gedou'>格斗游戏FTG</A></li>
-                <li><a href='/PC/feixing'>飞行射击FLY</A></li>
-                <li><a href='/PC/tiyu'>体育竞技SPG</A></li>
-                <li><a href='/PC/saiche'>赛车竞速RAC</A></li>
-                <li><a href='/PC/jishi'>即时战略RTS</A></li>
-                <li><a href='/PC/xiuxian'>休闲益智PUZ</A></li>
-                <li><a href='/PC/qita'>其他游戏ETC</A></li>
+                {{ each partials.pcList.records }}
+                <li><a href='/PC/{{$value.englishName}}'>{{$value.name}}</a></li>
+                {{ /each }}
             </ul>
         </div>
 
@@ -41,48 +27,6 @@
                         </a>
                         <span><a href='/html/5207682750.html' target='_blank'>骑马与砍杀2：领主</a></span>
                     </li>
-                    <li>
-                        <a class='a_img' href='/html/14280310.html' target='_blank'>
-                            <img src='/static/images/image/20200079.jpg'/>
-                        </a>
-                        <span><a href='/html/14280310.html' target='_blank'>使命召唤6：现代战争2重制版</a></span>
-                    </li>
-                    <li>
-                        <a class='a_img' href='/html/1673282514.html' target='_blank'>
-                            <img src='/static/images/image/20200010.jpg'/>
-                        </a>
-                        <span><a href='/html/1673282514.html' target='_blank'>帝国时代：终极版</a></span>
-                    </li>
-                    <li>
-                        <a class='a_img' href='/html/831962266.html' target='_blank'>
-                            <img src='/static/images/image/20200011.jpg'/>
-                        </a>
-                        <span><a href='/html/831962266.html' target='_blank'>猎人：野性的呼唤</a></span>
-                    </li>
-                    <li>
-                        <a class='a_img' href='/html/8190231911.html' target='_blank'>
-                            <img src='/static/images/image/20200006.jpg'/>
-                        </a>
-                        <span><a href='/html/8190231911.html' target='_blank'>腐烂国度2主宰版</a></span>
-                    </li>
-                    <li>
-                        <a class='a_img' href='/html/245390101.html' target='_blank'>
-                            <img src='/static/images/image/20200012.jpg'/>
-                        </a>
-                        <span><a href='/html/245390101.html' target='_blank'>毁灭战士：永恒</a></span>
-                    </li>
-                    <li>
-                        <a class='a_img' href='/html/4208172219.html' target='_blank'>
-                            <img src='/static/images/image/20200005.jpg'/>
-                        </a>
-                        <span><a href='/html/4208172219.html' target='_blank'>海贼无双4</a></span>
-                    </li>
-                    <li>
-                        <a class='a_img' href='/html/3807513145.html' target='_blank'>
-                            <img src='/static/images/image/20200085.jpg'/>
-                        </a>
-                        <span><a href='/html/3807513145.html' target='_blank'>极乐迪斯科</a></span>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -90,61 +34,25 @@
     <div class="clear"></div>
 
     <div class="public ad">
-        <script src='/static/ADs/122.js' type='text/javascript'></script>
+        <a href='https://w.url.cn/s/AngkrG0' target='_blank' title='Banner 1'>
+            <img src='/static/images/up_images/ad1.jpg'  width='1200' height='100'>
+        </a>
     </div>
+
 
     <div class="public mar10">
         <div class="tit_1 gsjs_t"><p>最新游戏</p><a href="/Support" class="more">+更多</a></div>
         <div class="clear"></div>
         <div class="index_zzry_n rool">
             <ul>
+                {{ each newGameList}}
                 <li>
-                    <a href='/html/14280310.html' target='_blank'>
-                        <img src='/static/images/image/20200079.jpg'/>
+                    <a href="/PC_detail/{{$value.id}}" target='_blank'>
+                        <img src="{{$value.imgUrl}}" alt="{{$value.name}}"/>
                     </a>
-                    <span><a href='/html/14280310.html' target='_blank'>使命召唤6：现代战争2重制版</a></span>
+                    <span><a href="/PC_detail/{{$value.id}}" target='_blank'>{{$value.name}}</a></span>
                 </li>
-                <li>
-                    <a href='/html/5289144327.html' target='_blank'>
-                        <img src='/static/images/image/20200080.jpg'/>
-                    </a>
-                    <span>
-                <a href='/html/5289144327.html' target='_blank'>怒之铁拳4</a>
-             </span>
-                </li>
-                <li>
-                    <a href='/html/2189644114.html' target='_blank'>
-                        <img src='/static/images/image/20200081.jpg'/>
-                    </a>
-                    <span>
-                <a href='/html/2189644114.html' target='_blank'>圣剑传说2：重置版</a>
-             </span>
-                </li>
-                <li>
-                    <a href='/html/9354283725.html' target='_blank'>
-                        <img src='/static/images/image/20200082.jpg'/>
-                    </a>
-                    <span>
-                <a href='/html/9354283725.html' target='_blank'>战争机器：战略版</a>
-             </span>
-                </li>
-                <li>
-                    <a href='/html/8594621424.html' target='_blank'>
-                        <img src='/static/images/image/20200083.jpg'/>
-                    </a>
-                    <span>
-                <a href='/html/8594621424.html' target='_blank'>星际争霸2：虚空之遗</a>
-             </span>
-                </li>
-                <li>
-                    <a href='/html/4813265827.html' target='_blank'>
-                        <img src='/static/images/image/20200084.jpg'/>
-                    </a>
-                    <span>
-                <a href='/html/4813265827.html' target='_blank'>丧尸前线</a>
-             </span>
-                </li>
-
+                {{ /each }}
             </ul>
         </div>
     </div>
@@ -155,103 +63,68 @@
             <div class="tit_1 gsjs_t"><p>最新公告</p><a href="/FFF" class="more">+更多</a></div>
             <div class="clear"></div>
             <div class="index_gsjs_n">
-                <span class="jj_im"><a href='/FFF/20031201.html' target='_blank'><img
-                        src="/static/images/up_images/FFF.jpg"
-                        width="366"
-                        height="250"/></a></span><br/>
-                <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class='FontRed'>FFF单机游戏站2020年全新升级</span>
-                </p>
-                <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;感谢大家两年来对“爱玩游戏网”的支持，2020年爱玩游戏做出全新升级回馈大家的厚爱。
-                </p>
-                <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;全新升级的FFF单机游戏站在秉承原网站的基础上，为大家提供更便捷的访问，更人性的分类，和更及时的更新。
-                </p>
-                <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;当然，“习惯是种很可怕的东西”，如果您仍习惯之前的“爱玩游戏网”，点击网站右上角“返回旧版”便可重新启用原网站，但至于旧版入口会保留多久，小F就不太清楚了(>‿◠)✌...
-                </p>
+                <span class="jj_im">
+                    <a href='/FFF/{{newNotices.id}}' target='_blank'>
+                        <img src="/static/images/up_images/FFF.jpg" width="366" height="250"/>
+                    </a>
+                </span>
+                <br/>
+                {{ each newNotices}}
+                <p>{{$value.title}}</p>
+                {{@$value.content}}
+                {{ /each }}
             </div>
         </div>
 
         <div class="index_cjwt fr">
-            <div class="tit_1 gsjs_t"><p>教程资讯</p><a href="/Course" class="more">+更多</a></div>
+            <div class="tit_1 gsjs_t"><p>教程资讯</p><a href="/course" class="more">+更多</a></div>
             <div class="clear"></div>
             <div class="index_cjwt_n">
-
+                {{ each tutorialsList}}
                 <ul class='news_n_ul_1'>
-                    <a href='/Course/104161413.html' target='_blank'>
-                        <img src='/static/images/image/20200070.jpg'/>
+                    <a href='/course/{{$value.id}}' target='_blank'>
+                        <img src="{{$value.imgUrl}}" alt="{{$value.title}}"/>
                     </a>
-                    <h3><a href='/Course/104161413.html' target='_blank'>游戏安装启动常见问题及解决办法</a></h3>
-                    <p>丢失***.dll、steam_api.dll、***_loader.dll、.NET初始化错误、应用程序无法启动等常见错误解决方法...</p>
-                </ul>
+                    <h3><a href="/course/{{$value.id}}" target='_blank'>{{$value.title}}</a></h3>
 
-                <ul class='news_n_ul_1'>
-                    <a href='/Course/104161322.html' target='_blank'>
-                        <img src='/static/images/image/20200071.jpg'/>
-                    </a>
-                    <h3><a href='/Course/104161322.html' target='_blank'>游戏安装教程</a></h3>
-                    <p>游戏安装图文、视频双教程，含游戏分类安装方法及安装前注意事项说明...</p>
+                    <p>{{$value.description}}...</p>
                 </ul>
-
-                <ul class='news_n_ul_1'>
-                    <a href='/Course/104161511.html' target='_blank'>
-                        <img src='/static/images/image/20200078.jpg'/>
-                    </a>
-                    <h3><a href='/Course/104161511.html' target='_blank'>文件完整性md5校验教程</a></h3>
-                    <p>游戏在下载中，可能会因网络因素造成丢包，从而导致安装异常，因此建议游戏在安装前校验游戏文件完整性...</p>
-                </ul>
-
+                {{ /each }}
             </div>
         </div>
     </div>
     <div class="clear"></div>
 
     <div class="public ad">
-        <script src='/static/ADs/123.js' type='text/javascript'></script>
+        <a href='https://w.url.cn/s/AngkrG0' target='_blank' title='Banner 2'>
+            <img src='/static/images/up_images/ad2.jpg'  width='1200' height='100' ></a>
     </div>
 
     <div class="index_khal">
         <h4><a href="/tool" target="_blank">游戏工具</a></h4>
 
 
-        <DIV class="blk_29">
-            <DIV class="LeftBotton" id="LeftArr"></DIV>
-            <DIV class="Cont" id="ISL_Cont_1">
+        <div class="blk_29">
+            <div class="LeftBotton" id="LeftArr_{{@otherToolList.scrollpicId}}"></div>
+            <div class="Cont" style="margin-left: 20px;" id="ISL_Cont_{{@otherToolList.scrollpicId}}">
                 <!-- 图片列表 begin -->
-                <DIV class='box'><a class='imgBorder' href='/case/8520695954.html' target='_blank' title='游戏必备工具合集'><IMG
-                        alt='游戏必备工具合集' src='/static/images/up_images/202041510537.jpg'></a>
-                    <p><a class='imgBorder' href='/case/8520695954.html' target='_blank' title='游戏必备工具合集'>游戏必备工具合集</A>
-                    </p></DIV>
-                <DIV class='box'><a class='imgBorder' href='/case/9276142715.html' target='_blank'
-                                    title='KB3080149系统升级补丁'><IMG alt='KB3080149系统升级补丁'
-                                                                 src='/static/images/up_images/20200019.jpg'></a>
-                    <p><a class='imgBorder' href='/case/9276142715.html' target='_blank' title='KB3080149系统升级补丁'>KB3080149系统升</A>
-                    </p></DIV>
-                <DIV class='box'><a class='imgBorder' href='/case/2350471839.html' target='_blank'
-                                    title='KB2670838系统升级补丁'><IMG alt='KB2670838系统升级补丁'
-                                                                 src='/static/images/up_images/20200018.jpg'></a>
-                    <p><a class='imgBorder' href='/case/2350471839.html' target='_blank' title='KB2670838系统升级补丁'>KB2670838系统升</A>
-                    </p></DIV>
-                <DIV class='box'><a class='imgBorder' href='/case/2158474918.html' target='_blank' title='md5文件完整性校验工具'><IMG
-                        alt='md5文件完整性校验工具' src='/static/images/up_images/20200016.jpg'></a>
-                    <p><a class='imgBorder' href='/case/2158474918.html' target='_blank' title='md5文件完整性校验工具'>md5文件完整性校验工具</A>
-                    </p></DIV>
-                <DIV class='box'><a class='imgBorder' href='/case/0453962655.html' target='_blank'
-                                    title='DirectX修复工具'><IMG alt='DirectX修复工具'
-                                                             src='/static/images/up_images/20200017.jpg'></a>
-                    <p><a class='imgBorder' href='/case/0453962655.html' target='_blank'
-                          title='DirectX修复工具'>DirectX修复工具</A></p></DIV>
-                <DIV class='box'><a class='imgBorder' href='/case/3659281128.html' target='_blank' title='游戏运行库'><IMG
-                        alt='游戏运行库' src='/static/images/up_images/20200015.jpg'></a>
-                    <p><a class='imgBorder' href='/case/3659281128.html' target='_blank' title='游戏运行库'>游戏运行库</A></p>
-                </DIV>
+                {{ each otherToolList.records}}
+                <div class='box'>
+                    <a class='imgBorder' href="/tool/{{@$value.id}}"
+                       target='_blank' title="{{$value.title}}" >
+                        <img src="{{$value.imgUrl}}" alt="{{$value.title}}">
+                    </a>
+                    <p>
+                        <a class='imgBorder'
+                           href="/tool/{{@$value.id}}" target='_blank'
+                           title="{{$value.title}}">{{$value.title}}</a>
+                    </p>
+                </div>
+                {{ /each }}
                 <!-- 图片列表 end -->
-            </DIV>
-
-            <DIV class="RightBotton" id="RightArr"></DIV>
-        </DIV>
+            </div>
+            <div class="RightBotton" id="RightArr_{{@otherToolList.scrollpicId}}"></div>
+        </div>
 
 
     </div>
@@ -297,5 +170,22 @@
         });
     });
 </script>
+<script type="text/javascript" src="/static/js/ScrollPic.js"></script>
+<script language=javascript type=text/javascript>
+    var scrollPic_02 = new ScrollPic();
 
+    scrollPic_02.scrollContId = "ISL_Cont_{{@otherToolList.scrollpicId}}"; //内容容器ID
+    scrollPic_02.arrLeftId = "LeftArr_{{@otherToolList.scrollpicId}}";//左箭头ID
+    scrollPic_02.arrRightId = "RightArr_{{@otherToolList.scrollpicId}}"; //右箭头ID
+
+    scrollPic_02.frameWidth = 1050;//显示框宽度
+    scrollPic_02.pageWidth = 240; //翻页宽度
+
+    scrollPic_02.speed = 1; //移动速度(单位毫秒，越小越快)
+    scrollPic_02.space = 1; //每次移动像素(单位px，越大越快)
+    scrollPic_02.autoPlay = true; //自动播放
+    scrollPic_02.autoPlayTime = 2; //自动播放间隔时间(秒)
+
+    scrollPic_02.initialize(); //初始化
+</script>
 {{/block}}

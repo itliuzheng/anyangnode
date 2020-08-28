@@ -13,7 +13,6 @@ class Collection{
         })
     }
 
-
     findAll(obj,cb){
         let data = {};
         if(utils.isEmpty(obj.title)){
@@ -65,6 +64,7 @@ class Collection{
             }
         })
     }
+
     autoFindAll(obj,cb,pageObj = {}){
 
         let page = pageObj.page || 1;
@@ -187,6 +187,15 @@ class Collection{
         Db.findOneAndDelete({_id:id},(err,docs)=>{
             if(err) return cb(err);
             return cb(null,{code:1,data:true,msg:'成功'})
+        })
+    }
+
+    promiseFindAll(obj={}){
+        return new Promise((resolve ,reject)=> {
+            this.findAll(obj,(err,detail)=>{
+                if(err) return reject(err);
+                resolve(detail.data)
+            })
         })
     }
 

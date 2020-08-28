@@ -1,0 +1,130 @@
+{{ extend '../_layouts/layout.html' }}
+
+{{ block 'head'}}
+
+<link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
+{{ /block}}
+
+{{ block 'content'}}
+
+<div id="body">
+    <div class="HeightTab clearfix"></div>
+    <!--inner start -->
+    <div class="inner clearfix">
+        <!--left start-->
+        <div class="left">
+            <div class="Sbox">
+                <div class="topic2">搜索</div>
+
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+            <div class="Sbox">
+                <div class="topic">FFF单机游戏下载站</div>
+                <a href="/">
+                    <div class="txt ColorLink">
+                    </div>
+                </a>
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+        </div>
+        <!--left end-->
+        <!--right start-->
+        <div class="right">
+            <div class="Position">
+                <span>你的位置：
+                    <a href="/">首页</a> > 搜索
+                </span>
+            </div>
+            <div class="HeightTab clearfix"></div>
+            <!--main start-->
+            <div class="main">
+
+                <div id="search_content" class="clearfix">
+                    <div class="searchtip">您正在搜索“
+                        <span class="FontRed">{{currentName}}</span>
+                        ”，找到相关信息
+                        <span class="font_brown">{{pagination.total}}</span>
+                        条
+                    </div>
+                    <div class="result_list">
+                        <div class="gray"></div>
+
+                        {{ if pagination.total !== 0}}
+
+                        {{ each gameList }}
+
+                        <dl>
+                            <dt>
+                                <a href="/PC_detail/{{$value.id}}" target='_blank' title="{{$value.name}}">
+                                    {{@$value.formatName}}
+                                </a>
+                            </dt>
+                            <dd>
+                                <p>游戏大小</p>
+                                <p style="text-indent: 2em;">{{@$value.sizeStr}}</p>
+                                <p>版本介绍</p>
+                                <p style="text-indent: 2em;">{{@$value.versionStr}}</p>
+                                <p>下载信息...</p>
+                            </dd>
+                            <dd class="font12 arial font_green line">
+                                <a href="/PC_detail/{{$value.id}}" target='_blank'>
+                                    <span class="font_green">点我跳转</span>
+                                </a>
+                                {{$value.createDate}}
+                            </dd>
+                        </dl>
+                        {{/each}}
+                        {{ include './pagination.html' pagination}}
+
+                        {{ else}}
+                        <div class='search_welcome'>很抱歉,没有找到与
+                            <span class='FontRed'>{{currentName}}</span> 相关的信息！
+                            <p>提示：只搜索游戏名称部分内容，进行模糊搜索可获取更理想结果，如“使命”“正当防卫”“古墓丽影”。</p>
+                        </div>
+                        {{/if}}
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!--right end-->
+
+    </div>
+    <!--main end-->
+    <div class="HeightTab clearfix"></div>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script type="text/javascript" src="/static/js/ServiceCenter.js"></script>
+<script type="text/javascript" src="/static/images/iepng/iepngfix_tilebg.js"></script>
+
+<script type="text/javascript">
+    jQuery(".fullSlide").hover(function () {
+            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+        function () {
+            jQuery(this).find(".prev,.next").fadeOut()
+        });
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click",
+        startFun: function (i) {
+            var curLi = jQuery(".fullSlide .bd li").eq(i);
+            if (!!curLi.attr("_src")) {
+                curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+            }
+        }
+    });
+</script>
+{{/block}}

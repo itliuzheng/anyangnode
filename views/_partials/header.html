@@ -1,12 +1,10 @@
-
-
 <div id="head">
     <div class='section'>
         <div class="MyInner tem_top">
             <h2>
                 <p>
                     <script language="javaScript">
-                        var name = '欢迎来到FFF单机游戏下载站',
+                        var name = '欢迎来到{{partials.websiteInfo.name}}',
                             now = new Date(),
                             hour = now.getHours();
                         if (hour < 6) {
@@ -47,25 +45,29 @@
 
         <div class="TopLogo">
             <!--<div class="logo"><a href="/"><img src="home.logoUrl" alt="home.name"></a></div>-->
-            <div class="logo"><a href="/"><img src="/static/images/up_images/logo.png" alt="FFF单机游戏下载站"></a></div>
+            <div class="logo"><a href="/"><img src="/static/images/up_images/logo.png" alt="{{partials.websiteInfo.name}}"></a></div>
 
 
             <div class='SearchTop'>
                 <div class="SearchBar">
-                    <form method="get" action="/Search/index.html">
-                        <input type="text" name="q" id="search-text" size="15"
-                               onBlur="if(this.value=='') this.value='输入关键词';"
-                               onfocus="if(this.value=='输入关键词') this.value='';" value="输入关键词"/><input type="submit"
-                                                                                                      id="search-submit"
-                                                                                                      value=" "/>
+                    <form method="get" class="clearfix" action="/Search/">
+                        <input type="text" name="q"
+                               id="search-text"
+                               size="15"
+                               onBlur="if(this.value=='')
+                                   this.value='输入关键词';"
+                               onfocus="if(this.value=='输入关键词')
+                                   this.value='';"
+                               value="输入关键词"/>
+                        <input type="submit" id="search-submit" value=" "/>
                     </form>
                 </div>
                 <p>
                     <strong>热门搜索:</strong>
-                    <a href='/Search/index.html?q=生化危机' target='_blank'>生化危机</a>
-                    <a href='/Search/index.html?q=使命召唤战区' target='_blank'>使命召唤战区</a>
-                    <a href='/Search/index.html?q=GTA5' target='_blank'>GTA5</a>
-                    <a href='/Search/index.html?q=骑马与砍杀2' target='_blank'>骑马与砍杀2</a>
+                    <a href='/Search?q=生化危机' target='_blank'>生化危机</a>
+                    <a href='/Search?q=使命召唤战区' target='_blank'>使命召唤战区</a>
+                    <a href='/Search?q=GTA5' target='_blank'>GTA5</a>
+                    <a href='/Search?q=骑马与砍杀2' target='_blank'>骑马与砍杀2</a>
                 </p>
             </div>
 
@@ -88,22 +90,28 @@
         <div id="NavBG">
             <!--Head Menu Start-->
             <ul id='sddm'>
-                <li class='CurrentLi'><a href='/'>网站首页</a></li>
-                <li><a href='/Support/' onmouseover=mopen('m2') onmouseout='mclosetime()'>PC单机游戏</a>
-                    <div id='m2' onmouseover='mcancelclosetime()' onmouseout='mclosetime()'><a href='/PC/dongzuo'>动作游戏ACT</a>
-                        <a href='/PC/sheji'>射击游戏STG</a> <a href='/PC/kongbu/'>恐怖冒险AVG</a> <a
-                                href='/PC/juese/'>角色扮演RPG</a> <a href='/PC/celue/'>策略战棋SLG</a> <a href='/PC/moni/'>模拟经营SIM</a>
-                        <a href='/PC/gedou/'>格斗游戏FTG</a> <a href='/PC/feixing/'>飞行射击FLY</a> <a
-                                href='/PC/tiyu/'>体育竞技SPG</a> <a href='/PC/saiche/'>赛车竞速RAC</a> <a href='/PC/jishi/'>即时战略RTS</a>
-                        <a href='/PC/xiuxian/'>休闲益智PUZ</a> <a href='/PC/qita/'>其他游戏ETC</a></div>
+                <!--<li class='CurrentLi'><a href='/'>网站首页</a></li>-->
+                <li class="{{currentClass == 'home'?'CurrentLi':''}}"><a href='/'>网站首页</a></li>
+                <li class="{{currentClass == 'pc'?'CurrentLi':''}}">
+                    <a href='/Support/' onmouseover=mopen('m2') onmouseout='mclosetime()'>PC单机游戏</a>
+                    <div id='m2' onmouseover='mcancelclosetime()' onmouseout='mclosetime()'>
+                        {{ each partials.pcList.records }}
+                        <a href='/PC/{{$value.englishName}}'>{{$value.name}}</a>
+                        {{ /each }}
+                    </div>
                 </li>
-                <li><a href='/vip/'>高速下载通道</a></li>
-                <li><a href='/tool/'>游戏工具</a></li>
-                <li><a href='/course/' onmouseover=mopen('m5') onmouseout='mclosetime()'>教程资讯</a>
-                    <div id='m5' onmouseover='mcancelclosetime()' onmouseout='mclosetime()'><a href='/course'>游戏教程</a>
-                        <a href='/course_new'>游戏资讯</a></div>
+                <li class="{{currentClass == 'vip'?'CurrentLi':''}}">
+                    <a href='/vip/'>高速下载通道</a></li>
+                <li class="{{currentClass == 'tool'?'CurrentLi':''}}">
+                    <a href='/tool/'>游戏工具</a></li>
+                <li class="{{currentClass == 'tutorial'?'CurrentLi':''}}">
+                    <a href='/course/' onmouseover=mopen('m5') onmouseout='mclosetime()'>教程资讯</a>
+                    <div id='m5' onmouseover='mcancelclosetime()' onmouseout='mclosetime()'>
+                        <a href='/course'>游戏教程</a>
+                        <a href='/course_new'>游戏资讯</a>
+                    </div>
                 </li>
-                <li><a href='/FFF'>网站公告</a></li>
+                <li class="{{currentClass == 'notice'?'CurrentLi':''}}"><a href='/FFF'>网站公告</a></li>
             </ul>
             <!--Head Menu End-->
         </div>

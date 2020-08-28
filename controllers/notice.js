@@ -39,7 +39,7 @@ class Collection{
 
                 let item = items.map(value=>{
                     return {
-                        id:value._id,
+                        id:value._id.toString(),
                         title:value.title,
                         isTop:value.isTop,
                         description:value.description,
@@ -187,9 +187,17 @@ class Collection{
         })
     }
 
+    promiseFindAll(obj={}){
+        return new Promise((resolve ,reject)=> {
+            this.findAll(obj,(err,detail)=>{
+                if(err) return reject(err);
+                resolve(detail.data)
+            })
+        })
+    }
 }
 
 
 
 
-module.exports = new Collection('gameDetail');
+module.exports = new Collection('notice');

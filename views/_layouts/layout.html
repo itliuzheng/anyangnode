@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="/static/favicon.ico"/>
-    <title>{{ block 'title' }}{{/block}}</title>
-    <meta name="keywords" content="{{ block 'keywords' }} {{/block}}"/>
-    <meta name="description" content="{{ block 'description' }} {{/block}}"/>
+    <title>{{ block 'title' }}{{partials.websiteInfo.title}}{{/block}}</title>
+    <meta name="keywords" content="{{ block 'keywords' }} {{partials.websiteInfo.keywords}}{{/block}}"/>
+    <meta name="description" content="{{ block 'description' }}{{partials.websiteInfo.description}} {{/block}}"/>
      {{ block 'head'}}
     <link href="/static/css/main.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/MyCMSLoad/style.css" rel="stylesheet" type="text/css"/>

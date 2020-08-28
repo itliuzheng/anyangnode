@@ -1,18 +1,9 @@
 var db = require(`../controllers/gameDetail`);
 var gameTool = require(`../controllers/gameTool`);
-var { gameType } = require(`../controllers/gameType`);
-var website = require(`../controllers/website`);
+var gameTutorial = require(`../controllers/gameTutorial`);
 var { calcPageination } = require('../common/utils');
 var pyfl = require('pyfl').default;
 
-function websiteFind(req){
-    return new Promise((resolve,reject) => {
-        website.find(req.body, function(err, home) {
-            if (err) return reject(err);
-            resolve(home.data);
-        });
-    })
-}
 
 function gameDetailFindById(body = {}){
     return new Promise((resolve,reject) => {
@@ -26,15 +17,6 @@ function gameDetailFindById(body = {}){
 function gameDetailFindAll(body = {}){
     return new Promise((resolve,reject) => {
         db.findAll(body, function(err, content) {
-            if (err) return reject(err);
-            resolve(content.data)
-        });
-    })
-}
-
-function gameTypeFindAll(body = {}){
-    return new Promise((resolve,reject) => {
-        gameType.findAll(body, function(err, content) {
             if (err) return reject(err);
             resolve(content.data)
         });
@@ -68,7 +50,6 @@ function substringDate(date){
 
 module.exports.index = async function(req, res, next) {
 
-    let home = await websiteFind(req);
     let tampltePath = 'pc/index.html';
 
     let option = {
@@ -80,10 +61,7 @@ module.exports.index = async function(req, res, next) {
         option.page = req.query.page;
     }
 
-    let gameType = await gameTypeFindAll();
-
     let gameInit = await gameDetailFindAll(option);
-
 
     let gameList = gameInit.records.map(item=>{
         return  Object.assign({},item,substringDate(item.createDate));
@@ -93,25 +71,33 @@ module.exports.index = async function(req, res, next) {
 
     let letterArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",]
 
-
-    let allTool = await autoFindAll();
-
-    allTool.records = allTool.records.map(item=>{
+    let otherToolList = await gameTool.promiseFindAll();
+    otherToolList.records = otherToolList.records.map(item=>{
         return {
             id:item.id,
             title:item.title,
             imgUrl:item.imgUrl,
         }
     });
-    allTool.scrollpicId = '';
+    otherToolList.scrollpicId = '1';
+
+    let otherTutorialList = await gameTutorial.promiseFindAll();
+    otherTutorialList.records = otherTutorialList.records.map(item=>{
+        return {
+            id:item.id,
+            title:item.title,
+            imgUrl:item.imgUrl,
+        }
+    });
+    otherTutorialList.scrollpicId = `game_1`;
 
     res.render(tampltePath,{
-        home:home,
-        rightNav:gameType.records,
+        currentClass:'pc',
         letterArr:letterArr,
         gameList:gameList,
         pagination:pagination,
-        toolList:allTool
+        otherToolList:otherToolList,
+        otherTutorialList:otherTutorialList
     });
 
 };
@@ -120,6 +106,7 @@ module.exports.query = async function(req, res, next) {
     let gameTypeName = req.params.name;
     let tampltePath = 'pc/index.html';
     let currentSeries = {};
+    let nextUrl = `/PC/${gameTypeName}`;
 
     let option = {
         page:1,
@@ -133,10 +120,11 @@ module.exports.query = async function(req, res, next) {
     if(req.params.series){
         option.catenaCode = req.params.series;
         currentSeries.code = req.params.series;
+        nextUrl = `/PC/${gameTypeName}/${req.params.series}`;
         tampltePath = 'pc/series_index.html';
     }
 
-    let gameType = await gameTypeFindAll();
+    let gameType = res.locals.partials.pcList;
 
     let findGameType = gameType.records.find(item=>{
         return item.englishName == gameTypeName
@@ -162,17 +150,39 @@ module.exports.query = async function(req, res, next) {
         return obj
     });
 
-    let pagination = calcPageination(gameInit,'/Support');
+    let pagination = calcPageination(gameInit,nextUrl);
 
     let letterArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",]
+
+    let otherToolList = await gameTool.promiseFindAll();
+    otherToolList.records = otherToolList.records.map(item=>{
+        return {
+            id:item.id,
+            title:item.title,
+            imgUrl:item.imgUrl,
+        }
+    });
+    otherToolList.scrollpicId = '1';
+
+    let otherTutorialList = await gameTutorial.promiseFindAll();
+    otherTutorialList.records = otherTutorialList.records.map(item=>{
+        console.log(item.imgUrl);
+        return {
+            id:item.id,
+            title:item.title,
+            imgUrl:item.imgUrl,
+        }
+    });
+    otherTutorialList.scrollpicId = `game_1`;
 
     res.render(tampltePath,{
         currentName:currentName,
         currentSeries:currentSeries,
-        rightNav:gameType.records,
         letterArr:letterArr,
         gameList:gameList,
         pagination:pagination,
+        otherToolList:otherToolList,
+        otherTutorialList:otherTutorialList,
     });
 
 };
@@ -189,8 +199,6 @@ module.exports.letter = async function(req, res, next) {
         option.page = req.query.page;
     }
 
-    let gameType = await gameTypeFindAll();
-
     //{catenaCode:{$regex:"C"}}
     option.nameCode = { $regex:`^${letterName}`};
 
@@ -204,16 +212,37 @@ module.exports.letter = async function(req, res, next) {
         return obj
     });
 
-    let pagination = calcPageination(gameInit,'/Support');
+    let pagination = calcPageination(gameInit,`/PC_initials/${letterName}`);
 
     let letterArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",]
 
+    let otherToolList = await gameTool.promiseFindAll();
+    otherToolList.records = otherToolList.records.map(item=>{
+        return {
+            id:item.id,
+            title:item.title,
+            imgUrl:item.imgUrl,
+        }
+    });
+    otherToolList.scrollpicId = '1';
+
+    let otherTutorialList = await gameTutorial.promiseFindAll();
+    otherTutorialList.records = otherTutorialList.records.map(item=>{
+        return {
+            id:item.id,
+            title:item.title,
+            imgUrl:item.imgUrl,
+        }
+    });
+    otherTutorialList.scrollpicId = `game_1`;
+
     res.render('pc/letter_index.html',{
         currentName:letterName,
-        rightNav:gameType.records,
         letterArr:letterArr,
         gameList:gameList,
         pagination:pagination,
+        otherToolList:otherToolList,
+        otherTutorialList:otherTutorialList,
     });
 
 };
@@ -226,13 +255,82 @@ module.exports.detail = async function(req, res, next) {
         id:detailId,
     };
 
-    let gameType = await gameTypeFindAll();
-
     let gameInit = await gameDetailFindById(option);
 
+    let otherToolList = await gameTool.promiseFindAll();
+    otherToolList.records = otherToolList.records.map(item=>{
+        return {
+            id:item.id,
+            title:item.title,
+            imgUrl:item.imgUrl,
+        }
+    });
+    otherToolList.scrollpicId = detailId;
+
+    let otherTutorialList = await gameTutorial.promiseFindAll();
+    otherTutorialList.records = otherTutorialList.records.map(item=>{
+        return {
+            id:item.id,
+            title:item.title,
+            imgUrl:item.imgUrl,
+        }
+    });
+    otherTutorialList.scrollpicId = `game_${detailId}`;
+
     res.render(tampltePath,{
-        rightNav:gameType.records,
         gameDetail:gameInit,
+        otherToolList:otherToolList,
+        otherTutorialList:otherTutorialList,
+    });
+
+};
+
+function replaceSearchName(reg,dom,replaceName){
+    if(dom){
+        return dom.replace(reg,`<span class="FontRed">${replaceName}</span>`)
+    }else{
+        return ''
+    }
+}
+
+//搜索
+module.exports.search = async function(req, res, next) {
+    let searchName = req.query.q;
+    let tampltePath = 'search/index.html';
+
+    let option = {
+        page:1,
+        pageSize:10
+    };
+
+    if(req.query.page){
+        option.page = req.query.page;
+    }
+
+    option.name = {
+        $regex:searchName,
+        $options:'i'
+    };
+
+    let gameInit = await db.autoFindAll(option);
+    var reg = new RegExp(searchName,'ig');
+    let formatValue = gameInit.records.map(item=>{
+       return {
+           id:item.id.toString(),
+           formatName:item.name.replace(reg,`<span class="FontRed">${searchName}</span>`),
+           name:item.name,
+           sizeStr:replaceSearchName(reg,item.sizeStr,searchName),
+           versionStr:replaceSearchName(reg,item.versionStr,searchName),
+           createDate:item.createDate.toLocaleString(),
+       }
+    });
+
+    let pagination = calcPageination(gameInit,`/Search?q=${searchName}`);
+
+    res.render(tampltePath,{
+        currentName:searchName,
+        gameList:formatValue,
+        pagination:pagination,
     });
 
 };

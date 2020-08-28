@@ -19,7 +19,7 @@
                 <div class="ClassNav">
                     <div class="NavTree">
                         <ul id='suckertree1'>
-                            {{ each rightNav}}
+                            {{ each partials.pcList.records}}
                             <li><a href="/PC/{{ $value.englishName }}/">{{ $value.name }}</a>
                                 <ul>
                                     {{ each $value.catena data}}
@@ -90,8 +90,8 @@
                     {{ include '../../_partials/dashang.html'}}
 
 
-                    {{ include '../partials/tutorials.html'}}
-                    {{ include '../partials/tools.html'}}
+                    {{ include '../partials/tutorials.html' otherTutorialList}}
+                    {{ include '../partials/tools.html' otherToolList}}
 
                 </div>
             </div>
@@ -108,7 +108,7 @@
 {{block 'script'}}
 <script type="text/javascript" src="/static/js/ServiceCenter.js"></script>
 <script type="text/javascript" src="/static/images/iepng/iepngfix_tilebg.js"></script>
-
+<script type="text/javascript" src="/static/js/ScrollPic.js"></script>
 <script type="text/javascript">
     jQuery(".fullSlide").hover(function () {
             jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
@@ -130,5 +130,44 @@
             }
         }
     });
+</script>
+
+<script language=javascript type=text/javascript>
+    $(function () {
+        var scrollPic_01 = new ScrollPic();
+
+        scrollPic_01.scrollContId = "Tutorials_ISL_Cont_{{@otherTutorialList.scrollpicId}}"; //内容容器ID
+        scrollPic_01.arrLeftId = "Tutorials_LeftArr_{{@otherTutorialList.scrollpicId}}";//左箭头ID
+        scrollPic_01.arrRightId = "Tutorials_RightArr_{{@otherTutorialList.scrollpicId}}"; //右箭头ID
+
+        scrollPic_01.frameWidth = 750;//显示框宽度
+        scrollPic_01.pageWidth = 240; //翻页宽度
+
+        scrollPic_01.speed = 1; //移动速度(单位毫秒，越小越快)
+        scrollPic_01.space = 1; //每次移动像素(单位px，越大越快)
+        scrollPic_01.autoPlay = true; //自动播放
+        scrollPic_01.autoPlayTime = 2; //自动播放间隔时间(秒)
+
+        scrollPic_01.initialize(); //初始化
+    })
+</script>
+<script language=javascript type=text/javascript>
+    $(function () {
+        var scrollPic_02 = new ScrollPic();
+
+        scrollPic_02.scrollContId = "ISL_Cont_{{@otherToolList.scrollpicId}}"; //内容容器ID
+        scrollPic_02.arrLeftId = "LeftArr_{{@otherToolList.scrollpicId}}";//左箭头ID
+        scrollPic_02.arrRightId = "RightArr_{{@otherToolList.scrollpicId}}"; //右箭头ID
+
+        scrollPic_02.frameWidth = 750;//显示框宽度
+        scrollPic_02.pageWidth = 240; //翻页宽度
+
+        scrollPic_02.speed = 1; //移动速度(单位毫秒，越小越快)
+        scrollPic_02.space = 1; //每次移动像素(单位px，越大越快)
+        scrollPic_02.autoPlay = true; //自动播放
+        scrollPic_02.autoPlayTime = 2; //自动播放间隔时间(秒)
+
+        scrollPic_02.initialize(); //初始化
+    })
 </script>
 {{/block}}

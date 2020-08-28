@@ -6,17 +6,17 @@
     {{ if current == 1}}
     &nbsp;&nbsp;上一页&nbsp;&nbsp;
     {{ else if current != 1}}
-    <a href="{{url}}?page={{current - 1}}">上一页</a>
+    <a href="{{url}}&page={{current - 1}}">上一页</a>
     {{/if}}
 
     {{ each pageArr}}
-    <a href="{{url}}?page={{$value}}">{{$value}}</a>
+    <a href="{{url}}&page={{$value}}">{{$value}}</a>
     {{ /each}}
 
     {{ if current == pages}}
     &nbsp;&nbsp;下一页&nbsp;&nbsp;
     {{ else if current != pages}}
-    <a href="{{url}}?page={{current + 1}}">下一页</a>
+    <a href="{{url}}&page={{current + 1}}">下一页</a>
     {{/if}}
-    <a href="{{url}}?page={{pages}}">尾页</a>
+    <a href="{{url}}&page={{pages}}">尾页</a>
 </div>

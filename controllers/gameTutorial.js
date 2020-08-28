@@ -84,7 +84,52 @@ class Collection{
 
                 let item = items.map(value=>{
                     return {
-                        id:value._id,
+                        id:value._id.toString(),
+                        title:value.title,
+                        description:value.description,
+                        imgUrl:value.imgUrl,
+                        tag:value.tag,
+                        content:value.content,
+                        sort:value.sort,
+                        createDate:value.createDate.toLocaleString(),
+                    }
+                });
+
+                let result = {
+                    current:page,
+                    pageNum:page,
+                    pageSize:pageSize,
+                    records:item,
+                    total:items.length
+                };
+                return cb(null,{
+                    code:1,
+                    data:result,
+                    msg:'成功'
+                })
+            }
+        })
+    }
+
+    find(obj,cb){
+
+        let page = pageObj.page || 1;
+        let pageSize = pageObj.pageSize || 10;
+
+        //分页
+        let queryResult = Db.find(obj)
+            .limit(pageSize)
+            .skip((page - 1) * pageSize)
+            .sort({'sort':1});
+
+        queryResult.exec((err,items)=>{
+            if(err){
+                return cb(null,err)
+            }else{
+
+                let item = items.map(value=>{
+                    return {
+                        id:value._id.toString(),
                         title:value.title,
                         description:value.description,
                         imgUrl:value.imgUrl,
@@ -185,6 +230,43 @@ class Collection{
         Db.findOneAndDelete({_id:id},(err,docs)=>{
             if(err) return cb(err);
             return cb(null,{code:1,data:true,msg:'成功'})
+        })
+    }
+
+    promiseFindAll(obj={}){
+        return new Promise((resolve ,reject)=> {
+            this.autoFindAll(obj,(err,detail)=>{
+                if(err) return reject(err);
+                resolve(detail.data)
+            })
+        })
+    }
+
+    promiseFind(obj={}){
+        return new Promise((resolve,reject) => {
+            let page = obj.page || 1;
+            let pageSize = obj.pageSize || 10;
+            let sort = obj.sort || 1;
+            obj.page && delete obj.page;
+            obj.pageSize &&delete obj.pageSize;
+            obj.sort && delete obj.sort;
+            //分页
+            let queryResult = Db.find(obj)
+                .limit(pageSize)
+                .skip((page - 1) * pageSize)
+                .sort({'sort':sort});
+
+            queryResult.exec((err,items)=>{
+                if(err) return reject(null);
+                let result = {
+                    current:page,
+                    pageNum:page,
+                    pageSize:pageSize,
+                    records:items,
+                    total:items.length
+                };
+                return resolve(result)
+            })
         })
     }
 

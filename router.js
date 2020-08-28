@@ -64,6 +64,7 @@ router.get('/api/notice/:id',routes.notice.getById);
 
 //用户界面  start
 router.get('/',viewModels.home.home);
+
 router.get('/Support',viewModels.pc.index);
 //大类分类
 router.get('/PC/:name',viewModels.pc.query);
@@ -73,6 +74,10 @@ router.get('/PC/:name/:series',viewModels.pc.query);
 router.get('/PC_initials/:letter',viewModels.pc.letter);
 //详情
 router.get('/PC_detail/:id',viewModels.pc.detail);
+//搜索
+router.get('/Search',viewModels.pc.search);
+
+
 
 //高速下载通道
 router.get('/vip',viewModels.home.vip);

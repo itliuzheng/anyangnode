@@ -62,14 +62,11 @@ class Collection{
         if(utils.isEmpty(obj.catenaCode)){
             data.catenaCode = obj.catenaCode
         }
-
         if(utils.isEmpty(obj.nameCode)){
             data.nameCode = obj.nameCode
         }
-
         let page = obj.page || 1;
         let pageSize = obj.pageSize || 10;
-
         //分页
         let queryResult = Db.find(data)
             .limit(pageSize)
@@ -80,7 +77,6 @@ class Collection{
             if(err){
                 return cb(null,err)
             }else{
-
                 this.findGameType()
                     .then(gameTypes =>{
                         let item = items.map(value=>{
@@ -206,6 +202,35 @@ class Collection{
         Db.findOneAndDelete({_id:id},(err,docs)=>{
             if(err) return cb(err);
             return cb(null,{code:1,data:true,msg:'成功'})
+        })
+    }
+
+    autoFindAll(obj = {}){
+        return new Promise((resolve,reject) => {
+            let page = obj.page || 1;
+            let pageSize = obj.pageSize || 10;
+            let sort = obj.sort || 1;
+            obj.page && delete obj.page;
+            obj.pageSize &&delete obj.pageSize;
+            obj.sort && delete obj.sort;
+            //分页
+            let queryResult = Db.find(obj)
+                .limit(pageSize)
+                .skip((page - 1) * pageSize)
+                .sort({'sort':sort});
+
+            queryResult.exec((err,items)=>{
+                if(err) return reject(null);
+                let result = {
+                    current:page,
+                    pageNum:page,
+                    pageSize:pageSize,
+                    records:items,
+                    total:items.length
+                };
+
+                return resolve(result)
+            })
         })
     }
 
