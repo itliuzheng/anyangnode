@@ -8,6 +8,7 @@ var expressArtTemplate = require('express-art-template');
 var vertoken = require('./common/token');
 var website = require(`./controllers/website`);
 var { gameType } = require(`./controllers/gameType`);
+var FriendLink = require(`./controllers/friendLink`);
 
 var router = require('./router')
 
@@ -89,8 +90,11 @@ app.use( async function (req, res, next) {
         let websiteInfo = await website.promiseFindAll(req.body);
         let pcList = await gameType.promiseFindAll();
 
+        let friendLink = await FriendLink.promiseFindAll();
+
         res.locals.partials.websiteInfo = websiteInfo;
         res.locals.partials.pcList = pcList;
+        res.locals.partials.friendLink = friendLink.records;
     }
     next()
 })

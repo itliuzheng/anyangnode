@@ -1,5 +1,7 @@
 {{ extend '../_layouts/layout.html' }}
 
+{{ block 'title' }}{{ currentName }}_{{partials.websiteInfo.name}}{{/block}}
+
 {{ block 'head'}}
 
 <link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
@@ -73,7 +75,7 @@
                         <li class="clear">
                             <div class='time'><strong>{{ $value.tagTop }}</strong>{{ $value.tagDown }}</div>
                             <div class='time-txt'><h3>
-                                <a href='/html/14280310.html' target='_blank'>
+                                <a href='/PC_detail/{{@$value.id}}' target='_blank'>
                                     {{ $value.name}}
                                 </a>
                             </h3>

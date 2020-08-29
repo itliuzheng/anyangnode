@@ -81,8 +81,16 @@ export const constantRouterMap = [
         name: 'websiteIndex',
         meta: {
           title: '网站信息设置',
-          noCache: true,
-          roles: '/website/index'
+          noCache: true
+        },
+      },
+      {
+        path: 'link',
+        component: resolve => require(['@/views/website/link.vue'], resolve),
+        name: 'websiteLink',
+        meta: {
+          title: '友链',
+          noCache: true
         },
       },
     ]
@@ -206,50 +214,50 @@ export const constantRouterMap = [
 
 
   //权限管理
-  {
-    path: '/authority_management',
-    component: Layout,
-    redirect: '/authority_management/set',
-    alwaysShow: true, // will always show the root menu
-    meta: {
-      title: '权限管理',
-      roles: '/authority_management/set'
-    },
-    children: [
-      {
-        path: 'set',
-        component: () => import('@/views/authority/set'),
-        name: 'set',
-        meta: {
-          title: '权限设置',
-          roles: '/authority_management/set'
-        }
-      },
-      {
-        path: 'set_user',
-        name: 'set_user_index',
-        redirect: '/authority_management/set',
-        component: () => import('@/views/authority/set_user_index'),
-        meta: {
-          title: '用户管理',
-          roles: '/authority_management/set'
-        },
-        hidden: true,
-        children: [
-          {
-            path: '',
-            component: () => import('@/views/authority/set_user'),
-            name: 'set_user',
-            meta: {
-              title: '用户详情',
-              roles: '/authority_management/set'
-            },
-          },
-
-        ]
-      },
-    ]
-  },
+  // {
+  //   path: '/authority_management',
+  //   component: Layout,
+  //   redirect: '/authority_management/set',
+  //   alwaysShow: true, // will always show the root menu
+  //   meta: {
+  //     title: '权限管理',
+  //     roles: '/authority_management/set'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'set',
+  //       component: () => import('@/views/authority/set'),
+  //       name: 'set',
+  //       meta: {
+  //         title: '权限设置',
+  //         roles: '/authority_management/set'
+  //       }
+  //     },
+  //     {
+  //       path: 'set_user',
+  //       name: 'set_user_index',
+  //       redirect: '/authority_management/set',
+  //       component: () => import('@/views/authority/set_user_index'),
+  //       meta: {
+  //         title: '用户管理',
+  //         roles: '/authority_management/set'
+  //       },
+  //       hidden: true,
+  //       children: [
+  //         {
+  //           path: '',
+  //           component: () => import('@/views/authority/set_user'),
+  //           name: 'set_user',
+  //           meta: {
+  //             title: '用户详情',
+  //             roles: '/authority_management/set'
+  //           },
+  //         },
+  //
+  //       ]
+  //     },
+  //   ]
+  // },
 
 ]
 

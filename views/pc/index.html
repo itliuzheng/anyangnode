@@ -1,7 +1,8 @@
 {{ extend '../_layouts/layout.html' }}
 
-{{ block 'head'}}
+{{ block 'title' }}{{currentName.name}}_{{partials.websiteInfo.name}}{{/block}}
 
+{{ block 'head'}}
 <link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
 <link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
 {{ /block}}

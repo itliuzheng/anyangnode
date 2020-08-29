@@ -96,26 +96,6 @@
 .DB_tab25 .DB_menuWrap .DB_menuSet li{cursor:pointer;margin:0 5px;display:inline-block; width: 20px; height: 20px; _display:inline; *display: inline;}
 
 
- #LinksBG {
-	 width:100%;
-	border-top:1px solid #DDDDDD;
-	background:#F5F5F5;
-	 }
-
- #Links {
-	width:1200px;
-	margin:auto;
-	padding:10px 0px;
-	line-height:25px;
-	font-size:12px;
-	}
- #Links span{
-	font-weight:bold;}
-
- #Links a{
-	padding:0px 7px;}	
-
-
 
 .ADList li{
 	float:left;

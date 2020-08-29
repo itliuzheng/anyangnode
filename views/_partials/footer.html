@@ -1,5 +1,13 @@
 <div class="footer">
     <div class="container">
+        <!--links start-->
+        <div id="Links">
+            <span>友情链接：</span>
+            {{ each partials.friendLink }}
+            <a href="{{$value.url}}" target='_blank'>{{$value.name}}</a>
+            {{ /each }}
+        </div>
+        <!--links end-->
         <div class="copyright">
             <p><a href="/">网站首页</a> | <a href="/FFF">网站公告</a> | <a href="/Sitemap">网站地图</a></p>
             <p>Copyright © 2017-2020 FFF单机游戏下载站 版权所有 All Rights Reserved </p>

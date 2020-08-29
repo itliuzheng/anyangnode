@@ -9,4 +9,5 @@ module.exports = {
     gameTutorial:require('./gameTutorial'),
     gameNew:require('./gameNew'),
     notice:require('./notice'),
+    friendLink:require('./friendLink'),
 }

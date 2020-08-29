@@ -59,6 +59,13 @@ router.post('/api/notice/update',routes.notice.update);
 router.post('/api/notice/delete',routes.notice.deleteById);
 router.get('/api/notice/:id',routes.notice.getById);
 
+//网站公告
+router.post('/api/friend_link/page',routes.friendLink.list);
+router.post('/api/friend_link/create',routes.friendLink.create);
+router.post('/api/friend_link/update',routes.friendLink.update);
+router.post('/api/friend_link/delete',routes.friendLink.deleteById);
+router.get('/api/friend_link/:id',routes.friendLink.getById);
+
 
 
 

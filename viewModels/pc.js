@@ -91,8 +91,14 @@ module.exports.index = async function(req, res, next) {
     });
     otherTutorialList.scrollpicId = `game_1`;
 
+    let currentName = {
+        name:'PC单机游戏',
+        code:null
+    };
+
     res.render(tampltePath,{
         currentClass:'pc',
+        currentName:currentName,
         letterArr:letterArr,
         gameList:gameList,
         pagination:pagination,

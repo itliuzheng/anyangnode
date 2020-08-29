@@ -1,5 +1,7 @@
 {{ extend '../../_layouts/layout.html' }}
 
+{{ block 'title' }}{{ gameDetail.name }}_{{partials.websiteInfo.name}}{{/block}}
+
 {{ block 'head'}}
 
 <link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
