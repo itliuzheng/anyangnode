@@ -3,6 +3,7 @@ var gameTool = require(`../controllers/gameTool`);
 var gameTutorial = require(`../controllers/gameTutorial`);
 var { calcPageination } = require('../common/utils');
 var pyfl = require('pyfl').default;
+var commonFunction = require('../common/function');
 
 
 function gameDetailFindById(body = {}){
@@ -96,6 +97,8 @@ module.exports.index = async function(req, res, next) {
         code:null
     };
 
+    res.locals.partials.banner = commonFunction.settingBanner(res,'单机游戏');
+
     res.render(tampltePath,{
         currentClass:'pc',
         currentName:currentName,
@@ -181,6 +184,7 @@ module.exports.query = async function(req, res, next) {
     });
     otherTutorialList.scrollpicId = `game_1`;
 
+    res.locals.partials.banner = commonFunction.settingBanner(res,'单机游戏');
     res.render(tampltePath,{
         currentName:currentName,
         currentSeries:currentSeries,
@@ -241,6 +245,7 @@ module.exports.letter = async function(req, res, next) {
         }
     });
     otherTutorialList.scrollpicId = `game_1`;
+    res.locals.partials.banner = commonFunction.settingBanner(res,'单机游戏');
 
     res.render('pc/letter_index.html',{
         currentName:letterName,
@@ -282,6 +287,7 @@ module.exports.detail = async function(req, res, next) {
         }
     });
     otherTutorialList.scrollpicId = `game_${detailId}`;
+    res.locals.partials.banner = commonFunction.settingBanner(res,'单机游戏');
 
     res.render(tampltePath,{
         gameDetail:gameInit,
@@ -332,6 +338,7 @@ module.exports.search = async function(req, res, next) {
     });
 
     let pagination = calcPageination(gameInit,`/Search?q=${searchName}`);
+    res.locals.partials.banner = commonFunction.settingBanner(res,'单机游戏');
 
     res.render(tampltePath,{
         currentName:searchName,

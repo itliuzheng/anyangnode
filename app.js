@@ -9,6 +9,7 @@ var vertoken = require('./common/token');
 var website = require(`./controllers/website`);
 var { gameType } = require(`./controllers/gameType`);
 var FriendLink = require(`./controllers/friendLink`);
+var websiteBanner = require(`./controllers/banner`);
 
 var router = require('./router')
 
@@ -92,9 +93,13 @@ app.use( async function (req, res, next) {
 
         let friendLink = await FriendLink.promiseFindAll();
 
+        let banner = await websiteBanner.promiseFindAll();
+
         res.locals.partials.websiteInfo = websiteInfo;
         res.locals.partials.pcList = pcList;
         res.locals.partials.friendLink = friendLink.records;
+        res.locals.partials.banner = banner;
+
     }
     next()
 })

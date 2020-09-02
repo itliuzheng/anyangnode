@@ -106,8 +106,8 @@
 
 
         <div class="blk_29">
-            <div class="LeftBotton" id="LeftArr_{{@otherToolList.scrollpicId}}"></div>
-            <div class="Cont" style="margin-left: 20px;" id="ISL_Cont_{{@otherToolList.scrollpicId}}">
+            <div class="LeftBotton" id="LeftArr_{{otherToolList.scrollpicId}}"></div>
+            <div class="Cont" style="margin-left: 20px;" id="ISL_Cont_{{otherToolList.scrollpicId}}">
                 <!-- 图片列表 begin -->
                 {{ each otherToolList.records}}
                 <div class='box'>
@@ -124,7 +124,7 @@
                 {{ /each }}
                 <!-- 图片列表 end -->
             </div>
-            <div class="RightBotton" id="RightArr_{{@otherToolList.scrollpicId}}"></div>
+            <div class="RightBotton" id="RightArr_{{otherToolList.scrollpicId}}"></div>
         </div>
 
 
@@ -150,7 +150,6 @@
 
 {{block 'script'}}
 
-<script type="text/javascript" src="/static/js/kxbdmarquee.js"></script>
 <script type="text/javascript">
     $(function () {
         $('.rool').kxbdMarquee({
@@ -164,20 +163,22 @@
 </script>
 <script type="text/javascript" src="/static/js/ScrollPic.js"></script>
 <script language=javascript type=text/javascript>
-    var scrollPic_02 = new ScrollPic();
+    $.ready(function () {
+        var scrollPic_02 = new ScrollPic();
+        console.log("ISL_Cont_{{otherToolList.scrollpicId}}")
+        scrollPic_02.scrollContId = "ISL_Cont_{{otherToolList.scrollpicId}}"; //内容容器ID
+        scrollPic_02.arrLeftId = "LeftArr_{{otherToolList.scrollpicId}}";//左箭头ID
+        scrollPic_02.arrRightId = "RightArr_{{otherToolList.scrollpicId}}"; //右箭头ID
 
-    scrollPic_02.scrollContId = "ISL_Cont_{{@otherToolList.scrollpicId}}"; //内容容器ID
-    scrollPic_02.arrLeftId = "LeftArr_{{@otherToolList.scrollpicId}}";//左箭头ID
-    scrollPic_02.arrRightId = "RightArr_{{@otherToolList.scrollpicId}}"; //右箭头ID
+        scrollPic_02.frameWidth = 1050;//显示框宽度
+        scrollPic_02.pageWidth = 240; //翻页宽度
 
-    scrollPic_02.frameWidth = 1050;//显示框宽度
-    scrollPic_02.pageWidth = 240; //翻页宽度
+        scrollPic_02.speed = 1; //移动速度(单位毫秒，越小越快)
+        scrollPic_02.space = 1; //每次移动像素(单位px，越大越快)
+        scrollPic_02.autoPlay = true; //自动播放
+        scrollPic_02.autoPlayTime = 2; //自动播放间隔时间(秒)
 
-    scrollPic_02.speed = 1; //移动速度(单位毫秒，越小越快)
-    scrollPic_02.space = 1; //每次移动像素(单位px，越大越快)
-    scrollPic_02.autoPlay = true; //自动播放
-    scrollPic_02.autoPlayTime = 2; //自动播放间隔时间(秒)
-
-    scrollPic_02.initialize(); //初始化
+        scrollPic_02.initialize(); //初始化
+    })
 </script>
 {{/block}}

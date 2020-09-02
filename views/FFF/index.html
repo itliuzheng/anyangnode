@@ -3,7 +3,6 @@
 {{ block 'title' }}网站公告_{{partials.websiteInfo.name}}{{/block}}
 
 {{ block 'head'}}
-
 <link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
 <link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
 {{ /block}}
@@ -97,26 +96,4 @@
 <script type="text/javascript" src="/static/js/ServiceCenter.js"></script>
 <script type="text/javascript" src="/static/images/iepng/iepngfix_tilebg.js"></script>
 
-<script type="text/javascript">
-    jQuery(".fullSlide").hover(function () {
-            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
-        },
-        function () {
-            jQuery(this).find(".prev,.next").fadeOut()
-        });
-    jQuery(".fullSlide").slide({
-        titCell: ".hd ul",
-        mainCell: ".bd ul",
-        effect: "fold",
-        autoPlay: true,
-        autoPage: true,
-        trigger: "click",
-        startFun: function (i) {
-            var curLi = jQuery(".fullSlide .bd li").eq(i);
-            if (!!curLi.attr("_src")) {
-                curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
-            }
-        }
-    });
-</script>
 {{/block}}

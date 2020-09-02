@@ -2,6 +2,8 @@ var gameDetail = require(`../controllers/gameDetail`);
 var notice = require(`../controllers/notice`);
 var gameTool = require(`../controllers/gameTool`);
 var gameTutorial = require(`../controllers/gameTutorial`);
+var commonFunction = require('../common/function');
+
 
 module.exports.home = async function(req, res, next) {
     let option = {
@@ -54,6 +56,8 @@ module.exports.home = async function(req, res, next) {
     });
     otherToolList.scrollpicId = 'home';
 
+    res.locals.partials.banner = commonFunction.settingBanner(res,'网站首页');
+
     let render = {
         currentClass:'home',
         newGameList:newGameList,
@@ -61,6 +65,7 @@ module.exports.home = async function(req, res, next) {
         tutorialsList:tutorialsList,
         otherToolList:otherToolList,
     };
+
     res.render('index.html',render);
 };
 
@@ -69,6 +74,9 @@ module.exports.dashang = function(req, res, next) {
 };
 
 module.exports.vip = function(req, res, next) {
+
+    res.locals.partials.banner = commonFunction.settingBanner(res,'高速下载通道');
+
     res.render('vip/index.html',{
         currentClass:'vip',
     });

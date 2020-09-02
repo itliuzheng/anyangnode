@@ -2,6 +2,7 @@ var db = require(`../controllers/gameTutorial`);
 var website = require(`../controllers/website`);
 var {calcPageination} = require('../common/utils');
 var ObjectId = require('mongodb').ObjectId;
+var commonFunction = require('../common/function');
 
 function websiteFind(req) {
     return new Promise((resolve, reject) => {
@@ -73,7 +74,7 @@ module.exports.index = async function (req, res, next) {
         list: list,
         pagination: pagination,
     };
-
+    res.locals.partials.banner = commonFunction.settingBanner(res,'教程资讯');
     res.render(tampltePath, render);
 
 };
@@ -104,6 +105,7 @@ module.exports.detail = async function (req, res, next) {
         });
         allData.scrollpicId = detailId;
 
+        res.locals.partials.banner = commonFunction.settingBanner(res,'教程资讯');
         res.render(tampltePath, {
             detail: detail,
             otherList: allData,

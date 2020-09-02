@@ -2,6 +2,7 @@ var db = require(`../controllers/gameTool`);
 var website = require(`../controllers/website`);
 var { calcPageination } = require('../common/utils');
 var ObjectId = require('mongodb').ObjectId;
+var commonFunction = require('../common/function');
 
 function websiteFind(req){
     return new Promise((resolve,reject) => {
@@ -70,6 +71,8 @@ module.exports.index = async function(req, res, next) {
         list:list,
         pagination:pagination,
     };
+
+    res.locals.partials.banner = commonFunction.settingBanner(res,'游戏工具');
 
     res.render(tampltePath,render);
 

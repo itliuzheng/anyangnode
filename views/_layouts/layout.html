@@ -6,11 +6,13 @@
     <title>{{ block 'title' }}{{partials.websiteInfo.name}}{{/block}}</title>
     <meta name="keywords" content="{{ block 'keywords' }} {{partials.websiteInfo.keywords}}{{/block}}"/>
     <meta name="description" content="{{ block 'description' }}{{partials.websiteInfo.description}} {{/block}}"/>
-     {{ block 'head'}}
+    <link href="/static/css/header.css" rel="stylesheet" type="text/css"/>
+    {{ block 'head'}}
     <link href="/static/css/main.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/MyCMSLoad/style.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
     {{/block}}
+     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
 
 </head>
 <body>
@@ -19,19 +21,19 @@
     {{ block 'content'}} {{/block}}
     {{ include '../_partials/footer.html'}}
 
-     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
      <script type="text/javascript" src="/static/js/gd.js"></script>
      <script type="text/javascript" src="/static/js/Functions.js"></script>
      <script src="/static/js/MyTop.js"></script>
-
+    <script type="text/javascript" src="/static/js/kxbdmarquee.js"></script>
     <script type="text/javascript">
-        jQuery(".fullSlide").hover(function () {
-                jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
-            },
-            function () {
-                jQuery(this).find(".prev,.next").fadeOut()
-            });
-        jQuery(".fullSlide").slide({
+
+        $(".fullSlide").hover(function () {
+        jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+        function () {
+            jQuery(this).find(".prev,.next").fadeOut()
+        });
+        $(".fullSlide").slide({
             titCell: ".hd ul",
             mainCell: ".bd ul",
             effect: "fold",
@@ -39,14 +41,16 @@
             autoPage: true,
             trigger: "click",
             startFun: function (i) {
-                var curLi = jQuery(".fullSlide .bd li").eq(i);
-                if (!!curLi.attr("_src")) {
-                    curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
-                }
+                // var curLi = jQuery(".fullSlide .bd li").eq(i);
+                // if (!!curLi.attr("_src")) {
+                //     curLi.css("background-image", `url(${curLi.attr("_src")})`).removeAttr("_src")
+                // }
             }
         });
     </script>
+
      {{ block 'script'}} {{/block}}
+
 
 </body>
 </html>

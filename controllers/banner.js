@@ -15,29 +15,13 @@ class Collection{
 
 
     findAll(obj,cb){
-        let data = {};
 
-        if(utils.isEmpty(obj.name)){
-            data.name = {
-                $regex:obj.name,
-                $options:'i'
-            }
-        }
-
-        let page = obj.page || 1;
-        let pageSize = obj.pageSize || 10;
-
-        //分页
-        let queryResult = Db.find(data)
-            .limit(pageSize)
-            .skip((page - 1) * pageSize)
-            .sort({'createDate':1});
+        let queryResult = Db.find(obj).sort({'createDate':1});
 
         queryResult.exec((err,items)=>{
             if(err){
                 return cb(null,err)
             }else{
-
                 let item = items.map(value=>{
                     return {
                         id:value._id.toString(),
@@ -50,32 +34,27 @@ class Collection{
                     }
                 });
 
-                let result = {
-                    current:page,
-                    pageNum:page,
-                    pageSize:pageSize,
-                    records:item,
-                    total:items.length
-                };
                 return cb(null,{
                     code:1,
-                    data:result,
+                    data:item,
                     msg:'成功'
                 })
             }
         })
     }
 
-    autoFindAll(obj,cb,pageObj = {}){
+    findAllPage(obj,cb){
+        let page = obj.page || 1;
+        let pageSize = obj.pageSize || 10;
 
-        let page = pageObj.page || 1;
-        let pageSize = pageObj.pageSize || 10;
+        if(obj.page) delete obj.page;
+        if(obj.pageSize) delete obj.pageSize;
 
         //分页
         let queryResult = Db.find(obj)
             .limit(pageSize)
             .skip((page - 1) * pageSize)
-            .sort({'sort':1});
+            .sort({'createDate':1});
 
         queryResult.exec((err,items)=>{
             if(err){

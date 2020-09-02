@@ -20,8 +20,4 @@ fs.readFile('./mongodb.json','utf-8',(err,data)=>{
    }
 });
 
-
-
-
-
 module.exports = mongoose;

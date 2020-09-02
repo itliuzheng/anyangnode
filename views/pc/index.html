@@ -118,36 +118,14 @@
 <script type="text/javascript" src="/static/images/iepng/iepngfix_tilebg.js"></script>
 <script type="text/javascript" src="/static/js/ScrollPic.js"></script>
 
-<script type="text/javascript">
-    jQuery(".fullSlide").hover(function () {
-            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
-        },
-        function () {
-            jQuery(this).find(".prev,.next").fadeOut()
-        });
-    jQuery(".fullSlide").slide({
-        titCell: ".hd ul",
-        mainCell: ".bd ul",
-        effect: "fold",
-        autoPlay: true,
-        autoPage: true,
-        trigger: "click",
-        startFun: function (i) {
-            var curLi = jQuery(".fullSlide .bd li").eq(i);
-            if (!!curLi.attr("_src")) {
-                curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
-            }
-        }
-    });
-</script>
 
 <script language=javascript type=text/javascript>
     $(function () {
         var scrollPic_01 = new ScrollPic();
 
-        scrollPic_01.scrollContId = "Tutorials_ISL_Cont_{{@otherTutorialList.scrollpicId}}"; //内容容器ID
-        scrollPic_01.arrLeftId = "Tutorials_LeftArr_{{@otherTutorialList.scrollpicId}}";//左箭头ID
-        scrollPic_01.arrRightId = "Tutorials_RightArr_{{@otherTutorialList.scrollpicId}}"; //右箭头ID
+        scrollPic_01.scrollContId = "Tutorials_ISL_Cont_{{otherTutorialList.scrollpicId}}"; //内容容器ID
+        scrollPic_01.arrLeftId = "Tutorials_LeftArr_{{otherTutorialList.scrollpicId}}";//左箭头ID
+        scrollPic_01.arrRightId = "Tutorials_RightArr_{{otherTutorialList.scrollpicId}}"; //右箭头ID
 
         scrollPic_01.frameWidth = 750;//显示框宽度
         scrollPic_01.pageWidth = 240; //翻页宽度
@@ -164,9 +142,9 @@
     $(function () {
         var scrollPic_02 = new ScrollPic();
 
-        scrollPic_02.scrollContId = "ISL_Cont_{{@otherToolList.scrollpicId}}"; //内容容器ID
-        scrollPic_02.arrLeftId = "LeftArr_{{@otherToolList.scrollpicId}}";//左箭头ID
-        scrollPic_02.arrRightId = "RightArr_{{@otherToolList.scrollpicId}}"; //右箭头ID
+        scrollPic_02.scrollContId = "ISL_Cont_{{otherToolList.scrollpicId}}"; //内容容器ID
+        scrollPic_02.arrLeftId = "LeftArr_{{otherToolList.scrollpicId}}";//左箭头ID
+        scrollPic_02.arrRightId = "RightArr_{{otherToolList.scrollpicId}}"; //右箭头ID
 
         scrollPic_02.frameWidth = 750;//显示框宽度
         scrollPic_02.pageWidth = 240; //翻页宽度

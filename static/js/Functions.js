@@ -501,11 +501,12 @@ $(function () {
 
 //产品分类导航
 
-var menuids = ["suckertree1"] //Enter id(s) of SuckerTree UL menus, separated by commas
+var menuids = ["suckertree1"]; //Enter id(s) of SuckerTree UL menus, separated by commas
 
 function buildsubmenus() {
     for (var i = 0; i < menuids.length; i++) {
         var ultags = document.getElementById(menuids[i]) && document.getElementById(menuids[i]).getElementsByTagName("ul");
+        if(!ultags) return false;
         for (var t = 0; t < ultags.length; t++) {
             ultags[t].parentNode.getElementsByTagName("a")[0].className = "subfolderstyle"
             ultags[t].parentNode.onmouseover = function () {
@@ -518,10 +519,11 @@ function buildsubmenus() {
     }
 }
 
-if (window.addEventListener)
+if (window.addEventListener){
     window.addEventListener("load", buildsubmenus, false)
-else if (window.attachEvent)
+} else if (window.attachEvent){
     window.attachEvent("onload", buildsubmenus)
+}
 
 
 function comment_check() {
