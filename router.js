@@ -66,6 +66,13 @@ router.post('/api/friend_link/update',routes.friendLink.update);
 router.post('/api/friend_link/delete',routes.friendLink.deleteById);
 router.get('/api/friend_link/:id',routes.friendLink.getById);
 
+//banner
+router.post('/api/banner/page',routes.banner.list);
+router.post('/api/banner/create',routes.banner.create);
+router.post('/api/banner/update',routes.banner.update);
+router.post('/api/banner/delete',routes.banner.deleteById);
+router.get('/api/banner/:id',routes.banner.getById);
+
 
 
 

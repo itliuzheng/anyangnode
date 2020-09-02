@@ -93,6 +93,15 @@ export const constantRouterMap = [
           noCache: true
         },
       },
+      {
+        path: 'banner',
+        component: resolve => require(['@/views/website/banner.vue'], resolve),
+        name: 'websiteBanner',
+        meta: {
+          title: 'Banner管理',
+          noCache: true
+        },
+      },
     ]
   },
   {

@@ -85,7 +85,7 @@
       return {
         gameTypeList:[],
         formRules:{
-          name:[{required: true, message: `不能为空`, trigger: 'blue'}]
+          name:[{required: true, message: `不能为空`, trigger: 'blur'}]
         },
         dialogFormVisibleDetail:true,
 				editorOption:{

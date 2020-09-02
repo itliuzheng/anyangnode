@@ -13,9 +13,33 @@
             <el-input v-model="formData.name" placeholder=""></el-input>
           </el-form-item>
         </el-col>
+        <el-col :span="24" class="text-left">
+          <el-form-item label="banner" prop="imgUrl">
+            <el-upload
+              action=""
+              name="imgUrl"
+              :show-file-list="true"
+              :limit="1"
+              :file-list="fileList"
+              list-type="picture"
+              :http-request="uploadHttp"
+            >
+              <el-button size="small" type="primary">点击上传</el-button>
+            </el-upload>
+          </el-form-item>
+        </el-col>
         <el-col :span="24">
           <el-form-item label="链接" prop="url">
             <el-input v-model="formData.url" placeholder=""></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="banner所在位置" prop="typeId">
+            <el-select v-model="formData.typeId" multiple >
+              <el-option v-for="(item,index) in bannerList" :key="index"
+                         :label="item.label"
+                         :value="item.value"></el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="24">
@@ -40,20 +64,23 @@
 	import 'quill/dist/quill.bubble.css'
 
 	import { quillEditor } from 'vue-quill-editor'
-  import { postPage,postAdd,postUpdate,postDelete } from '../../../api/friendLink'
+  import { postAdd,postUpdate } from '../../../api/banner'
   import { postUpload } from '@/api/api'
+  import industry from '../../../utils/industry'
 
   export default {
     props:['formData'],
 		components: {
 			quillEditor
 		},
-    name: "dialogAdd",
+    name: "dialogBannerAdd",
     data() {
       return {
+        bannerList:industry.BANNERTYPE,
         formRules:{
-          name:[{required: true, message: `不能为空`, trigger:'blur'}],
-          url:[{required: true, message: `不能为空`, trigger:'blur'}]
+          name:[{required: true, message: `不能为空`, trigger: 'blur'}],
+          url:[{required: true, message: `不能为空`, trigger:'blur'}],
+          typeId:[{required: true, message: `不能为空`, trigger: 'change'}]
         },
         fileList:[],
         dialogFormVisibleDetail:true,
@@ -82,8 +109,6 @@
         let formData = new FormData();
         console.log(data);
         formData.append('img', data.file);
-
-        console.log(formData.get('img'));
 
         postUpload(formData)
           .then(res => {

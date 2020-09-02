@@ -80,7 +80,7 @@
     data() {
       return {
         formRules:{
-          title:[{required: true, message: `不能为空`, trigger: 'blue'}]
+          title:[{required: true, message: `不能为空`, trigger:'blur'}]
         },
         fileList:[],
         dialogFormVisibleDetail:true,

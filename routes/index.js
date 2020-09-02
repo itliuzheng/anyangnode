@@ -10,4 +10,5 @@ module.exports = {
     gameNew:require('./gameNew'),
     notice:require('./notice'),
     friendLink:require('./friendLink'),
+    banner:require('./banner'),
 }
