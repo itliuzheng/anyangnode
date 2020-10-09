@@ -118,11 +118,10 @@ router.get('/FFF/:id',viewModels.notice.detail);
 
 //后台界面
 router.get('/admin',function(req,res,next) {
-    // res.end('/Wzadmin/index.html')
-    res.end('/index.html')
+    res.end('backend/dist/index.html')
 });
 
-router.get('/*',(req,res)=>{
+router.get('/admin/*',(req,res)=>{
     res.redirect('/');
 });
 

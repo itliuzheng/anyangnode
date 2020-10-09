@@ -12,13 +12,17 @@ const config = require('../config')
 const webpackConfig = require('./webpack.prod.conf')
 const buildtype = process.argv.slice(2)[0]||'development'
 const spinner = ora('building for production...')
+// 开始显示编译信息
 spinner.start()
-
+// 清空静态资源的二级目录下所有内容
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
   webpack(webpackConfig, (err, stats) => {
+    // 停止编译信息的显示
     spinner.stop()
+    // 如果出错，抛出错误
     if (err) throw err
+    // 配置编译信息的显示样式
     process.stdout.write(stats.toString({
       colors: true,
       modules: false,
