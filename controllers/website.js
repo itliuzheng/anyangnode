@@ -95,6 +95,8 @@ class Collection {
                         mobile:result.mobile,
                         modifyDate:result.modifyDate.toLocaleString(),
                     }
+                }else{
+                    docs = {};
                 }
                 return cb(null,{
                     code:1,

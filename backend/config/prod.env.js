@@ -10,12 +10,12 @@ switch(buildtype){
   case 'test'://测试
     process.argv.srconfig = 'test';
     obj.srconfig = '"test"';
-    obj.BASE_API = '"http://119.147.171.111:81/e-factoring"';
+    obj.BASE_API = '"/"';
     break;
   default://默认
     process.argv.srconfig = 'pro';
     obj.srconfig = '"pro"';
-    obj.BASE_API = '"http://119.147.171.111:81/e-factoring"';
+    obj.BASE_API = '"/"';
     break;
 }
 

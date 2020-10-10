@@ -117,8 +117,10 @@ router.get('/FFF/:id',viewModels.notice.detail);
 //用户界面  end
 
 //后台界面
-router.get('/admin',function(req,res,next) {
-    res.end('backend/dist/index.html')
+router.get('/_admin',function(req,res,next) {
+    // res.end('_admin/index.html')
+
+    res.render('_admin/index.html');
 });
 
 router.get('/admin/*',(req,res)=>{
