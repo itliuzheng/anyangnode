@@ -1,7 +1,7 @@
 var db = require(`../controllers/gameDetail`);
 var gameTool = require(`../controllers/gameTool`);
 var gameTutorial = require(`../controllers/gameTutorial`);
-var { calcPageination } = require('../common/utils');
+var { calcPageination,letterArr } = require('../common/utils');
 var pyfl = require('pyfl').default;
 var commonFunction = require('../common/function');
 
@@ -70,7 +70,6 @@ module.exports.index = async function(req, res, next) {
 
     let pagination = calcPageination(gameInit,'/Support');
 
-    let letterArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",]
 
     let otherToolList = await gameTool.promiseFindAll();
     otherToolList.records = otherToolList.records.map(item=>{
@@ -161,7 +160,6 @@ module.exports.query = async function(req, res, next) {
 
     let pagination = calcPageination(gameInit,nextUrl);
 
-    let letterArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",]
 
     let otherToolList = await gameTool.promiseFindAll();
     otherToolList.records = otherToolList.records.map(item=>{
@@ -224,7 +222,6 @@ module.exports.letter = async function(req, res, next) {
 
     let pagination = calcPageination(gameInit,`/PC_initials/${letterName}`);
 
-    let letterArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",]
 
     let otherToolList = await gameTool.promiseFindAll();
     otherToolList.records = otherToolList.records.map(item=>{

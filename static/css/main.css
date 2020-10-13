@@ -119,7 +119,7 @@
 .youlian span{ font-weight:bold;}
 .youlian a{padding:0 6px; }
 
-.footer{width:100%; min-height:230px;min-width:1200px; margin-top:25px; background:#be0000 url(/static/images/bot_bg.jpg) repeat-x; overflow:hidden;}
+.footer{width:100%; min-height:230px;min-width:1200px; background:#be0000 url(/static/images/bot_bg.jpg) repeat-x; overflow:hidden;}
 .bottom_l{width:360px; height:230px; float:left; background:#ab0000; overflow:hidden;text-align:center;font-family:"微软雅黑";font-weight:bold;}
 .bottom_l h1{margin:83px 0 20px;font-size:38px;color:#EEE10F;line-height:40px;}
 .bottom_l span{font-size:22px;color:#fff;}

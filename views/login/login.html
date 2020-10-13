@@ -1,0 +1,37 @@
+{{ extend './index.html'}}
+
+{{ block 'title' }}登录_{{partials.websiteInfo.name}}{{/block}}
+{{ block 'head' }}
+<link href="/static/css/login/login.css" rel="stylesheet" type="text/css"/>
+{{/block}}
+
+
+{{ block 'content'}}
+
+<div class="container-body">
+
+    <form class="form-signin">
+        <h2 class="form-signin-heading">登录</h2>
+        <div class="form-group">
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="text" name="fff_login" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="fff_password" id="inputPassword" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-danger btn-block" type="submit">Sign in</button>
+        <div class="go-register">没有账号？前往注册</div>
+    </form>
+
+</div>
+{{/block}}
+
+{{block 'script'}}
+
+{{/block}}

@@ -5,4 +5,5 @@ module.exports = {
     "tutorial":require('./tutorial'),
     "gameNew":require('./gameNew'),
     "notice":require('./notice'),
+    "sitemap":require('./sitemap'),
 }

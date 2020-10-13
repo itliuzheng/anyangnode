@@ -1,0 +1,26 @@
+
+.container-body{
+    height: calc(100vh - 213px);
+    position: relative;
+}
+
+.form-signin{
+    width: 500px;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.form-signin-heading{
+    text-align: center;
+    margin-top: 0;
+}
+
+.go-register{
+    margin-top: 10px;
+}

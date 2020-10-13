@@ -82,3 +82,14 @@ module.exports.vip = function(req, res, next) {
     });
 };
 
+
+module.exports.PCLogin = function (req, res, next) {
+    let tampltePath = 'login/login.html';
+
+    let render = {
+        currentClass:'loginIndex',
+    };
+
+    console.log(tampltePath);
+    res.render(tampltePath,render);
+}

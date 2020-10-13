@@ -10,7 +10,7 @@ var router = express.Router();
 
 //登录
 router.post('/api/user/login',routes.users.login);
-// router.post('/register',routes.users.create);
+router.post('/api/user/register',routes.users.Register);
 
 //菜单
 router.get('/api/sysuser/resources',routes.sysuser.resources);
@@ -79,6 +79,9 @@ router.get('/api/banner/:id',routes.banner.getById);
 //用户界面  start
 router.get('/',viewModels.home.home);
 
+//登录
+router.get('/login',viewModels.home.PCLogin);
+
 router.get('/Support',viewModels.pc.index);
 //大类分类
 router.get('/PC/:name',viewModels.pc.query);
@@ -113,7 +116,8 @@ router.get('/course_new/:id',viewModels.gameNew.detail);
 router.get('/FFF',viewModels.notice.index);
 router.get('/FFF/:id',viewModels.notice.detail);
 
-
+//网站地图
+router.get('/sitemap',viewModels.sitemap.sitemapIndex);
 //用户界面  end
 
 //后台界面

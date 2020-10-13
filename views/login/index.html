@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/favicon.ico"/>
+    <title>{{ block 'title' }}{{/block}}</title>
+    <meta name="keywords" content="{{ block 'keywords' }} {{/block}}"/>
+    <meta name="description" content="{{ block 'description' }}{{/block}}"/>
+    <link href="/static/css/main.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/MyCMSLoad/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    {{ block 'head'}} {{/block}}
+     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+
+</head>
+<body>
+
+    {{ block 'content'}} {{/block}}
+
+
+
+    {{ include '../_partials/footer.html'}}
+
+     {{ block 'script'}} {{/block}}
+
+
+</body>
+</html>

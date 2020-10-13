@@ -1,0 +1,105 @@
+{{ extend '../_layouts/layout.html' }}
+
+{{ block 'title' }}网站地图_{{partials.websiteInfo.name}}{{/block}}
+
+{{ block 'head'}}
+<link href="/static/css/MyCMSLoad/inner.css" rel="stylesheet" type="text/css"/>
+<link href="/static/css/MyCMSLoad/common.css" rel="stylesheet" type="text/css"/>
+{{ /block}}
+
+{{ block 'content'}}
+
+<div id="body">
+    <div class="HeightTab clearfix"></div>
+    <!--inner start -->
+    <div class="inner clearfix">
+        <!--left start-->
+        <div class="left">
+            <div class="Sbox">
+                <div class="topic2">网站地图</div>
+
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+            <div class="Sbox">
+                <div class="topic">FFF单机游戏下载站</div>
+                <a href="/">
+                    <div class="txt ColorLink">
+                    </div>
+                </a>
+            </div>
+            <div class="HeightTab clearfix"></div>
+
+        </div>
+        <!--left end-->
+        <!--right start-->
+        <div class="right">
+            <div class="Position">
+                <span>你的位置：
+                    <a href="/">首页</a> >
+                    <a href="/FFF/">网站地图</a>
+                </span>
+            </div>
+            <div class="HeightTab clearfix"></div>
+            <!--main start-->
+            <div class="main">
+
+
+                <!--SiteMap start-->
+                <div class="SiteMap">
+                    <nav>
+                        <ul>
+                            <li><a href="/">网站首页</a></li>
+                            <li><A href='/Support'>PC单机游戏</A>
+                                <ul>
+                                    {{each gameTypeList.records value index}}
+                                    <li>
+                                        <a href='/PC/{{value.englishName}}/'>{{value.name}}</a>
+                                        {{ each value.catena value1 index1 }}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<a href='/PC/{{value.englishName}}/{{value1.code}}'>{{value1.name}}系列</a>
+                                        {{ /each }}
+                                    </li>
+                                    {{ /each }}
+                                </ul>
+                                <ul>
+                                    <li>
+                                        {{ each letterArr }}
+                                        <a href='/PC_initials/{{$value}}'>{{$value}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{/each}}
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><A href='/VIP'>高速下载通道</A>
+                                <ul>
+                                    <li><A href='https://w.url.cn/s/AngkrG0'>直接下单</A></li>
+                                </ul>
+                            </li>
+                            <li><A href='/tool'>游戏工具</A></li>
+                            <li><A href='/Course'>教程资讯</A>
+                                <ul>
+                                    <li><A href='/course'>游戏教程</A></li>
+                                    <li><A href='/course_new'>游戏资讯</A></li>
+                                </ul>
+                            </li>
+                            <li><A href='/FFF'>网站公告</A></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </nav>
+                </div>
+                <!--SiteMap end-->
+
+            </div>
+
+
+        </div>
+        <!--right end-->
+
+    </div>
+    <!--main end-->
+    <div class="HeightTab clearfix"></div>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script type="text/javascript" src="/static/js/ServiceCenter.js"></script>
+{{/block}}
