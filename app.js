@@ -10,6 +10,7 @@ var website = require(`./controllers/website`);
 var { gameType } = require(`./controllers/gameType`);
 var FriendLink = require(`./controllers/friendLink`);
 var websiteBanner = require(`./controllers/banner`);
+var private_data = require('./private_data');
 
 var router = require('./router')
 
@@ -40,6 +41,7 @@ app.set('view options', {
 app.set('views',path.join(__dirname,'./views'));
 
 
+
 // 给express post请求体中 加入 body 对象
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -56,6 +58,10 @@ app.all('*',function(req,res,next) {
     res.header('Access-Control-Allow-Methods','PUT,POST,GET,DELETE,OPTIONS');
     next();
 });
+
+//会话存储
+app.use(require('cookie-parser')(private_data.cookieSecret));
+app.use(require('express-session')());
 
 //解析token 获取用户信息
 app.use(function(req,res,next) {
@@ -80,7 +86,7 @@ app.use('/api',expressJwt({
     algorithms:['HS256'],  // algorithms should be set  6.0.0以后必须配置算法 否则报错
     secret:vertoken.singkey  //秘钥
 }).unless({
-    path:['/api/user/login'] //除了这个地址，其他的URL都需要验证
+    path:['/api/user/login','/api/user/register'] //除了这个地址，其他的URL都需要验证
 }));
 
 
@@ -88,19 +94,41 @@ app.use('/api',expressJwt({
 app.use( async function (req, res, next) {
     if(!res.locals.partials){
         res.locals.partials = {};
+        try {
+            // console.time('locals')
+            let [
+                websiteInfo,
+                pcList,
+                friendLink,
+                banner
+            ] = await Promise.all([
+                website.promiseFindAll(req.body),
+                gameType.promiseFindAll(),
+                FriendLink.promiseFindAll(),
+                websiteBanner.promiseFindAll()
+            ])
+            //上述方法快了近150ms
+            // let websiteInfo = await website.promiseFindAll(req.body).catch(function (err) {console.log(err);});
+            // let pcList = await gameType.promiseFindAll().catch(function (err) {console.log(err);});
+            // let friendLink = await FriendLink.promiseFindAll().catch(function (err) {console.log(err);});
+            // let banner = await websiteBanner.promiseFindAll().catch(function (err) {console.log(err);});
+            // console.timeEnd('locals')
 
-        let websiteInfo = await website.promiseFindAll(req.body);
-        let pcList = await gameType.promiseFindAll();
 
-        let friendLink = await FriendLink.promiseFindAll();
+            if(req.session.token) {
+                res.locals.partials.csrf_token = req.session.token;
+                let userName = await vertoken.getToken(req.session.token).catch(function (err) {console.log(err);});
+                res.locals.partials.userName = userName.name;
+            }
 
-        let banner = await websiteBanner.promiseFindAll();
 
-        res.locals.partials.websiteInfo = websiteInfo;
-        res.locals.partials.pcList = pcList;
-        res.locals.partials.friendLink = friendLink.records;
-        res.locals.partials.banner = banner;
+            res.locals.partials.websiteInfo = websiteInfo;
+            res.locals.partials.pcList = pcList;
+            res.locals.partials.friendLink = friendLink.records;
+            res.locals.partials.banner = banner;
+        }catch (e) {
 
+        }
     }
     next()
 })

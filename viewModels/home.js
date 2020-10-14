@@ -3,7 +3,7 @@ var notice = require(`../controllers/notice`);
 var gameTool = require(`../controllers/gameTool`);
 var gameTutorial = require(`../controllers/gameTutorial`);
 var commonFunction = require('../common/function');
-
+var users = require('../controllers/users');
 
 module.exports.home = async function(req, res, next) {
     let option = {
@@ -90,6 +90,22 @@ module.exports.PCLogin = function (req, res, next) {
         currentClass:'loginIndex',
     };
 
-    console.log(tampltePath);
     res.render(tampltePath,render);
-}
+};
+
+module.exports.PCRegister = function (req, res, next) {
+    let tampltePath = 'login/register.html';
+
+    let render = {
+        currentClass:'registerIndex',
+    };
+
+    res.render(tampltePath,render);
+};
+
+module.exports.PCloginOut = function(req, res, next) {
+    console.log(users);
+  users.loginOut(req);
+  res.redirect('/');
+
+};

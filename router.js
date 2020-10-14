@@ -81,6 +81,10 @@ router.get('/',viewModels.home.home);
 
 //登录
 router.get('/login',viewModels.home.PCLogin);
+//注册
+router.get('/register',viewModels.home.PCRegister);
+//退出登录
+router.get('/loginout',viewModels.home.PCloginOut);
 
 router.get('/Support',viewModels.pc.index);
 //大类分类

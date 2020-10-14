@@ -1,0 +1,101 @@
+{{ extend './index.html'}}
+
+{{ block 'title' }}注册_{{partials.websiteInfo.name}}{{/block}}
+{{ block 'head' }}
+<link href="/static/css/login/login.css" rel="stylesheet" type="text/css"/>
+{{/block}}
+
+
+{{ block 'content'}}
+
+<div class="container-body">
+
+    <form class="form-signin" id="register-form">
+        <h2 class="form-signin-heading"></h2>
+        <div class="form-group">
+            <label for="inputMobile" class="sr-only">手机号</label>
+            <input type="text" name="fff_mobile" id="inputMobile" class="form-control" placeholder="手机号" required
+                   autofocus>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">密码</label>
+            <input type="password" name="fff_password" id="inputPassword" class="form-control" placeholder="密码"
+                   required>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">确定密码</label>
+            <input type="password" name="fff_password_confirm" id="inputPasswordConfirm" class="form-control"
+                   placeholder="确定密码" required>
+        </div>
+        <div id="error-alert" class="alert alert-danger" role="alert" style="display: none;"></div>
+        <button class="btn btn-lg btn-danger btn-block" type="submit">注 册</button>
+        <div class="go-register"><a href="/login">已有账号？前往登录</a></div>
+    </form>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p>注册成功！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-danger"><a href="/login" style="color: #fff;">前往登录</a></button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script>
+
+    var registerForm = $('#register-form');
+
+    registerForm.on('submit', function (e) {
+        e.preventDefault();
+        var formData = {};
+        $(this).serializeArray().map(function (value) {
+            formData[value.name] = value.value;
+        });
+        if (formData.fff_password_confirm != formData.fff_password) {
+            $('#error-alert').html('密码不一致，请重新设置！');
+            $('#error-alert').show();
+            return false;
+        }
+        $('#error-alert').hide();
+        $.ajax({
+            url: '/api/user/register',
+            type: 'post',
+            data: {
+                mobile: formData.fff_mobile,
+                password: formData.fff_password
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == -1) {
+                    $('#error-alert').html(data.msg);
+                    $('#error-alert').show();
+                    return
+                }
+                if (data.code == 1) {
+                    $('#myModal').modal('show');
+                }
+            }
+        })
+    });
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        $('#inputMobile').val('');
+        $('#inputPassword').val('');
+        $('#inputPasswordConfirm').val('');
+        $('#error-alert').hide();
+    })
+</script>
+{{/block}}

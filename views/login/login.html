@@ -10,28 +10,61 @@
 
 <div class="container-body">
 
-    <form class="form-signin">
+    <form class="form-signin" id="login-form">
         <h2 class="form-signin-heading">登录</h2>
         <div class="form-group">
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="text" name="fff_login" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputEmail" class="sr-only">手机号</label>
+            <input type="text" name="fff_login" id="inputEmail" class="form-control" placeholder="手机号" required
+                   autofocus>
         </div>
         <div class="form-group">
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="fff_password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <label for="inputPassword" class="sr-only">密码</label>
+            <input type="password" name="fff_password" id="inputPassword" class="form-control" placeholder="密码"
+                   required>
         </div>
         <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+            <label><input type="checkbox" value="remember-me">记住我</label>
         </div>
-        <button class="btn btn-lg btn-danger btn-block" type="submit">Sign in</button>
-        <div class="go-register">没有账号？前往注册</div>
+        <div id="error-alert" class="alert alert-danger" role="alert" style="display: none;"></div>
+        <button class="btn btn-lg btn-danger btn-block" type="submit" id="loginBtn">Sign in</button>
+        <div class="go-register"><a href="/register">没有账号？前往注册</a></div>
     </form>
 
 </div>
 {{/block}}
 
 {{block 'script'}}
+<script>
+    var loginForm = $('#login-form');
 
+    loginForm.on('submit', function (e) {
+        e.preventDefault();
+        var formData = {};
+        $(this).serializeArray().map(function (value) {
+            formData[value.name] = value.value;
+        });
+        $.ajax({
+            url: '/api/user/login',
+            type: 'post',
+            data: {
+                loginName: formData.fff_login,
+                password: formData.fff_password
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == -1) {
+                    $('#error-alert').html(data.msg);
+                    $('#error-alert').show();
+                    return
+                }
+                $('#error-alert').hide();
+                if (data.code === 1) {
+                    // window.alert('注册成功！')
+                    // 服务端重定向针对异步请求无效
+                    window.location.href = '/'
+                }
+            }
+        })
+    })
+</script>
 {{/block}}

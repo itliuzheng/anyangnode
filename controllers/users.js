@@ -35,10 +35,9 @@ class Collection {
                 password
             }).save();
 
-            console.log('注册成功---',ret);
             cb(null,{
                 code : 1,
-                data:ret,
+                data:null,
                 msg:'注册成功'
             })
 
@@ -54,18 +53,19 @@ class Collection {
      * @returns {Promise<void>}
      */
     async login(body = {},cb) {
-        body.password = MD5(body.password,MD5_KEY);
+        let password = MD5(body.password,MD5_KEY);
 
         try{
             let result = await User.findOne({
                 loginName:body.loginName,
-                password:body.password
+                password:password
             })
 
             if(result){
                 let username = result.loginName;
                 let userid = result._id;
                 let token = await Token.setToken(username,userid,'1 days');
+
                 cb(null,{
                     code : 1,
                     data:token,
@@ -78,8 +78,15 @@ class Collection {
             cb(new error.NotFound(e))
         }
     }
+
+    saveLogin(req,user){
+        req.session.token = user.data;
+    }
+    loginOut(req){
+        delete req.session.token
+    }
 }
 
 
 
-module.exports.users = new Collection('users');
+module.exports = new Collection('users');

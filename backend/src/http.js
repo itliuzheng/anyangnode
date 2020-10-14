@@ -22,10 +22,7 @@ const http = axios.create({
     'Content-Type': 'application/json;charset=UTF-8'
   },
   transformRequest: [function (data, headers) {
-    // headers.Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiYWRtaW7nrqHnkIblkZgifV0sInVzZXJJZCI6IjEiLCJ1c2VyVHlwZSI6IjEiLCJ1c2VyTmFtZSI6ImFkbWluIiwiY29tcGFueU5hbWUiOiIyMTQxNCIsInNvY2lhbENyZWRpdENvZGUiOiIxMjM0NTYiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTU5NTgxNTgwNSwiZXhwIjoxOTExMzQ4NjA4fQ.47toBTfM3JjxOoe8sF4b4MJbpUzk6d32_iQCayh_yjhhizKSHceWeXU0hxYpWzx7J91XtOTpX0vPQFDVJDJEbg' // store.getters.token;
-    
-    let token = store.getters.token;
-    headers.Authorization = token && ( 'Bearer ' + token);
+    headers.Authorization = store.getters.token;
     if (headers['Content-Type'] === 'multipart/form-data') {
       return data;
     } else {

@@ -4,7 +4,7 @@
             <h2>
                 <p>
                     <script language="javaScript">
-                        var name = '欢迎来到{{partials.websiteInfo.name}}',
+                        var name = '欢迎{{partials.userName}}来到{{partials.websiteInfo.name}}',
                             now = new Date(),
                             hour = now.getHours();
                         if (hour < 6) {
@@ -35,7 +35,12 @@
                 </p>
             </h2>
             <div class="tem_top_nav">
-                <a href="/Sitemap/">网站地图</a> | <a href="/login">登录</a> | <a href="/register">注册</a>
+                <a href="/Sitemap/">网站地图</a>
+                {{ if !partials.csrf_token }}
+                | <a href="/login">登录</a> | <a href="/register">注册</a>
+                {{ else }}
+                | <a href="/loginout">退出</a>
+                {{ /if }}
             </div>
         </div>
         <div class="clearfix"></div>
