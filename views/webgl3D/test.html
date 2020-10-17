@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>第一个three.js文件_WebGL三维场景</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            /* 隐藏body窗口区域滚动条 */
+        }
+    </style>
+    <!--引入three.js三维引擎-->
+    <script src="_static/webgl3D/three.js"></script>
+    <script src="_static/webgl3D/OrbitControls.js"></script>
+    <script src="_static/webgl3D/WebGL.js"></script>
+</head>
+
+<body>
+<script>
+    [{
+        "show": true,
+        "uuid": "",
+        "name": "background",
+        "objType": "cube2",
+        "length": 200000,
+        "width": 200000,
+        "height": 10,
+        "x": 0,
+        "y": -576.444,
+        "z": 0,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {
+                    "skinColor": 16777215,
+                    "side": 1,
+                    "opacity": 1,
+                    "imgurl": "../../img/3dImg/bg2.png",
+                    "repeatx": true,
+                    "width": 4096,
+                    "repeaty": true,
+                    "height": 4096
+                },
+                "skin_down": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bg2.png"},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1}
+            }
+        },
+        "showSortNub": 1,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_10",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": 10237.738,
+        "y": -139.174,
+        "z": 3320.555,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_11",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": 18066.859,
+        "y": -139.174,
+        "z": 14929.469,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_7",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": -19896.116,
+        "y": -139.174,
+        "z": 30779.636,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_8",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": -18017.483,
+        "y": -139.174,
+        "z": 49679.969,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_3",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": -14248.791,
+        "y": -139.174,
+        "z": 2799.724,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_6",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": -31619.419,
+        "y": -139.174,
+        "z": 25782.452,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_12",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": 20756.568,
+        "y": -139.174,
+        "z": 36695.712,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_5",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": -31619.419,
+        "y": -139.174,
+        "z": 2799.724,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_1",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": -7399.548,
+        "y": -139.174,
+        "z": -2991.478,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"skinColor": 589798, "side": 1, "opacity": 1},
+                "skin_fore": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_behind": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_left": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"},
+                "skin_right": {"skinColor": 16777215, "side": 1, "opacity": 1, "imgurl": "../../img/3dImg/bf.png"}
+            }
+        },
+        "showSortNub": 399,
+        "customType1": "",
+        "customType2": "",
+        "animation": null,
+        "dbclickEvents": null,
+        "rotation": [{"direction": "x", "degree": 0}, {"direction": "y", "degree": 0}, {"direction": "z", "degree": 0}],
+        "thick": null,
+        "scale": {"x": 1, "y": 1, "z": 1},
+        "BindDevId": null,
+        "BindDevName": null,
+        "devInfo": null,
+        "BindMeteId": null,
+        "BindMeteName": null
+    }, {
+        "show": true,
+        "uuid": "",
+        "name": "bo_2",
+        "objType": "cube2",
+        "length": 2000,
+        "width": 1000,
+        "height": 800,
+        "x": -616.637,
+        "y": -139.174,
+        "z": 6943.05,
+        "style": {
+            "skinColor": 16777215,
+            "skin": {
+                "skin_up": {"skinColor": 1456752, "side": 1, "opacity": 1},
+                "skin_down": {"width": 200, "height": 300}
+            }
+        }], "showSortNub"
+    :
+    348, "BindDevId"
+    :
+    null, "BindDevName"
+    :
+    null, "devInfo"
+    :
+    null, "BindMeteId"
+    :
+    null, "BindMeteName"
+    :
+    null, "customType1"
+    :
+    "", "customType2"
+    :
+    "", "animation"
+    :
+    null, "dbclickEvents"
+    :
+    null
+    }]
+
+</script>
+</body>
+</html>

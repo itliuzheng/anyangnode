@@ -135,4 +135,10 @@ router.get('/admin/*',(req,res)=>{
     res.redirect('/');
 });
 
+//webgl3D
+router.get('/webgl3D',function(req,res,next) {
+
+    res.render('webgl3D/index.html');
+});
+
 module.exports = router;
