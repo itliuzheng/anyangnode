@@ -107,6 +107,52 @@ scene.add(mesh); //网格模型添加到场景中
 /**
  * 设置Geometry顶点位置、顶点颜色数据
  */
+//人员动画标识
+function people() {
+    //立方形网络模块
+    var geometry = new THREE.SphereGeometry(5, 5, 40); //创建一个立方体几何对象Geometry
+
+    var material = new THREE.MeshLambertMaterial({  //材质对象Material
+        color: 0x00f0ff
+    });
+    // geometry.translate(0,-100,200)
+    var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+
+    return mesh
+}
+
+function animationPeople() {
+    var times = [0,10,20,30,40,50];
+    var values = [
+        0,-100,200,
+        10, -80, 150,
+        -50, -110, 100,
+        0, -85, 50,
+        0, -115, 0,
+        0, -50, -100
+    ]; //与时间点对应的值组成的数组
+    // 创建位置关键帧对象：0时刻对应位置0, 0, 0   10时刻对应位置150, 0, 0
+    var posTrack = new THREE.KeyframeTrack('Box.position', times, values);
+    // 创建颜色关键帧对象：
+    // 10时刻对应颜色1, 0, 0
+    // 20时刻对应颜色0, 0, 1
+    var colorKF = new THREE.KeyframeTrack('Box.material.color',
+        [10, 20], [1, 0, 0, 0, 0, 1]);
+    // 创建名为Sphere对象的关键帧数据  从0~20时间段，尺寸scale缩放3倍
+    var scaleTrack = new THREE.KeyframeTrack('Sphere.scale',
+        [0, 20], [1, 1, 1, 3, 3, 3]);
+
+    // duration决定了默认的播放时间，一般取所有帧动画的最大时间
+    // duration偏小，帧动画数据无法播放完，偏大，播放完帧动画会继续空播放
+    var duration = 50;
+    // 多个帧动画作为元素创建一个剪辑clip对象，命名"default"，持续时间20
+    var clip = new THREE.AnimationClip("default", duration, [posTrack
+        // , colorKF
+        // ,scaleTrack
+    ]);
+    return clip
+}
+
 //人员位置模型创建函数
 function addressPoint() {
     var geometry1 = new THREE.Geometry();
@@ -154,6 +200,15 @@ function addressLine(address) {
     return line;
 }
 
+var people_group = new THREE.Group();
+people_group.name = '人物'
+people_group.add(people())
+var mixer = new THREE.AnimationMixer(people_group)
+var AnimationAction = mixer.clipAction(animationPeople())
+AnimationAction.timeScale = 20
+AnimationAction.play();
+
+
 var group = new THREE.Group()
 group.name = '矿下人员定位';
 
@@ -167,12 +222,14 @@ group.add(address,line);
 var group1 = group.clone()
 var group2 = group.clone()
 
-scene.add(group,group1,group2)
+scene.add(people_group,group,group1,group2)
 
 // group.scale.set(2,2,2)
-group.rotateY(Math.PI/6)
+// group.rotateY(Math.PI/8)
+people_group.rotateY(Math.PI/6)
 group1.rotateY(Math.PI/4)
 group1.translateY(10)
+
 group1.translateZ(20)
 group2.translateZ(100)
 
@@ -233,11 +290,37 @@ document.body.appendChild(renderer.domElement); //body元素中插入canvas对�
 //     mesh.rotateY(0.001 * t);
 //
 // }
-
+// 创建一个时钟对象Clock
+var clock = new THREE.Clock();
+// 渲染函数
 function render() {
-    renderer.render(scene, camera)
+  renderer.render(scene, camera); //执行渲染操作
+  requestAnimationFrame(render); //请求再次执行渲染函数render，渲染下一帧
+
+  //clock.getDelta()方法获得两帧的时间间隔
+  // 更新混合器相关的时间
+  mixer.update(clock.getDelta());
 }
+render();
+
+
 
 render()
 var controls = new THREE.OrbitControls(camera, renderer.domElement) // 创建控件对象
 controls.addEventListener('change', render)
+
+// onresize 事件会在窗口被调整大小时发生
+window.onresize=function(){
+  // 重置渲染器输出画布canvas尺寸
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  // 重置相机投影的相关参数
+  k = window.innerWidth/window.innerHeight;//窗口宽高比
+  camera.left = -s*k;
+  camera.right = s*k;
+  camera.top = s;
+  camera.bottom = -s;
+  // 渲染器执行render方法的时候会读取相机对象的投影矩阵属性projectionMatrix
+  // 但是不会每渲染一帧，就通过相机的属性计算投影矩阵(节约计算资源)
+  // 如果相机的一些属性发生了变化，需要执行updateProjectionMatrix ()方法更新相机的投影矩阵
+  camera.updateProjectionMatrix ();
+};

@@ -1,3 +1,5 @@
+
+
 # 闫涵淘宝后台架构设计
 
 ## 功能点
@@ -220,3 +222,19 @@
 }
 ```
 
+
+
+
+
+# 启动
+
+```bash
+    ##全局安装nodemon命令
+    npm install nodemon-g 
+    ## 启动应用
+    nodemon /app.js
+    ## 重启
+    自动重启
+    ## 停止
+    ctrl + C
+```

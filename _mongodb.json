@@ -1,3 +1,7 @@
 {
   "address":"mongodb://localhost/user"
 }
+
+{
+  "address":"mongodb+srv://liuzheng:baobao3344@cluster0.cgpy9.azure.mongodb.net/user?retryWrites=true&w=majority"
+}

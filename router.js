@@ -137,8 +137,10 @@ router.get('/admin/*',(req,res)=>{
 
 //webgl3D
 router.get('/webgl3D',function(req,res,next) {
-
     res.render('webgl3D/index.html');
+});
+router.get('/webgl3D_3d',function(req,res,next) {
+    res.render('webgl3D/3d.html');
 });
 
 module.exports = router;
